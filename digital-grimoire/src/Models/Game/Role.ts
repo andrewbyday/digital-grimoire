@@ -1,4 +1,4 @@
-import {NightOrder} from "./NightOrder.ts";
+import { NightOrder } from "./NightOrder.ts";
 
 export interface Role {
     script_id: string;
