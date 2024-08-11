@@ -1,8 +1,9 @@
 import {Role} from "./Role.ts";
 import Board from "../Physical/Board.ts";
+import Session from "./Session.ts";
 
 export default class GameEngine {
-    private readonly _session: number;                          // session id/room for the WebSocket
+    private readonly _session: Session;                         // session id/room for the WebSocket
     private readonly _apiRoles: Map<string, Role>;              // list of roles from the api (all botc roles)
     private readonly _scripSheetRoles: Map<string, Role>;       // list of roles from the script
 
@@ -15,7 +16,7 @@ export default class GameEngine {
      * @param {Array<Role>} apiRoles
      * @param {Array<Role>} scriptSheetRoles
      */
-    public constructor(screen: Screen, session: number, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
+    public constructor(screen: Screen, session: Session, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
         this._session = session;
         this._apiRoles = apiRoles;
         this._scripSheetRoles = scriptSheetRoles;
@@ -26,10 +27,10 @@ export default class GameEngine {
      * Asynchronously creates a game session by downloading the scripts from the API and loads the roles
      * appropriately.
      * @param {Screen} screen
-     * @param {number} session
+     * @param {Session} session
      * @param {string} scriptSheetRolesURL
      */
-    public static async init(screen: Screen, session: number, scriptSheetRolesURL: string): Promise<GameEngine> {
+    public static async init(screen: Screen, session: Session, scriptSheetRolesURL: string): Promise<GameEngine> {
         const apiRolesResponse: Response = await fetch('./roles.json');
         const apiRolesData: any = await apiRolesResponse.json();
 
@@ -80,7 +81,7 @@ export default class GameEngine {
     /**
      * Return the session id number for the WebSocekt room
      */
-    public get session(): number {
+    public get session(): Session {
         return this._session;
     }
 

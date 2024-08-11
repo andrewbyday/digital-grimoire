@@ -1,14 +1,14 @@
 import Player from "../Game/Player.ts";
 import NightSheet from "./NightSheet.ts";
-import {FabledToken, RoleToken, TravelerToken} from "./Token.ts";
+import {PlayerToken, FabledToken} from "./Token.ts";
 import Shroud from "./Shroud.ts";
 
 export default class Board {
     private readonly _width: number;
     private readonly _height: number;
 
-    private _scriptRoleTokens: Set<RoleToken>;
-    private _travelerTokens: Set<TravelerToken>;
+    private _scriptRoleTokens: Set<PlayerToken>;
+    private _travelerTokens: Set<PlayerToken>;
     private _fabledTokens: Set<FabledToken>;
     private _players: Set<Player>;
 
@@ -21,8 +21,8 @@ export default class Board {
         this._width = width;
         this._height = height;
 
-        this._scriptRoleTokens = new Set<RoleToken>();
-        this._travelerTokens = new Set<TravelerToken>();
+        this._scriptRoleTokens = new Set<PlayerToken>();
+        this._travelerTokens = new Set<PlayerToken>();
         this._fabledTokens = new Set<FabledToken>();
         this._players = new Set<Player>();
 
@@ -72,17 +72,17 @@ export default class Board {
         this._fabledTokens = value;
     }
 
-    public get travelerTokens(): Set<TravelerToken> {
+    public get travelerTokens(): Set<PlayerToken> {
         return this._travelerTokens;
     }
-    public set travelerTokens(value: Set<TravelerToken>) {
+    public set travelerTokens(value: Set<PlayerToken>) {
         this._travelerTokens = value;
     }
 
-    public get scriptRoleTokens(): Set<RoleToken> {
+    public get scriptRoleTokens(): Set<PlayerToken> {
         return this._scriptRoleTokens;
     }
-    public set scriptRoleTokens(value: Set<RoleToken>) {
+    public set scriptRoleTokens(value: Set<PlayerToken>) {
         this._scriptRoleTokens = value;
     }
 }
