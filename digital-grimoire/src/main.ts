@@ -6,11 +6,11 @@ class main {
         document.querySelector<HTMLDivElement>('#app')!.innerHTML = `Hello World!`
     }
 
-    public async startGame() {
-        const game: Game = await Game.init(1,'./roles.json');
-        console.log(game.apiRoles());
+    public async startGame(): Promise<Game> {
+        return Game.init(1,'./trouble_brewing.json');
     }
 }
 
 const app: main = new main();
-app.startGame();
+const game: Game = await app.startGame();
+console.log(game.scriptSheetRoles);

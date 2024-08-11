@@ -33,6 +33,7 @@ export default class Game {
         let apiRolesMap: Map<string, Role> = new Map<string, Role>();
         let scriptSheetRolesMap: Map<string, Role> = new Map<string, Role>();
 
+        // create roles from the api
         apiRolesData.forEach((role: any) => {
             const currentRole: Role = {
                 script_id: role.script_id,
@@ -45,16 +46,12 @@ export default class Game {
             apiRolesMap.set(role.script_id, currentRole);
         });
 
+        // search for roles and assign
         scriptSheetRolesData.forEach((role: any) => {
-            const currentRole: Role = {
-                script_id: role.id,
-                name: "name",
-                type: "type",
-                edition: "edition",
-                official_icon: "icon",
-                official_icon_bg: "icon_bg"
-            };
-            scriptSheetRolesMap.set(role.set_id, currentRole);
+            if (apiRolesMap.has(role.id)) {
+                const currentRole: Role = apiRolesMap.get(role.id)!;
+                scriptSheetRolesMap.set(role.id, currentRole);
+            }
         });
 
         return new Game(session, apiRolesMap, scriptSheetRolesMap);
@@ -63,21 +60,21 @@ export default class Game {
     /**
      * Return an array of roles from the api
      */
-    public apiRoles(): Map<string, Role> {
+    public get apiRoles(): Map<string, Role> {
         return this._apiRoles;
     }
 
     /**
      * Return an array of roles from the script
      */
-    public scriptSheetRoles(): Map<string, Role> {
+    public get scriptSheetRoles(): Map<string, Role> {
         return this._scripSheetRoles;
     }
 
     /**
      * Return the session id number for the WebSocekt room
      */
-    public session(): number {
+    public get session(): number {
         return this._session;
     }
 }
