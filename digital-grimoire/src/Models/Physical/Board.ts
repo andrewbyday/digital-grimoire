@@ -1,4 +1,4 @@
-import Player from "./Player.ts";
+import Player from "../Game/Player.ts";
 import NightSheet from "./NightSheet.ts";
 import {FabledToken, RoleToken, TravelerToken} from "./Token.ts";
 import Shroud from "./Shroud.ts";

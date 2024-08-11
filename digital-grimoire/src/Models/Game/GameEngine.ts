@@ -1,29 +1,35 @@
 import {Role} from "./Role.ts";
+import Board from "../Physical/Board.ts";
 
-export default class Game {
+export default class GameEngine {
     private readonly _session: number;                          // session id/room for the WebSocket
     private readonly _apiRoles: Map<string, Role>;              // list of roles from the api (all botc roles)
-    private readonly _scripSheetRoles: Map<string, Role>;     // list of roles from the script
+    private readonly _scripSheetRoles: Map<string, Role>;       // list of roles from the script
+
+    private _board: Board;                                      // Board
 
     /**
      * Creates a game session
+     * @param {Screen} screen
      * @param {number} session
      * @param {Array<Role>} apiRoles
      * @param {Array<Role>} scriptSheetRoles
      */
-    public constructor(session: number, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
+    public constructor(screen: Screen, session: number, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
         this._session = session;
         this._apiRoles = apiRoles;
         this._scripSheetRoles = scriptSheetRoles;
+        this._board = new Board(screen.width, screen.height);
     }
 
     /**
      * Asynchronously creates a game session by downloading the scripts from the API and loads the roles
      * appropriately.
+     * @param {Screen} screen
      * @param {number} session
      * @param {string} scriptSheetRolesURL
      */
-    public static async init(session: number, scriptSheetRolesURL: string): Promise<Game> {
+    public static async init(screen: Screen, session: number, scriptSheetRolesURL: string): Promise<GameEngine> {
         const apiRolesResponse: Response = await fetch('./roles.json');
         const apiRolesData: any = await apiRolesResponse.json();
 
@@ -54,7 +60,7 @@ export default class Game {
             }
         });
 
-        return new Game(session, apiRolesMap, scriptSheetRolesMap);
+        return new GameEngine(screen, session, apiRolesMap, scriptSheetRolesMap);
     }
 
     /**
@@ -76,5 +82,20 @@ export default class Game {
      */
     public get session(): number {
         return this._session;
+    }
+
+    /**
+     * Return the board
+     */
+    public get board() {
+        return this._board;
+    }
+
+    /**
+     * Set the current board to a new or different board
+     * @param board
+     */
+    public set board(board: Board) {
+        this._board = board;
     }
 }
