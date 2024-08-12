@@ -4,7 +4,7 @@ export default class Session {
 
     constructor() {
         this._id = this.generateId();
-        this._webSocket = new WebSocket("ws://localhost:8080");
+        this._webSocket = new WebSocket(import.meta.env.VITE_WEBSOCKET);
     }
 
     public get id(): number {
