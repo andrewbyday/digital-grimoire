@@ -26,4 +26,4 @@ class main {
 }
 
 const app: main = new main();
-app.startGame().then(r => console.log(r));
+app.startGame().then(() => console.log('Game started!'));
