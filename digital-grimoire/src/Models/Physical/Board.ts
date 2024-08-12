@@ -12,6 +12,7 @@ export enum BoardLayers {
     BUTTONS,
     TOKENS_AND_SHROUDS,
     NIGHT_SHEETS,
+    TOKEN_DRAWER,
     SETTINGS
 }
 
