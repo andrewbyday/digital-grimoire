@@ -29,4 +29,8 @@ export default class GameController {
     public handleAddNightSheet() {
 
     }
+
+    public renderScene() {
+        this._view.renderTokens(this._model.getTokens());
+    }
 }
