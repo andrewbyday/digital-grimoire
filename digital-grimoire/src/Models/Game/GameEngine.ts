@@ -1,6 +1,7 @@
 import {Role} from "./Role.ts";
 import Board from "../Physical/Board.ts";
 import Session from "./Session.ts";
+import Token from "../Physical/Token.ts";
 
 export default class GameEngine {
     private readonly _session: Session;                         // session id/room for the WebSocket
@@ -77,6 +78,28 @@ export default class GameEngine {
      */
     public get scriptSheetRoles(): Map<string, Role> {
         return this._scripSheetRoles;
+    }
+
+    public getTokens(): Set<Token> {
+        let tokens: Set<Token> = new Set();
+
+        let spaceX: number = 10;
+        let spaceY: number = 10;
+        let index: number = 0;
+
+        for (let role of this._scripSheetRoles.values()) {
+            if (index === 6) {
+                spaceX = 10;
+                spaceY += 135;
+                index = 0;
+            }
+            const currtoken: Token = new Token(role, {x: spaceX, y: spaceY});
+            tokens.add(currtoken);
+            spaceX += 135;
+            index++;
+        }
+
+        return tokens;
     }
 
     /**

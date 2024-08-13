@@ -1,27 +1,21 @@
 import './style.css'
 import GameEngine from './Models/Game/GameEngine.ts'
 import Session from "./Models/Game/Session.ts";
+import GameView from "./Views/GameView.ts";
+import GameController from "./Controllers/GameController.ts";
 
 class main {
-    constructor() {
-        const url: string = import.meta.env.VITE_ROLES_API_URL;
-
-        document.querySelector<HTMLDivElement>('#app')!.innerHTML =
-            `
-            <p>
-                Hello World!
-            </p>
-            <p>
-                API URL: ${url}
-            </p>
-            `;
-    }
+    constructor() { }
 
     public async startGame(): Promise<void> {
-        const session: Session = new Session();
+        const model: GameEngine = await GameEngine.init(window.screen, new Session(), './trouble_brewing.json');
+        const view: GameView = await GameView.init(model.board);
 
-        const game: GameEngine = await GameEngine.init(window.screen,session, './trouble_brewing.json');
-        console.log(game.scriptSheetRoles);
+        const game: GameController = new GameController(model, view);
+
+        game.view.renderTokens(game.model.getTokens());
+
+        console.log(game.model.getTokens());
     }
 }
 
