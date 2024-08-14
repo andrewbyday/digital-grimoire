@@ -12,26 +12,26 @@ export default class GameEngine {
 
     /**
      * Creates a game session
-     * @param {Screen} screen
+     * @param {Window} window
      * @param {number} session
      * @param {Array<Role>} apiRoles
      * @param {Array<Role>} scriptSheetRoles
      */
-    public constructor(screen: Screen, session: Session, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
+    public constructor(window: Window, session: Session, apiRoles: Map<string, Role>, scriptSheetRoles: Map<string, Role>) {
         this._session = session;
         this._apiRoles = apiRoles;
         this._scripSheetRoles = scriptSheetRoles;
-        this._board = new Board(screen.width, screen.height);
+        this._board = new Board(window.innerWidth, window.innerHeight);
     }
 
     /**
      * Asynchronously creates a game session by downloading the scripts from the API and loads the roles
      * appropriately.
-     * @param {Screen} screen
+     * @param {Window} window
      * @param {Session} session
      * @param {string} scriptSheetRolesURL
      */
-    public static async init(screen: Screen, session: Session, scriptSheetRolesURL: string): Promise<GameEngine> {
+    public static async init(window: Window, session: Session, scriptSheetRolesURL: string): Promise<GameEngine> {
         const api_url: string = import.meta.env.VITE_ROLES_API_URL;
         const apiRolesResponse: Response = await fetch(api_url);
         const apiRolesData: any = await apiRolesResponse.json();
@@ -63,7 +63,7 @@ export default class GameEngine {
             }
         });
 
-        return new GameEngine(screen, session, apiRolesMap, scriptSheetRolesMap);
+        return new GameEngine(window, session, apiRolesMap, scriptSheetRolesMap);
     }
 
     /**
