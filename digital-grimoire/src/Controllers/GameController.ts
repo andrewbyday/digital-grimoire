@@ -18,18 +18,6 @@ export default class GameController {
         return this._view;
     }
 
-    public handleAddPlayer(name: string, pronouns: string, role: string) {
-
-    }
-
-    public handleAddToken() {
-
-    }
-
-    public handleAddNightSheet() {
-
-    }
-
     public renderScene() {
         this._view.renderTokens(this._model.getTokens());
     }
