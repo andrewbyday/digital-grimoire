@@ -13,24 +13,49 @@ export default class Token {
         this._group = this.createGroup(role,position);
     }
 
+    /**
+     * Returns role
+     */
     public get role() {
         return this._role;
     }
+
+    /**
+     * Sets role
+     * @param {Role} role
+     */
     public set role(role: Role) {
         this._role = role;
     }
 
+    /**
+     * Returns position on the board
+     */
     public get boardPosition(): { x: number; y: number } {
         return this._boardPosition;
     }
+
+    /**
+     * Sets the position of the token on the board
+     * @param position
+     */
     public set boardPosition(position: { x: number; y: number }) {
         this._boardPosition = position;
     }
 
+    /**
+     * Gets the Konva.Group
+     */
     public get group(): Konva.Group {
         return this._group;
     }
 
+    /**
+     * Creates the group for Konva.Layer
+     * @param role
+     * @param position
+     * @private
+     */
     private createGroup(role: Role, position: { x: number; y: number }): Konva.Group {
         const group: Konva.Group = new Konva.Group({
             x: position.x,
@@ -58,7 +83,7 @@ export default class Token {
             const background: Konva.Image = new Konva.Image({
                x: 0,
                y: 0,
-               image: bgImage,
+               image: values[0],
                width: 125,
                height: 125
             });
@@ -67,26 +92,56 @@ export default class Token {
             const role: Konva.Image = new Konva.Image({
                 x: 0,
                 y: 0,
-                image: roleImage,
+                image: values[1],
                 width: 125,
                 height: 125
             });
             group.add(role);
         });
 
+        group.on('dragmove', () => {
+            const pos = group.absolutePosition();
+
+            let x = this.clamp(pos.x,0,window.innerWidth-125);
+            let y = this.clamp(pos.y,0,window.innerHeight-125);
+
+            group.x(x);
+            group.y(y);
+        });
+
+        group.on('dblclick dbltap', () => {
+           console.log(role.name);
+        });
+
         return group;
     }
 
+    /**
+     * Loads images
+     * @param image
+     * @private
+     */
     private loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
         return new Promise((resolve, reject) => {
-           image.onload = image => { resolve(image); }
-           image.onerror = error => { resolve(error); }
+           image.onload = () => { resolve(image); }
+           image.onerror = (error) => { reject(error); }
         });
+    }
+
+    /**
+     * Clamps value between a min and a max
+     * @param {number} value
+     * @param {number} min
+     * @param {number} max
+     * @private
+     */
+    private clamp(value: number, min: number, max: number): number {
+        return Math.min(Math.max(value, min), max);
     }
 }
 
 export class PlayerToken extends Token {
-    private _player: Player;
+    private readonly _player: Player;
 
     constructor(role: Role, player: Player, position: { x: number; y: number }) {
         super(role, position);
