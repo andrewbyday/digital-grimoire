@@ -1,18 +1,20 @@
-import Token from "../Physical/Token.ts";
-
 export default class SvgCircleTextPath {
-    private readonly _token: Token;                 // token, used for its position
+    private readonly _tokenRadius: number = 0;
     private readonly _innerRadius: number = 0;      // inner radius (top of text)
     private readonly _outerRadius: number = 0;      // outer radius (bottom of text)
     private _text: string = "";                     // text to be used
     private _path:string = "";                      // svg path
 
-    constructor(token: Token, innerRadius: number, outerRadius: number, text: string) {
-        this._token = token;
+    constructor(tokenRadius: number, innerRadius: number, outerRadius: number, text: string) {
+        this._tokenRadius = tokenRadius;
         this._innerRadius = innerRadius;
         this._outerRadius = outerRadius;
         this._text = text;
-        this._path = this.generatePath(innerRadius, outerRadius);
+        this._path = this.generatePath(tokenRadius, innerRadius, outerRadius);
+    }
+
+    public get tokenRadius(): number {
+        return this._tokenRadius;
     }
 
     /**
@@ -53,39 +55,37 @@ export default class SvgCircleTextPath {
 
     /**
      * Generates and returns the svg path for text around the token
+     * @param tokenRadius
      * @param innerRadius
      * @param outerRadius
      * @private
      */
-    private generatePath(innerRadius: number, outerRadius: number): string {
+    private generatePath(tokenRadius: number, innerRadius: number, outerRadius: number): string {
         const end: number = 360;
-        const start: number = 0;
-        const radius: number = (innerRadius+outerRadius)/2;
+        const start: number = 1;
+        const bisectPath: number = (innerRadius+outerRadius)/2;
 
-        const textStart: {x: number, y: number} = this.coordinateTransformation(radius, end);
-        const textEnd: {x: number, y: number} = this.coordinateTransformation(radius, start);
+        const textStart: {x: number, y: number} = this.coordinateTransformation(tokenRadius, bisectPath, end);
+        const textEnd: {x: number, y: number} = this.coordinateTransformation(tokenRadius, bisectPath, start);
 
-        const sweep: string = end - start <= 180 ? "0" : "1";
-
-        return [
-            "M", textStart.x, textStart.y,
-            "A", radius, radius, 0, sweep, 0, textEnd.x, textEnd.y, "z"
-        ].join(" ");
+        return `M ${textStart.x} ${textStart.y} A ${bisectPath} ${bisectPath} 0 1 0 ${textEnd.x} ${textEnd.y} z`;
     }
 
     /**
      * Returns the x/y positions
-     * @param radius
+     * @param tokenRadius
+     * @param bisectPath
      * @param angleInDegrees
      * @private
      */
-    private coordinateTransformation(radius: number, angleInDegrees: number): {x: number, y: number} {
-        const position: {x: number, y: number } = this._token.boardPosition;
+    private coordinateTransformation(tokenRadius: number, bisectPath: number, angleInDegrees: number): {x: number, y: number} {
         const angleInRadians: number = (angleInDegrees-90) * Math.PI / 180.0;
+        const finalX: number = tokenRadius/2 + (bisectPath * Math.cos(angleInRadians));
+        const finalY: number = tokenRadius/2 + (bisectPath * Math.sin(angleInRadians));
 
         return {
-            x: position.x + (radius * Math.cos(angleInRadians)),
-            y: position.y + (radius * Math.sin(angleInRadians))
+            x: finalX,
+            y: finalY
         };
     }
 }

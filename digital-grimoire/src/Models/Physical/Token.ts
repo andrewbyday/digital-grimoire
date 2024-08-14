@@ -1,16 +1,21 @@
 import {Role} from "../Game/Role.ts";
 import Player from "../Game/Player.ts";
 import Konva from "konva";
+import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
 
 export default class Token {
     private _role: Role;
     private _boardPosition: { x: number; y: number };
     private readonly _group: Konva.Group;
+    private readonly _width: number;
+    private readonly _height: number;
 
-    constructor(role: Role, position: { x: number; y: number }) {
+    constructor(role: Role, position: { x: number; y: number }, width: number = 125, height: number = 125) {
         this._role = role;
         this._boardPosition = position;
         this._group = this.createGroup(role,position);
+        this._width = width;
+        this._height = height;
     }
 
     /**
@@ -71,9 +76,9 @@ export default class Token {
 
         Promise.all([this.loadImage(bgImage), this.loadImage(roleImage)]).then((values) => {
             const circle: Konva.Circle = new Konva.Circle({
-                x: 125/2,
-                y: 125/2,
-                radius: 125/2,
+                x: this._width/2,
+                y: this._height/2,
+                radius: this._width/2,
                 stroke: 'black',
                 strokeWidth: 4,
                 fill: 'white'
@@ -84,19 +89,35 @@ export default class Token {
                x: 0,
                y: 0,
                image: values[0],
-               width: 125,
-               height: 125
+               width: this._width,
+               height: this._height
             });
             group.add(background);
 
+            const scale = 0.75;
             const role: Konva.Image = new Konva.Image({
-                x: 0,
+                x: (this._width - this._width * scale)/2,
                 y: 0,
                 image: values[1],
-                width: 125,
-                height: 125
+                width: this._width * scale,
+                height: this._height * scale
             });
             group.add(role);
+
+            const path: SvgCircleTextPath = new SvgCircleTextPath(125,35,50,this._role.name);
+            console.log(path.path);
+            const text: Konva.TextPath = new Konva.TextPath({
+                x: 0,
+                y: 0,
+                fill: 'black',
+                fontSize: 18,
+                fontStyle: 'bold',
+                fontFamily: 'Dumbledore',
+                text: this._role.name.toUpperCase(),
+                align: 'center',
+                data: path.path
+            });
+            group.add(text);
         });
 
         group.on('dragmove', () => {
