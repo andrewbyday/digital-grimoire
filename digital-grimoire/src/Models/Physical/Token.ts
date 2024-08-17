@@ -94,7 +94,7 @@ export default class Token {
             });
             group.add(background);
 
-            const scale = 0.75;
+            const scale = 0.7;
             const role: Konva.Image = new Konva.Image({
                 x: (this._width - this._width * scale)/2,
                 y: 0,
@@ -104,13 +104,13 @@ export default class Token {
             });
             group.add(role);
 
-            const path: SvgCircleTextPath = new SvgCircleTextPath(125,35,50,this._role.name);
+            const path: SvgCircleTextPath = new SvgCircleTextPath(this._width,35,50,this._role.name);
             console.log(path.path);
             const text: Konva.TextPath = new Konva.TextPath({
                 x: 0,
                 y: 0,
                 fill: 'black',
-                fontSize: 18,
+                fontSize: 17,
                 fontStyle: 'bold',
                 fontFamily: 'Dumbledore',
                 text: this._role.name.toUpperCase(),
@@ -123,8 +123,8 @@ export default class Token {
         group.on('dragmove', () => {
             const pos = group.absolutePosition();
 
-            let x = this.clamp(pos.x,0,window.innerWidth-125);
-            let y = this.clamp(pos.y,0,window.innerHeight-125);
+            let x = this.clamp(pos.x,0,window.innerWidth-this._width);
+            let y = this.clamp(pos.y,0,window.innerHeight-this._width);
 
             group.x(x);
             group.y(y);
@@ -142,7 +142,7 @@ export default class Token {
      * @param image
      * @private
      */
-    private loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
+    protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
         return new Promise((resolve, reject) => {
            image.onload = () => { resolve(image); }
            image.onerror = (error) => { reject(error); }
@@ -156,7 +156,7 @@ export default class Token {
      * @param {number} max
      * @private
      */
-    private clamp(value: number, min: number, max: number): number {
+    protected clamp(value: number, min: number, max: number): number {
         return Math.min(Math.max(value, min), max);
     }
 }

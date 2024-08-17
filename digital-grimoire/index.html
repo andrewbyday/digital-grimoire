@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="icon" type="image/x-icon" href="src/assets/images/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./src/assets/images/favicon.ico" />
     <title>Digital Grimoire</title>
+    <script>
+      window.addEventListener("scroll", (e) => {
+        e.preventDefault();
+        window.scrollTo(0,0);
+      });
+    </script>
   </head>
   <body>
     <div id="app"></div>
