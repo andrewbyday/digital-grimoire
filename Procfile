@@ -1,2 +1,2 @@
-web: bin/start-nginx-solo
+web: bin/start-nginx-static
 worker: node ./server/server.js
