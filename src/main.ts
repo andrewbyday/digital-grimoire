@@ -9,7 +9,7 @@ import { io } from "socket.io-client";
 
 class main {
     constructor() {
-        const client = io('ws://joinapp.playclocktower.com:3000');
+        const client = io('ws://localhost:3000');
         console.log('connect check', client);
 
         client.on('connect', () => {
