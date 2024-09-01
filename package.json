@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -22,6 +21,6 @@
   },
   "engines": {
     "node": "20.x",
-    "npm": "10.8.0"
+    "npm": "10.8.3"
   }
 }
