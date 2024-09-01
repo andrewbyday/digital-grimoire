@@ -9,7 +9,9 @@ import { io } from "socket.io-client";
 class main {
     constructor() {
         const client = io("http://joinapp.shinpostudios.com:3000");
-        console.log(client);
+        client.on('hello', (args) => {
+            console.log(args);
+        };
     }
 
     public async startGame(): Promise<GameController> {
