@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dokku": {
-      "postdeploy": "node server.js"
+      "post-deploy": "node server.js"
     },
     "start": "node server.js",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "post-deploy": "node server.js",
+    "postdeploy": "node server.js"
   },
   "devDependencies": {
     "typescript": "^5.5.3",
