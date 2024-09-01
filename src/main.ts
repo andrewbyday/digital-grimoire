@@ -7,16 +7,7 @@ import GameController from "./Controllers/GameController.ts";
 import { io } from "socket.io-client";
 
 class main {
-    constructor() {
-        const client = io('https://joinapp.shinpostudios.com', {secure: true});
-        console.log('connect check', client);
-
-        client.on('connect', () => {
-            console.log('second check', client);
-        });
-
-        client.emit('join-lobby', 42);
-    }
+    constructor() { }
 
     public async startGame(): Promise<GameController> {
         const model: GameEngine = await GameEngine.init(window, new Session(), './trouble_brewing.json');
