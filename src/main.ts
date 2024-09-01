@@ -4,7 +4,6 @@ import GameEngine from './Models/Game/GameEngine.ts'
 import Session from "./Models/Game/Session.ts";
 import GameView from "./Views/GameView.ts";
 import GameController from "./Controllers/GameController.ts";
-import { io } from "socket.io-client";
 
 class main {
     constructor() { }
