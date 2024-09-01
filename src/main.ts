@@ -11,7 +11,7 @@ class main {
         const client = io("http://joinapp.shinpostudios.com:3000");
         client.on('hello', (args) => {
             console.log(args);
-        };
+        });
     }
 
     public async startGame(): Promise<GameController> {
