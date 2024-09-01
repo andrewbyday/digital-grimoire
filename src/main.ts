@@ -4,9 +4,13 @@ import GameEngine from './Models/Game/GameEngine.ts'
 import Session from "./Models/Game/Session.ts";
 import GameView from "./Views/GameView.ts";
 import GameController from "./Controllers/GameController.ts";
+import { io } from "socket.io-client";
 
 class main {
-    constructor() { }
+    constructor() {
+        const client = io("http://joinapp.shinpostudios.com:3000");
+        console.log(client);
+    }
 
     public async startGame(): Promise<GameController> {
         const model: GameEngine = await GameEngine.init(window, new Session(), './trouble_brewing.json');
