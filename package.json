@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
+    "dokku": {
+      "postdeploy": "node server.js"
+    }
   },
   "devDependencies": {
     "typescript": "^5.5.3",
