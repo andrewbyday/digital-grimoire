@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "dokku": {
+      "postdeploy": "node server.js"
+    },
     "start": "node server.js",
     "dev": "vite",
     "build": "tsc && vite build",
