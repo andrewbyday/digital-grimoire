@@ -8,9 +8,7 @@ import { io } from "socket.io-client";
 
 class main {
     constructor() {
-        const client = io("http://joinapp.shinpostudios.com:3000", {
-            withCredentials: true
-        });
+        const client = io("http://joinapp.shinpostudios.com");
         client.on('hello', (args) => {
             console.log(args);
         });
