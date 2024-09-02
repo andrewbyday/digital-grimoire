@@ -10,7 +10,7 @@ import { readFileSync } from "fs";
 class main {
     constructor() {
         const client = io("https://joinapp.shinpostudios.com", {
-            ca: readFileSync('/app/server/tls/server.letsencrypt.crt')
+            ca: readFileSync("/app/server/tls/server.letsencrypt.crt")
         });
         client.on('hello', (args) => {
             console.log(args);
