@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 
 class main {
     constructor() {
-        const client = io("https://joinapp.playclocktower.com");
+        const client = io(import.meta.env.VITE_WEBSOCKET_SERVER);
         client.on('hello', (args) => {
             console.log(args);
         });
