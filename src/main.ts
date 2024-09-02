@@ -5,13 +5,10 @@ import Session from "./Models/Game/Session.ts";
 import GameView from "./Views/GameView.ts";
 import GameController from "./Controllers/GameController.ts";
 import { io } from "socket.io-client";
-import * as fs from 'fs';
 
 class main {
     constructor() {
-        const client = io("https://joinapp.shinpostudios.com", {
-            ca: fs.readFileSync("/app/server/tls/server.letsencrypt.crt", "utf-8")
-        });
+        const client = io("https://joinapp.shinpostudios.com");
         client.on('hello', (args) => {
             console.log(args);
         });
