@@ -26,8 +26,14 @@ class main {
     }
 }
 
-let hostButton = document.getElementById('hostButton') as HTMLButtonElement;
-if (hostButton) {
+let hostButton: HTMLButtonElement | null = document.getElementById('hostButton') as HTMLButtonElement;
+let baseThreeSelect: HTMLSelectElement | null = document.getElementById('baseThreeSelect') as HTMLSelectElement;
+let sessionCode: HTMLInputElement | null = document.getElementById('sessionCode') as HTMLInputElement;
+
+if (hostButton && baseThreeSelect && sessionCode) {
+    const scriptSelectedValue: string = baseThreeSelect.selectedOptions[baseThreeSelect.selectedIndex].value;
+    const sessionCodeValue: string = sessionCode.value;
+
     hostButton.addEventListener('click', () => {
         const app: main = new main();
 
@@ -35,7 +41,7 @@ if (hostButton) {
             console.log(args);
         });
 
-        app.startGame('42', './scripts/trouble_brewing.json').then((game: GameController): void => {
+        app.startGame(scriptSelectedValue, sessionCodeValue).then((game: GameController): void => {
             console.log('game', game);
             // game.renderScene();
             game.listenJoins();
