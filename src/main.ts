@@ -13,9 +13,7 @@ class main {
         this._client = io(import.meta.env.VITE_WEBSOCKET_SERVER);
     }
 
-    public async startGame(scriptURL:string, sessionCode: string): Promise<GameController> {
-        this._client.emit('join-lobby', sessionCode);
-
+    public async startGame(scriptURL:string): Promise<GameController> {
         const model: GameEngine = await GameEngine.init(window, new Session(this._client), scriptURL);
         const view: GameView = await GameView.init(model.board, this._client);
 
@@ -27,21 +25,16 @@ class main {
     }
 }
 
-const app: main = new main();
-
 let hostButton = document.getElementById('hostButton');
-let sessionCode = document.getElementById('sessionCode') as HTMLInputElement;
-let baseThreeSelect = document.getElementById('baseThreeSelect') as HTMLSelectElement;
-if (hostButton && sessionCode && baseThreeSelect) {
-    const choiceScript: string = baseThreeSelect.selectedOptions[baseThreeSelect.selectedIndex].value;
-    const sessionId: string = sessionCode.value;
-
+if (hostButton) {
     hostButton.addEventListener('click', () => {
-        app.client.on('hello', (args) => {
+        const app: main = new main();
+
+        app.client.on('hello',  (args) => {
             console.log(args);
         });
 
-        app.startGame(sessionId, choiceScript).then((game: GameController): void => {
+        app.startGame('42').then((game: GameController): void => {
             console.log('game', game);
             // game.renderScene();
             game.listenJoins();
