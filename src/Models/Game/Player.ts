@@ -1,21 +1,14 @@
-import {PlayerToken} from "../Physical/Token.ts";
-import Session from "./Session.ts";
-
 export default class Player {
     private _name: string;
     private _pronouns: string;
-    private _token: PlayerToken;
     private _alive: boolean = true;
     private readonly _uuid: string;
-    private readonly _session: Session;
 
-    constructor(name: string, pronouns: string, token: PlayerToken, alive: boolean, session: Session) {
+    constructor(name: string, pronouns: string, alive: boolean, uuid: string) {
         this._name = name;
         this._pronouns = pronouns;
-        this._token = token;
         this._alive = alive;
-        this._uuid = session.clientUUID;
-        this._session = session;
+        this._uuid = uuid;
     }
 
     /**
@@ -49,21 +42,6 @@ export default class Player {
     }
 
     /**
-     * Get the player's token
-     */
-    public get token(): PlayerToken {
-        return this._token;
-    }
-
-    /**
-     * Set the player's token
-     * @param {PlayerToken} token
-     */
-    public set token(token: PlayerToken) {
-        this._token = token;
-    }
-
-    /**
      * Return if the player is alive or dead (shrouded)
      */
     public get alive(): boolean {
@@ -76,13 +54,6 @@ export default class Player {
      */
     public set alive(alive: boolean) {
         this._alive = alive;
-    }
-
-    /**
-     * Get client's session
-     */
-    public get session(): Session {
-        return this._session;
     }
 
     /**

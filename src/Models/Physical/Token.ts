@@ -4,11 +4,11 @@ import Konva from "konva";
 import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
 
 export default class Token {
-    private _role: Role;
-    private _boardPosition: { x: number; y: number };
-    private readonly _group: Konva.Group;
-    private readonly _width: number;
-    private readonly _height: number;
+    protected _role: Role;
+    protected _boardPosition: { x: number; y: number };
+    protected readonly _group: Konva.Group;
+    protected readonly _width: number;
+    protected readonly _height: number;
 
     constructor(role: Role, position: { x: number; y: number }, width: number = 125, height: number = 125) {
         this._role = role;
@@ -21,8 +21,16 @@ export default class Token {
     /**
      * Returns role
      */
-    public get role() {
+    public get role(): Role {
         return this._role;
+    }
+
+    public get width(): number {
+        return this._width;
+    }
+
+    public get height(): number {
+        return this._height;
     }
 
     /**
@@ -162,16 +170,26 @@ export default class Token {
 }
 
 export class PlayerToken extends Token {
-    private readonly _player: Player;
-
     constructor(role: Role, player: Player, position: { x: number; y: number }) {
         super(role, position);
-
-        this._player = player;
+        this.addName(player.name, super.width);
     }
 
-    public get player(): Player {
-        return this._player;
+    private addName(name: string, width: number) {
+        var nameText: Konva.Text = new Konva.Text({
+            x: 0,
+            y: 70,
+            text: name,
+            fontSize: 16,
+            fontFamily: 'Dumbledore',
+            fontWeight: 800,
+            fill: 'black',
+            align: 'center',
+            name: 'roleTokenText'
+        });
+        nameText.x(width/2-nameText.getTextWidth()/2);
+        super.group.add(nameText);
+        nameText.moveToBottom();
     }
 }
 

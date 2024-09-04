@@ -1,46 +1,47 @@
-import Token from "../Models/Physical/Token.ts";
+import Token, {PlayerToken} from "../Models/Physical/Token.ts";
 import Board from "../Models/Physical/Board.ts";
 import Konva from "konva";
 import {Stage} from "konva/lib/Stage";
+import {Socket} from "socket.io-client";
 
 export default class GameView {
     private readonly _stage: Stage;
+    private readonly _socket: Socket;
+    private readonly _tokenLayer: Konva.Layer;
 
-    constructor(stage: Stage) {
+    constructor(stage: Stage, socket: Socket) {
         this._stage = stage;
+        this._socket = socket;
+
+        this._tokenLayer = new Konva.Layer();
+        this._stage.add(this._tokenLayer);
     }
 
-    public static async init(board: Board): Promise<GameView> {
+    public static async init(board: Board, socket: Socket): Promise<GameView> {
         const stage: Stage = new Konva.Stage({
             container: 'app',
             width: board.width,
             height: board.height,
         });
 
-        return new GameView(stage);
+        return new GameView(stage, socket);
     }
 
     public get stage(): Stage {
         return this._stage;
     }
 
+    public get socket(): Socket {
+        return this._socket;
+    }
+
     public renderTokens(tokens: Set<Token>): void {
-        let layer: Konva.Layer = new Konva.Layer();
-        const orientation: ScreenOrientation = screen.orientation;
-
-        let scale: number = (window.innerHeight/window.innerWidth)*1.5;
-        if (orientation.type === "portrait-primary" || orientation.type === "portrait-secondary") {
-            scale = (window.innerWidth/window.innerHeight)*1.5;
-        }
-
-        console.log(orientation);
-
         tokens.forEach((token: Token) => {
-            console.log(scale);
-            token.group.scaleX(scale);
-            token.group.scaleY(scale);
-            layer.add(token.group);
+            this._tokenLayer.add(token.group);
         });
-        this._stage.add(layer);
+    }
+
+    public listenJoins(token: PlayerToken): void {
+        this._tokenLayer.add(token.group);
     }
 }

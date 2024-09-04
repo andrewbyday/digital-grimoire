@@ -11,9 +11,277 @@
         window.scrollTo(0,0);
       });
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- Startup Modal -->
+    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="false" id="startGameModal" tabindex="-1" role="dialog" aria-labelledby="startGameModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="startGameModalTitle">Blood on the Clocktower Digital Grimoire</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group row">
+                <label for="sessionCode" class="col-sm-4 col-form-label">Session Code</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="sessionCode">
+                </div>
+              </div>
+              <div class="form-group row" id="baseThreeSelector">
+                <label for="sessionCode" class="col-sm-4 col-form-label">Script</label>
+                <div class="col-sm-8">
+                  <select class="form-select" id="baseThreeSelect">
+                    <option value="./assets/scripts/trouble_brewing.json" selected>Trouble Brewing</option>
+                    <option value="./assets/scripts/bad_moon_rising.json">Bad Moon Rising</option>
+                    <option value="./assets/scripts/sects_and_violets.json">Sects and Violets</option>
+                    <option value="./assets/scripts/symptoms_of_paranoia.json">Symptoms of Paranoia (2.2.0)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row d-none" id="scriptUrlRow">
+                <label for="scriptUrl" class="col-sm-4 col-form-label">Script URL</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="scriptUrl">
+                </div>
+              </div>
+              <div class="form-group row d-none" id="scriptFileRow">
+                <label for="scripFile" class="col-sm-4 col-form-label">Script File</label>
+                <div class="col-sm-8">
+                  <input type="file" class="custom-file-input" id="scripFile" required>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="customScriptButton">
+                <label class="form-check-label" for="customScriptButton">Custom Scripts</label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary mx-auto" id="hostButton">Host Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="false" id="joinGameQRModal" tabindex="-1" role="dialog" aria-labelledby="joinGameQRModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title mx-auto" id="joinGameQRModalTitle"></h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div id="qrcode" class="d-flex justify-content-center"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary mx-auto" id="startButton">Start Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- First Night Order Modal -->
+    <div class="modal fade" data-bs-backdrop="false" id="firstNightOrderModal" tabindex="-1" role="dialog" aria-labelledby="firstNightOrderModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideout modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="firstNightOrderModalLabel">First Night Order</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            First Night Order Info
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Night Order Modal -->
+    <div class="modal fade" id="otherNightOrderModal" tabindex="-1" role="dialog" aria-labelledby="otherNightOrderModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideout modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="otherNightOrderModalLabel">Other Night Order</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Other Night Order Info
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Tokens Modal -->
+    <div class="modal fade" id="additionalTokensModal" tabindex="-1" role="dialog" aria-labelledby="additionalTokensModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideout modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="additionalTokensModalLabel">Additional Tokens</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Additional Tokens Here
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player Token Modal -->
+    <div class="modal fade" id="playerTokenModal" tabindex="-1" role="dialog" aria-labelledby="playerTokenModalTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="playerTokenModalTitle">Token Settings</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-inline">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Angie" aria-label="Username" id="usernameInput">
+                <input type="text" class="form-control" placeholder="They/Them" aria-label="Pronouns" id="userPronounsInput">
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Imp" aria-label="Role" id="roleInput">
+              </div>
+              <div class="input-group btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">Alive</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">Dead</label>
+                  </div>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group" style="margin-left: 10px;">
+                  <div class="btn-group">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                      <input type="radio" class="btn-check" name="alignment" id="align1" autocomplete="off">
+                      <label class="btn btn-outline-primary" for="align1">Good</label>
+
+                      <input type="radio" class="btn-check" name="alignment" id="align2" autocomplete="off" checked>
+                      <label class="btn btn-outline-primary" for="align2">Evil</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group" style="margin-left: 10px;">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary" id="showRoleButton">Show token</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="savePlayerTokenInfoButton">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Token Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Token</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-inline">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Role" aria-label="Token" id="roleTokenNameInput" autocomplete="off">
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Name" id="addTokenUsernameInput" aria-label="Username" autocomplete="off">
+                <input type="text" class="form-control" placeholder="Pronouns" id="addTokenPronounsInput" aria-label="Pronouns" autocomplete="off">
+              </div>
+              <div class="input-group btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="roleradio" id="roleradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="roleradio1">Role</label>
+
+                    <input type="radio" class="btn-check" name="roleradio" id="roleradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="roleradio2">Reminders</label>
+
+                    <input type="radio" class="btn-check" name="roleradio" id="roleradio3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="roleradio3">Travelers</label>
+
+                    <input type="radio" class="btn-check" name="roleradio" id="roleradio4" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="roleradio4">Fables</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addTokenButton">Add Token</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trashed Token Modal -->
+    <div class="modal fade" id="trashedTokenModal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="trashedTokenModal">Trashed Tokens & Items</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Trashed Token Images
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="app"></div>
     <script type="module" src="./src/main.ts"></script>
+    <script>
+      $(window).on('load', () => {
+        $('#startGameModal').modal('show');
+      });
+
+      /*
+      Add show buttons if custom script selected
+       */
+      $('#customScriptButton').on('click', () => {
+        const state = $('#customScriptButton').is(':checked');
+        if (state) {
+          $('#scriptUrlRow').removeClass('d-none');
+          $('#scriptFileRow').removeClass('d-none');
+          $('#baseThreeSelector').addClass('d-none');
+        } else {
+          $('#scriptUrlRow').addClass('d-none');
+          $('#scriptFileRow').addClass('d-none');
+          $('#baseThreeSelector').removeClass('d-none');
+        }
+      });
+
+      /*
+      Start Game
+       */
+      $('#hostButton').on('click', () => {
+        $('#startGameModal').modal('hide');
+      });
+    </script>
   </body>
 </html>
