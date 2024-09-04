@@ -33,7 +33,7 @@ window.onload = (e): void => {
     startGameModal.show();
 };
 
-window.addEventListener("scroll", (e) => {
+window.addEventListener("scroll", (e: Event): void => {
     e.preventDefault();
     window.scrollTo(0,0);
 });
@@ -46,7 +46,7 @@ let baseThreeSelector: HTMLElement | null = document.getElementById('baseThreeSe
 let scriptUrl: HTMLInputElement | null = document.getElementById('scriptUrl') as HTMLInputElement;
 
 if (customScriptButton && baseThreeSelector) {
-    customScriptButton.addEventListener('click', e => {
+    customScriptButton.addEventListener('click', (): void => {
         const status: boolean = customScriptButton.checked;
         const scriptUrlRow: HTMLElement = document.getElementById('scriptUrlRow') as HTMLElement;
 
