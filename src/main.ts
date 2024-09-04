@@ -11,11 +11,12 @@ class main {
 
     constructor() {
         this._client = io(import.meta.env.VITE_WEBSOCKET_SERVER);
-        this._client.emit('join-lobby', '42');
     }
 
-    public async startGame(): Promise<GameController> {
-        const model: GameEngine = await GameEngine.init(window, new Session(this._client), './trouble_brewing.json');
+    public async startGame(scriptURL:string, sessionCode: string): Promise<GameController> {
+        this._client.emit('join-lobby', sessionCode);
+
+        const model: GameEngine = await GameEngine.init(window, new Session(this._client), scriptURL);
         const view: GameView = await GameView.init(model.board, this._client);
 
         return new GameController(model, view);
@@ -28,12 +29,22 @@ class main {
 
 const app: main = new main();
 
-app.client.on('hello', (args) => {
-    console.log(args);
-});
+let hostButton = document.getElementById('hostButton');
+let sessionCode = document.getElementById('sessionCode') as HTMLInputElement;
+let baseThreeSelect = document.getElementById('baseThreeSelect') as HTMLSelectElement;
+if (hostButton && sessionCode && baseThreeSelect) {
+    const choiceScript: string = baseThreeSelect.selectedOptions[baseThreeSelect.selectedIndex].value;
+    const sessionId: string = sessionCode.value;
 
-app.startGame().then((game: GameController): void => {
-    console.log('game', game);
-    // game.renderScene();
-    game.listenJoins();
-});
+    hostButton.addEventListener('click', () => {
+        app.client.on('hello', (args) => {
+            console.log(args);
+        });
+
+        app.startGame(sessionId, choiceScript).then((game: GameController): void => {
+            console.log('game', game);
+            // game.renderScene();
+            game.listenJoins();
+        });
+    })
+}
