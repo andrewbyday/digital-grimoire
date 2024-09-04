@@ -1,8 +1,8 @@
 import GameEngine from "../Models/Game/GameEngine.ts";
 import GameView from "../Views/GameView.ts";
 import {Role} from "../Models/Game/Role.ts";
-import {PlayerToken} from "../Models/Physical/Token.ts";
 import Player from "../Models/Game/Player.ts";
+import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
 
 export default class GameController {
     private readonly _model: GameEngine;
@@ -31,7 +31,7 @@ export default class GameController {
            const player: Player = new Player(data.name, data.pronouns, true, data.playerId);
 
             if (role !== undefined) {
-                const token: PlayerToken = new PlayerToken(role, player, {x: 10, y: 10});
+                const token: TokenPlayer = new TokenPlayer(role, player, {x: 10, y: 10});
                 this._view.listenJoins(token);
             }
         });

@@ -1,8 +1,9 @@
-import Token, {PlayerToken} from "../Models/Physical/Token.ts";
 import Board from "../Models/Physical/Board.ts";
 import Konva from "konva";
 import {Stage} from "konva/lib/Stage";
 import {Socket} from "socket.io-client";
+import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
+import Token from "../Models/Physical/Token.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -41,7 +42,7 @@ export default class GameView {
         });
     }
 
-    public listenJoins(token: PlayerToken): void {
+    public listenJoins(token: TokenPlayer): void {
         this._tokenLayer.add(token.group);
     }
 }
