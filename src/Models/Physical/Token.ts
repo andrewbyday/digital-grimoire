@@ -189,7 +189,6 @@ export class PlayerToken extends Token {
         });
         nameText.x(width/2-nameText.getTextWidth()/2);
         super.group.add(nameText);
-        nameText.moveToBottom();
     }
 }
 
