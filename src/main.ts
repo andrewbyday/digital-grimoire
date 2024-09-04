@@ -41,19 +41,45 @@ window.addEventListener("scroll", (e) => {
 let hostButton: HTMLButtonElement | null = document.getElementById('hostButton') as HTMLButtonElement;
 let sessionCode: HTMLInputElement | null = document.getElementById('sessionCode') as HTMLInputElement;
 let baseThreeSelect: HTMLSelectElement | null = document.getElementById('baseThreeSelect') as HTMLSelectElement;
+let customScriptButton: HTMLInputElement | null = document.getElementById('customScriptButton') as HTMLInputElement;
+let baseThreeSelector: HTMLElement | null = document.getElementById('baseThreeSelector') as HTMLElement;
+let scriptUrl: HTMLInputElement | null = document.getElementById('scriptUrl') as HTMLInputElement;
 
-if (hostButton && sessionCode && baseThreeSelect) {
+if (customScriptButton && baseThreeSelector) {
+    customScriptButton.addEventListener('click', e => {
+        const status: boolean = customScriptButton.checked;
+        const scriptUrlRow: HTMLElement = document.getElementById('scriptUrlRow') as HTMLElement;
+
+        if (status) {
+            scriptUrlRow.className = 'form-group row';
+            baseThreeSelector.className = 'form-group row d-none';
+        } else {
+            scriptUrlRow.className = 'form-group row d-none';
+            baseThreeSelector.className = 'form-group row';
+        }
+    });
+}
+
+
+if (hostButton && sessionCode && baseThreeSelect && scriptUrl) {
     hostButton.addEventListener('click', () => {
         const app: main = new main();
 
+        const status: boolean = customScriptButton.checked;
         const sessionCodeValue: string = sessionCode.value ? sessionCode.value : "42";
         const baseThreeSelectValue: string = baseThreeSelect.value ? baseThreeSelect.value : "./scripts/trouble_brewing.json";
+        const customScriptValue: string = scriptUrl.value ? scriptUrl.value : "./scripts/trouble_brewing.json";
+
+        let chosenScript: string = baseThreeSelectValue;
+        if (status) {
+            chosenScript = customScriptValue;
+        }
 
         app.client.on('hello',  (args) => {
             console.log(args);
         });
 
-        app.startGame(sessionCodeValue, baseThreeSelectValue).then((game: GameController): void => {
+        app.startGame(sessionCodeValue, chosenScript).then((game: GameController): void => {
             console.log('game', game);
             // game.renderScene();
             game.listenJoins();
