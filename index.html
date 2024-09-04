@@ -255,33 +255,5 @@
 
     <div id="app"></div>
     <script type="module" src="./src/main.ts"></script>
-    <script>
-      $(window).on('load', () => {
-        $('#startGameModal').modal('show');
-      });
-
-      /*
-      Add show buttons if custom script selected
-       */
-      $('#customScriptButton').on('click', () => {
-        const state = $('#customScriptButton').is(':checked');
-        if (state) {
-          $('#scriptUrlRow').removeClass('d-none');
-          $('#scriptFileRow').removeClass('d-none');
-          $('#baseThreeSelector').addClass('d-none');
-        } else {
-          $('#scriptUrlRow').addClass('d-none');
-          $('#scriptFileRow').addClass('d-none');
-          $('#baseThreeSelector').removeClass('d-none');
-        }
-      });
-
-      /*
-      Start Game
-       */
-      $('#hostButton').on('click', () => {
-        $('#startGameModal').modal('hide');
-      });
-    </script>
   </body>
 </html>

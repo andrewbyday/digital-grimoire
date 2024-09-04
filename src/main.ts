@@ -5,6 +5,7 @@ import Session from "./Models/Game/Session.ts";
 import GameView from "./Views/GameView.ts";
 import GameController from "./Controllers/GameController.ts";
 import {io, Socket} from "socket.io-client";
+import { Modal } from "bootstrap";
 
 class main {
     private readonly _client: Socket;
@@ -14,10 +15,8 @@ class main {
     }
 
     public async startGame(sessionCode:string, scriptURL:string): Promise<GameController> {
-        const model: GameEngine = await GameEngine.init(window, new Session(this._client), scriptURL);
+        const model: GameEngine = await GameEngine.init(window, new Session(this._client, sessionCode), scriptURL);
         const view: GameView = await GameView.init(model.board, this._client);
-        this._client.emit('join-lobby', sessionCode);
-
         return new GameController(model, view);
     }
 
@@ -26,25 +25,34 @@ class main {
     }
 }
 
+const startGameModalElement: HTMLElement = document.getElementById('startGameModal') as HTMLElement;
+const startGameModal = new Modal(startGameModalElement);
+
+window.onload = (): void => {
+    startGameModal.show();
+};
+
 let hostButton: HTMLButtonElement | null = document.getElementById('hostButton') as HTMLButtonElement;
-let baseThreeSelect: HTMLSelectElement | null = document.getElementById('baseThreeSelect') as HTMLSelectElement;
 let sessionCode: HTMLInputElement | null = document.getElementById('sessionCode') as HTMLInputElement;
+let baseThreeSelect: HTMLSelectElement | null = document.getElementById('baseThreeSelect') as HTMLSelectElement;
 
-if (hostButton && baseThreeSelect && sessionCode) {
-    const scriptSelectedValue: string = baseThreeSelect.selectedOptions[baseThreeSelect.selectedIndex].value;
-    const sessionCodeValue: string = sessionCode.value;
-
+if (hostButton && sessionCode && baseThreeSelect) {
     hostButton.addEventListener('click', () => {
         const app: main = new main();
+
+        const sessionCodeValue: string = sessionCode.value ? sessionCode.value : "42";
+        const baseThreeSelectValue: string = baseThreeSelect.value ? baseThreeSelect.value : "./scripts/trouble_brewing.json";
 
         app.client.on('hello',  (args) => {
             console.log(args);
         });
 
-        app.startGame(scriptSelectedValue, sessionCodeValue).then((game: GameController): void => {
+        app.startGame(sessionCodeValue, baseThreeSelectValue).then((game: GameController): void => {
             console.log('game', game);
             // game.renderScene();
             game.listenJoins();
         });
+
+        startGameModal.hide();
     })
 }
