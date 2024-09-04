@@ -28,9 +28,15 @@ class main {
 const startGameModalElement: HTMLElement = document.getElementById('startGameModal') as HTMLElement;
 const startGameModal = new Modal(startGameModalElement);
 
-window.onload = (): void => {
+window.onload = (e): void => {
+    e.preventDefault();
     startGameModal.show();
 };
+
+window.addEventListener("scroll", (e) => {
+    e.preventDefault();
+    window.scrollTo(0,0);
+});
 
 let hostButton: HTMLButtonElement | null = document.getElementById('hostButton') as HTMLButtonElement;
 let sessionCode: HTMLInputElement | null = document.getElementById('sessionCode') as HTMLInputElement;
