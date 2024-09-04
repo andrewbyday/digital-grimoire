@@ -13,9 +13,10 @@ class main {
         this._client = io(import.meta.env.VITE_WEBSOCKET_SERVER);
     }
 
-    public async startGame(scriptURL:string): Promise<GameController> {
+    public async startGame(sessionCode:string, scriptURL:string): Promise<GameController> {
         const model: GameEngine = await GameEngine.init(window, new Session(this._client), scriptURL);
         const view: GameView = await GameView.init(model.board, this._client);
+        this._client.emit('join-lobby', sessionCode);
 
         return new GameController(model, view);
     }
@@ -25,7 +26,7 @@ class main {
     }
 }
 
-let hostButton = document.getElementById('hostButton');
+let hostButton = document.getElementById('hostButton') as HTMLButtonElement;
 if (hostButton) {
     hostButton.addEventListener('click', () => {
         const app: main = new main();
@@ -34,7 +35,7 @@ if (hostButton) {
             console.log(args);
         });
 
-        app.startGame('42').then((game: GameController): void => {
+        app.startGame('42', './scripts/trouble_brewing.json').then((game: GameController): void => {
             console.log('game', game);
             // game.renderScene();
             game.listenJoins();
