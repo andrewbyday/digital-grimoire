@@ -1,5 +1,4 @@
 import './style.css';
-import './assets/fonts/Dumbledore/dum1.ttf';
 import GameEngine from './Models/Game/GameEngine.ts'
 import Session from "./Models/Game/Session.ts";
 import GameView from "./Views/GameView.ts";
