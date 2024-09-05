@@ -34,7 +34,7 @@ export default class GameController {
         type PlayerInput = z.infer<typeof playerInputSchema>;
 
         this._model.session.socket.on('player-join-info', (data: PlayerInput): void => {
-            this._model.addPlayer(data.playerId, data.name, data.pronouns, data.role);
+            this._view.listenJoins(this._model.addPlayer(data.playerId, data.name, data.pronouns, data.role));
         });
     }
 }
