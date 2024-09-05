@@ -133,6 +133,14 @@ export default class GameEngine {
         this._board = board;
     }
 
+    /**
+     * Adds a player to the game.
+     *
+     * @param {string} inputPlayerId Unique ID for the user
+     * @param {string} inputName User's Name
+     * @param {string} inputPronouns User's Pronouns
+     * @param {string} inputRole User's Role
+     */
     public addPlayer(inputPlayerId: string, inputName: string, inputPronouns: string, inputRole: string): TokenPlayer {
         let role: Role | undefined = this._scripSheetRoles.get(inputRole);
         const player: Player = new Player(inputName, inputPronouns, true, inputPlayerId);
