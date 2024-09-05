@@ -2,6 +2,9 @@ import {Role} from "./Role.ts";
 import Board from "../Physical/Board.ts";
 import Session from "./Session.ts";
 import Token from "../Physical/Token.ts";
+import Player from "./Player.ts";
+import TokenPlayer from "../Physical/TokenPlayer.ts";
+import Konva from "konva";
 
 export default class GameEngine {
     private readonly _session: Session;                         // session id/room for the WebSocket
@@ -129,5 +132,25 @@ export default class GameEngine {
      */
     public set board(board: Board) {
         this._board = board;
+    }
+
+    public addPlayer(inputPlayerId: string, inputName: string, inputPronouns: string, inputRole: string): Konva.Group {
+        let role: Role | undefined = this._scripSheetRoles.get(inputRole);
+        const player: Player = new Player(inputName, inputPronouns, true, inputPlayerId);
+
+        if (role === undefined) {
+            role = {
+                edition: "",
+                firstNightOrder: [],
+                name: "",
+                official_icon: "",
+                official_icon_bg: "",
+                otherNightOrder: [],
+                script_id: "string",
+                type: ""
+            }
+        }
+        const token: TokenPlayer = new TokenPlayer(role, player, {x: 10, y: 10});
+        return token.group;
     }
 }

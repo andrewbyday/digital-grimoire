@@ -1,8 +1,6 @@
 import GameEngine from "../Models/Game/GameEngine.ts";
 import GameView from "../Views/GameView.ts";
-import {Role} from "../Models/Game/Role.ts";
-import Player from "../Models/Game/Player.ts";
-import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
+import { z } from "zod";
 
 export default class GameController {
     private readonly _model: GameEngine;
@@ -26,14 +24,17 @@ export default class GameController {
     }
 
     public listenJoins() {
-        this._model.session.socket.on('player-join-info', (data) => {
-           const role: Role | undefined = this._model.scriptSheetRoles.get(data.role);
-           const player: Player = new Player(data.name, data.pronouns, true, data.playerId);
+        const playerInputSchema = z.object({
+            playerId: z.string(),
+            name: z.string(),
+            pronouns: z.string(),
+            role: z.string()
+        });
 
-            if (role !== undefined) {
-                const token: TokenPlayer = new TokenPlayer(role, player, {x: 10, y: 10});
-                this._view.listenJoins(token);
-            }
+        type PlayerInput = z.infer<typeof playerInputSchema>;
+
+        this._model.session.socket.on('player-join-info', (data: PlayerInput): void => {
+            this._model.addPlayer(data.playerId, data.name, data.pronouns, data.role);
         });
     }
 }
