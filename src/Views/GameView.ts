@@ -9,13 +9,20 @@ export default class GameView {
     private readonly _stage: Stage;
     private readonly _socket: Socket;
     private readonly _tokenLayer: Konva.Layer;
+    private readonly _drawerLayer: Konva.Layer;
+    private readonly _buttonsLayer: Konva.Layer;
 
     constructor(stage: Stage, socket: Socket) {
         this._stage = stage;
         this._socket = socket;
 
         this._tokenLayer = new Konva.Layer();
+        this._drawerLayer = new Konva.Layer();
+        this._buttonsLayer = new Konva.Layer();
+
         this._stage.add(this._tokenLayer);
+        this._stage.add(this._drawerLayer);
+        this._stage.add(this._buttonsLayer);
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -40,6 +47,116 @@ export default class GameView {
         tokens.forEach((token: Token) => {
             this._tokenLayer.add(token.group);
         });
+    }
+
+    public renderButtons(): void {
+        const group: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: this._stage.width(),
+            height: this._stage.height(),
+            name: 'buttons',
+            draggable: false
+        });
+
+        let button = new Image();
+        button.onload = function() {
+            let buttonImg = new Konva.Image({
+                x: 0,
+                y: 0,
+                image: button,
+                width: 100,
+                height: 257,
+            });
+            group.add(buttonImg);
+        }
+        button.src = '/img/buttons/first_night.png';
+
+        this._buttonsLayer.add(group);
+    }
+
+    public renderDrawer(): void {
+        const finalWidth: number = 200;
+        const finalHeight: number = 1000;
+
+        const group: Konva.Group = new Konva.Group({
+            x: this._stage.width() - finalWidth,
+            y: 0,
+            name: 'drawer',
+            draggable: true
+        });
+
+        const bg: Konva.Rect = new Konva.Rect( {
+            x: 0,
+            y: 0,
+            width: finalWidth,
+            height: finalHeight,
+            fill: 'black'
+        });
+
+        const characterRolesBtn: Konva.Text = new Konva.Text({
+            x: 170,
+            y: 120,
+            text: 'SCRIPT',
+            fontSize: 28,
+            fontFamily: 'Dumbledore',
+            fill: 'white',
+            rotation: 270,
+            id: 'characterRolesTextBtn',
+            opacity: 1,
+        });
+
+        characterRolesBtn.on('click tap', (): void => {
+            characterRolesBtn.fill('white');
+            travelerRolesBtn.fill('grey');
+            fabledRolesBtn.fill('grey');
+        });
+
+        const travelerRolesBtn: Konva.Text = new Konva.Text({
+            x: 170,
+            y: 300,
+            text: 'TRAVELERS',
+            fontSize: 28,
+            fontFamily: 'Dumbledore',
+            fill: 'grey',
+            rotation: 270,
+            id: 'travelerRolesTextBtn',
+        });
+
+        travelerRolesBtn.on('click tap', (): void => {
+            characterRolesBtn.fill('grey');
+            travelerRolesBtn.fill('white');
+            fabledRolesBtn.fill('grey');
+        });
+
+        const fabledRolesBtn: Konva.Text = new Konva.Text({
+            x: 170,
+            y: 420,
+            text: 'FABLED',
+            fontSize: 28,
+            fontFamily: 'Dumbledore',
+            fill: 'grey',
+            rotation: 270,
+            id: 'fabledRolesTextBtn',
+        });
+
+        fabledRolesBtn.on('click tap', (): void => {
+            characterRolesBtn.fill('grey');
+            travelerRolesBtn.fill('grey');
+            fabledRolesBtn.fill('white');
+        });
+
+        group.add(bg, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
+
+        this._drawerLayer.add(group);
+    }
+
+    public hideDrawer(): void {
+        this._drawerLayer.hide();
+    }
+
+    public showDrawer(): void {
+        this._drawerLayer.show();
     }
 
     public listenJoins(token: TokenPlayer): void {

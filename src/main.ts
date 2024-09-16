@@ -79,8 +79,7 @@ if (hostButton && sessionCode && baseThreeSelect && scriptUrl) {
         });
 
         app.startGame(sessionCodeValue, chosenScript).then((game: GameController): void => {
-            console.log('game', game);
-            // game.renderScene();
+            game.renderScene();
             game.listenJoins();
         });
 

@@ -9,8 +9,9 @@ export default class GameEngine {
     private readonly _session: Session;                         // session id/room for the WebSocket
     private readonly _apiRoles: Map<string, Role>;              // list of roles from the api (all botc roles)
     private readonly _scripSheetRoles: Map<string, Role>;       // list of roles from the script
-
     private _board: Board;                                      // Board
+
+    private _players: number;
 
     /**
      * Creates a game session
@@ -24,6 +25,7 @@ export default class GameEngine {
         this._apiRoles = apiRoles;
         this._scripSheetRoles = scriptSheetRoles;
         this._board = new Board(window.innerWidth, window.innerHeight);
+        this._players = 0;
     }
 
     /**
@@ -102,8 +104,8 @@ export default class GameEngine {
                 spaceY += 135;
                 index = 0;
             }
-            const currtoken: Token = new Token(role, {x: spaceX, y: spaceY});
-            tokens.add(currtoken);
+
+            tokens.add(new Token(role, {x: spaceX, y: spaceY}));
             spaceX += 135;
             index++;
         }
@@ -133,6 +135,14 @@ export default class GameEngine {
         this._board = board;
     }
 
+    public get players(): number {
+        return this._players;
+    }
+
+    public set players(value: number) {
+        this._players = value;
+    }
+
     /**
      * Adds a player to the game.
      *
@@ -144,6 +154,7 @@ export default class GameEngine {
     public addPlayer(inputPlayerId: string, inputName: string, inputPronouns: string, inputRole: string): TokenPlayer {
         let role: Role | undefined = this._scripSheetRoles.get(inputRole);
         const player: Player = new Player(inputName, inputPronouns, true, inputPlayerId);
+        this._players++;
 
         if (role === undefined) {
             role = {
@@ -159,5 +170,17 @@ export default class GameEngine {
         }
 
         return new TokenPlayer(role, player, {x: 10, y: 10});
+    }
+
+    public getFabledTokens(): Set<Token> {
+        let tokens: Set<Token> = new Set();
+
+        return tokens;
+    }
+
+    public getTravelerTokens(): Set<Token> {
+        let tokens: Set<Token> = new Set();
+
+        return tokens;
     }
 }

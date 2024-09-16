@@ -20,7 +20,10 @@ export default class GameController {
     }
 
     public renderScene() {
-        this._view.renderTokens(this._model.getTokens());
+        this._view.renderButtons();
+
+        this._view.hideDrawer();
+        this._view.renderDrawer();
     }
 
     public listenJoins() {
