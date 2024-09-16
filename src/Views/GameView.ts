@@ -50,27 +50,88 @@ export default class GameView {
     }
 
     public renderButtons(): void {
+        const width: number = this._stage.width();
+        const height: number = this._stage.height();
+
         const group: Konva.Group = new Konva.Group({
             x: 0,
             y: 0,
-            width: this._stage.width(),
-            height: this._stage.height(),
+            width: width,
+            height: height,
             name: 'buttons',
             draggable: false
         });
 
-        let button = new Image();
-        button.onload = function() {
-            let buttonImg = new Konva.Image({
-                x: 0,
-                y: 0,
-                image: button,
+        let firstNightButton = new Image();
+        firstNightButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-125,
+                y: height-257,
+                image: firstNightButton,
                 width: 100,
                 height: 257,
+                name: 'first-night-button'
             });
             group.add(buttonImg);
         }
-        button.src = '/img/buttons/first_night.png';
+        firstNightButton.src = '/img/buttons/first_night.png';
+
+        let otherNightbutton = new Image();
+        otherNightbutton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-64.25,
+                y: height-257,
+                image: otherNightbutton,
+                width: 64.25,
+                height: 257,
+                name: 'other-night-button'
+            });
+            group.add(buttonImg);
+        }
+        otherNightbutton.src = '/img/buttons/other_night.png';
+
+        let additionalTokensButton = new Image();
+        additionalTokensButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-140,
+                y: height-(257+175),
+                image: additionalTokensButton,
+                width: 162.86,
+                height: 150,
+                name: 'additional-tokens-button'
+            });
+            group.add(buttonImg);
+        }
+        additionalTokensButton.src = '/img/buttons/additional_tokens.png';
+
+        let nightActionCardsButton = new Image();
+        nightActionCardsButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-140,
+                y: height-(257+175+175),
+                image: nightActionCardsButton,
+                width: 160.43,
+                height: 150,
+                name: 'night-action-cards-button'
+            });
+            group.add(buttonImg);
+        }
+        nightActionCardsButton.src = '/img/buttons/night_action_cards.png';
+
+        let putAwayButton = new Image();
+        putAwayButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-140,
+                y: height-(257+175+175+200),
+                image: putAwayButton,
+                width: 175,
+                height: 175,
+                name: 'put-away-button'
+            });
+            group.add(buttonImg);
+        }
+        putAwayButton.src = '/img/buttons/put_away.png';
+
 
         this._buttonsLayer.add(group);
     }
