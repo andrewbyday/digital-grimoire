@@ -194,23 +194,19 @@ export default class GameView {
 
         scriptTokens.forEach( (token: Token) => {
             token.disableDragging();
-            token.group.on('dblclick dbltap', () => {
-               console.log(token);
-               const newToken: Konva.Group = token.group.clone();
-               newToken.x(10);
-               newToken.y(this._stage.height() - 135);
-               this._tokenLayer.add(newToken);
-            });
+            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
             scriptTokensGroup.add(token.group);
         });
 
         travellerTokens.forEach( (token: Token) => {
             token.disableDragging();
+            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
             travellerTokensGroup.add(token.group);
         });
 
         fabledTokens.forEach( (token: Token) => {
             token.disableDragging();
+            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
             fabledTokensGroup.add(token.group);
         });
 

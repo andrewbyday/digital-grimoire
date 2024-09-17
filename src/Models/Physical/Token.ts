@@ -18,6 +18,18 @@ export default class Token {
         this._height = height;
     }
 
+    public makeAddable(x: number, y: number, layer: Konva.Layer): void {
+        this._group.on('dblclick dbltap', () => {
+            const newToken: Konva.Group = this._group.clone({
+                x: x,
+                y: y,
+                draggable: true,
+                id: 'test2'
+            });
+            newToken.moveTo(layer);
+        });
+    }
+
     public disableDragging(): void {
         this._group.draggable(false);
     }
