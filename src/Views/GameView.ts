@@ -148,9 +148,10 @@ export default class GameView {
         this._buttonsLayer.add(group);
     }
 
-    public renderDrawer(travelerTokens: Set<Token>): void {
+    public renderDrawer(scriptTokens: Set<Token>, travellerTokens: Set<Token>, fabledTokens: Set<Token>): void {
         const finalWidth: number = 200;
-        const finalHeight: number = 1000;
+        const finalHeight: number = 135 * scriptTokens.size + 30;
+        const maxHeight: number = finalHeight - this._stage.height();
 
         const group: Konva.Group = new Konva.Group({
             x: this._stage.width() - finalWidth,
@@ -159,13 +160,51 @@ export default class GameView {
             draggable: true
         });
 
-        const travellerTokensGroup: Konva.Group = new Konva.Group({
+        const picker: Konva.Group = new Konva.Group({
+            x: this._stage.width() - finalWidth,
+            y: 0,
+            name: 'picker'
+        });
+
+        group.on('dragmove', () => {
+            const pos = group.absolutePosition();
+
+            let currY = this.clamp(pos.y, -maxHeight, 0);
+            console.log(currY);
+            group.y(currY);
+            group.x(this._stage.width()-finalWidth);
+        });
+
+        const scriptTokensGroup: Konva.Group = new Konva.Group({
             x: 0,
             y: 0
         });
 
-        travelerTokens.forEach( (token: Token) => {
-           travellerTokensGroup.add(token.group);
+        const travellerTokensGroup: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0
+        });
+        travellerTokensGroup.hide();
+
+        const fabledTokensGroup: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0
+        });
+        fabledTokensGroup.hide();
+
+        scriptTokens.forEach( (token: Token) => {
+            token.disableDragging();
+            scriptTokensGroup.add(token.group);
+        });
+
+        travellerTokens.forEach( (token: Token) => {
+            token.disableDragging();
+            travellerTokensGroup.add(token.group);
+        });
+
+        fabledTokens.forEach( (token: Token) => {
+            token.disableDragging();
+            fabledTokensGroup.add(token.group);
         });
 
         const returnToGrimGroup: Konva.Group = new Konva.Group({
@@ -201,6 +240,10 @@ export default class GameView {
             characterRolesBtn.fill('white');
             travelerRolesBtn.fill('grey');
             fabledRolesBtn.fill('grey');
+
+            scriptTokensGroup.show();
+            travellerTokensGroup.hide();
+            fabledTokensGroup.hide();
         });
 
         const travelerRolesBtn: Konva.Text = new Konva.Text({
@@ -218,6 +261,10 @@ export default class GameView {
             characterRolesBtn.fill('grey');
             travelerRolesBtn.fill('white');
             fabledRolesBtn.fill('grey');
+
+            scriptTokensGroup.hide();
+            travellerTokensGroup.show();
+            fabledTokensGroup.hide();
         });
 
         const fabledRolesBtn: Konva.Text = new Konva.Text({
@@ -235,6 +282,10 @@ export default class GameView {
             characterRolesBtn.fill('grey');
             travelerRolesBtn.fill('grey');
             fabledRolesBtn.fill('white');
+
+            scriptTokensGroup.hide();
+            travellerTokensGroup.hide();
+            fabledTokensGroup.show();
         });
 
         let returnToGrimButton = new Image();
@@ -258,9 +309,11 @@ export default class GameView {
         }
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
 
-        group.add(bg, travellerTokensGroup, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
+        picker.add(characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
+        group.add(bg, scriptTokensGroup, travellerTokensGroup, fabledTokensGroup);
 
         this._drawerLayer.add(group);
+        this._drawerLayer.add(picker);
     }
 
     public renderNightActionCards(): void {
@@ -413,5 +466,9 @@ export default class GameView {
             image.onload = () => { resolve(image); }
             image.onerror = (error) => { reject(error); }
         });
+    }
+
+    protected clamp(value: number, min: number, max: number): number {
+        return Math.min(Math.max(value, min), max);
     }
 }

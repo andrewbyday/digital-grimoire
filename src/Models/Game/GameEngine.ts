@@ -172,19 +172,42 @@ export default class GameEngine {
         return new TokenPlayer(role, player, {x: 10, y: 10});
     }
 
-    public getFabledTokens(): Set<Token> {
+    public getScriptTokens(): Set<Token> {
         let tokens: Set<Token> = new Set();
+        let spaceY: number = 20;
+
+        for (let role of this._scripSheetRoles.values()) {
+            console.log(role);
+            tokens.add(new Token(role, {x: 20, y: spaceY}));
+            spaceY += 135;
+        }
 
         return tokens;
     }
 
-    public getTravelerTokens(): Set<Token> {
+    public getTravellerTokens(): Set<Token> {
         let tokens: Set<Token> = new Set();
-        let spaceY: number = 0;
+        let spaceY: number = 20;
 
-        for (let role of this._scripSheetRoles.values()) {
-            tokens.add(new Token(role, {x: 0, y: spaceY}));
-            spaceY += 135;
+        for (let role of this._apiRoles.values()) {
+            if (role.type === 'traveller' || role.type === 'traveler') {
+                tokens.add(new Token(role, {x: 20, y: spaceY}));
+                spaceY += 135;
+            }
+        }
+
+        return tokens;
+    }
+
+    public getFabledTokens(): Set<Token> {
+        let tokens: Set<Token> = new Set();
+        let spaceY: number = 20;
+
+        for (let role of this._apiRoles.values()) {
+            if (role.type === 'fabled') {
+                tokens.add(new Token(role, {x: 20, y: spaceY}));
+                spaceY += 135;
+            }
         }
 
         return tokens;

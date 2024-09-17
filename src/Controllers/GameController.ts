@@ -1,6 +1,7 @@
 import GameEngine from "../Models/Game/GameEngine.ts";
 import GameView from "../Views/GameView.ts";
 import { z } from "zod";
+import Token from "../Models/Physical/Token.ts";
 
 export default class GameController {
     private readonly _model: GameEngine;
@@ -23,7 +24,12 @@ export default class GameController {
         this._view.renderButtons();
         this._view.renderNightActionCards();
         this._view.hideDrawer();
-        this._view.renderDrawer(this._model.getTravelerTokens());
+
+        const scriptTokens: Set<Token> = this._model.getScriptTokens();
+        const travellerTokens: Set<Token> = this._model.getTravellerTokens();
+        const fabledTokens: Set<Token> = this._model.getFabledTokens();
+
+        this._view.renderDrawer(scriptTokens,travellerTokens, fabledTokens);
     }
 
     public listenJoins() {

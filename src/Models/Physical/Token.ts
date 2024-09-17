@@ -18,6 +18,14 @@ export default class Token {
         this._height = height;
     }
 
+    public disableDragging(): void {
+        this._group.draggable(false);
+    }
+
+    public enableDragging(): void {
+        this._group.draggable(true);
+    }
+
     /**
      * Returns role
      */
@@ -133,6 +141,8 @@ export default class Token {
 
             let x = this.clamp(pos.x,0,window.innerWidth-this._width);
             let y = this.clamp(pos.y,0,window.innerHeight-this._width);
+
+            console.log(x,y);
 
             group.x(x);
             group.y(y);
