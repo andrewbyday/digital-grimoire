@@ -11,7 +11,6 @@ export default class GameView {
     private readonly _tokenLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
-    private readonly _settingsLayer: Konva.Layer;
     private readonly _nightActionsLayer: Konva.Layer;
 
     constructor(stage: Stage, socket: Socket) {
@@ -21,13 +20,11 @@ export default class GameView {
         this._tokenLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
-        this._settingsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
 
         this._stage.add(this._tokenLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._buttonsLayer);
-        this._stage.add(this._settingsLayer);
         this._stage.add(this._nightActionsLayer);
     }
 
@@ -53,43 +50,6 @@ export default class GameView {
         tokens.forEach((token: Token) => {
             this._tokenLayer.add(token.group);
         });
-    }
-
-    public renderSettings(): void {
-        const width: number = this._stage.width();
-        const height: number = this._stage.height();
-
-        const group: Konva.Group = new Konva.Group({
-            x: 0,
-            y: 0,
-            width: width,
-            height: height,
-            name: 'settings-buttons',
-            draggable: false
-        });
-
-        let returnToGrimButton = new Image();
-        returnToGrimButton.onload = (): void => {
-            const buttonImg = new Konva.Image({
-                x: width-390,
-                y: height-80,
-                image: returnToGrimButton,
-                width: 162,
-                height: 40,
-                name: 'return-to-grim-button'
-            });
-            group.add(buttonImg);
-
-            buttonImg.on('dblclick dbltap', (): void => {
-                this._settingsLayer.hide();
-                this._drawerLayer.hide();
-                this._buttonsLayer.show();
-            });
-        }
-        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
-
-        this._settingsLayer.add(group);
-        this._settingsLayer.hide();
     }
 
     public renderButtons(): void {
@@ -173,7 +133,6 @@ export default class GameView {
 
                 additionalTokensButton.on('dblclick dbltap', () => {
                     this._buttonsLayer.hide();
-                    this._settingsLayer.show();
                     this._drawerLayer.show();
                 });
 
@@ -198,6 +157,15 @@ export default class GameView {
             y: 0,
             name: 'drawer',
             draggable: true
+        });
+
+        const returnToGrimGroup: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: this._stage.width(),
+            height: this._stage.height(),
+            name: 'return-to-grimoire-group',
+            draggable: false
         });
 
         const bg: Konva.Rect = new Konva.Rect( {
@@ -259,6 +227,27 @@ export default class GameView {
             travelerRolesBtn.fill('grey');
             fabledRolesBtn.fill('white');
         });
+
+        let returnToGrimButton = new Image();
+        returnToGrimButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: this._stage.width() - 390,
+                y: this._stage.height() - 80,
+                image: returnToGrimButton,
+                width: 162,
+                height: 40,
+                name: 'return-to-grim-button'
+            });
+            returnToGrimGroup.add(buttonImg);
+
+            buttonImg.on('dblclick dbltap', (): void => {
+                this._drawerLayer.hide();
+                this._buttonsLayer.show();
+            });
+
+            this._drawerLayer.add(returnToGrimGroup);
+        }
+        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
 
         group.add(bg, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
 
