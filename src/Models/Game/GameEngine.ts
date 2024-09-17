@@ -177,7 +177,6 @@ export default class GameEngine {
         let spaceY: number = 20;
 
         for (let role of this._scripSheetRoles.values()) {
-            console.log(role);
             tokens.add(new Token(role, {x: 20, y: spaceY}));
             spaceY += 135;
         }

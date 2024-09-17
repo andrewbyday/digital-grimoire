@@ -194,6 +194,13 @@ export default class GameView {
 
         scriptTokens.forEach( (token: Token) => {
             token.disableDragging();
+            token.group.on('dblclick dbltap', () => {
+               console.log(token);
+               const newToken: Konva.Group = token.group.clone();
+               newToken.x(10);
+               newToken.y(this._stage.height() - 135);
+               this._tokenLayer.add(newToken);
+            });
             scriptTokensGroup.add(token.group);
         });
 
