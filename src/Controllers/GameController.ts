@@ -21,7 +21,8 @@ export default class GameController {
 
     public renderScene() {
         this._view.renderButtons();
-
+        this._view.renderSettings();
+        this._view.renderNightActionCards();
         this._view.hideDrawer();
         this._view.renderDrawer();
     }

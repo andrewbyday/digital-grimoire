@@ -11,6 +11,8 @@ export default class GameView {
     private readonly _tokenLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
+    private readonly _settingsLayer: Konva.Layer;
+    private readonly _nightActionsLayer: Konva.Layer;
 
     constructor(stage: Stage, socket: Socket) {
         this._stage = stage;
@@ -19,10 +21,14 @@ export default class GameView {
         this._tokenLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
+        this._settingsLayer = new Konva.Layer();
+        this._nightActionsLayer = new Konva.Layer();
 
         this._stage.add(this._tokenLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._buttonsLayer);
+        this._stage.add(this._settingsLayer);
+        this._stage.add(this._nightActionsLayer);
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -47,6 +53,43 @@ export default class GameView {
         tokens.forEach((token: Token) => {
             this._tokenLayer.add(token.group);
         });
+    }
+
+    public renderSettings(): void {
+        const width: number = this._stage.width();
+        const height: number = this._stage.height();
+
+        const group: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: width,
+            height: height,
+            name: 'settings-buttons',
+            draggable: false
+        });
+
+        let returnToGrimButton = new Image();
+        returnToGrimButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: width-390,
+                y: height-80,
+                image: returnToGrimButton,
+                width: 162,
+                height: 40,
+                name: 'return-to-grim-button'
+            });
+            group.add(buttonImg);
+
+            buttonImg.on('dblclick dbltap', (): void => {
+                this._settingsLayer.hide();
+                this._drawerLayer.hide();
+                this._buttonsLayer.show();
+            });
+        }
+        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
+
+        this._settingsLayer.add(group);
+        this._settingsLayer.hide();
     }
 
     public renderButtons(): void {
@@ -100,6 +143,13 @@ export default class GameView {
                 height: 150,
                 name: 'additional-tokens-button'
             });
+
+            buttonImg.on('dblclick dbltap', () => {
+                this._buttonsLayer.hide();
+                this._settingsLayer.show();
+                this._drawerLayer.show();
+            });
+
             group.add(buttonImg);
         }
         additionalTokensButton.src = '/img/buttons/additional_tokens.png';
@@ -114,6 +164,12 @@ export default class GameView {
                 height: 150,
                 name: 'night-action-cards-button'
             });
+
+            buttonImg.on('dblclick dbltap', () => {
+               this._nightActionsLayer.show();
+               this._buttonsLayer.hide();
+            });
+
             group.add(buttonImg);
         }
         nightActionCardsButton.src = '/img/buttons/night_action_cards.png';
@@ -131,7 +187,6 @@ export default class GameView {
             group.add(buttonImg);
         }
         putAwayButton.src = '/img/buttons/put_away.png';
-
 
         this._buttonsLayer.add(group);
     }
@@ -210,6 +265,139 @@ export default class GameView {
         group.add(bg, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
 
         this._drawerLayer.add(group);
+    }
+
+    public renderNightActionCards(): void {
+        const tokenSize: number = 125;
+        const group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: this._stage.width(),
+            height: this._stage.height(),
+            id: 'stCardLayer',
+        });
+
+        const leftAbilities = [
+            "st_card_demon",
+            "st_card_minions",
+            "st_card_bluffs",
+            "st_card_nominate",
+            "st_card_vote"
+        ];
+
+        const leftAbilitiesPos = [
+            50,
+            135+50,
+            300+50,
+            460+50,
+            600+50
+        ];
+
+        const rightAbilities = [
+            "st_card_you",
+            "st_card_player",
+            "st_card_selected",
+            "st_card_ability",
+            "st_card_choice"
+        ];
+
+        const rightAbilitiesPos = [
+            50+tokenSize,
+            135+50+tokenSize,
+            300+50+tokenSize,
+            460+50+tokenSize,
+            600+50+tokenSize
+        ]
+
+        for (let i = 0; i < leftAbilities.length; i++) {
+            const file = leftAbilities[i];
+            Konva.Image.fromURL('/img/cards/' + file + '.png', function (card) {
+                card.setAttrs({
+                    x: 180,
+                    y: leftAbilitiesPos[i],
+                    width: 125,
+                    height: 180,
+                    rotation: 90,
+                    id: file,
+                });
+                card.on('dblclick dbltap', function() {
+                    const currentCardDisplayed = group.findOne('#currentSTCard');
+                    var imageObj = new Image();
+                    imageObj.onload = function() {
+                        if (currentCardDisplayed !== undefined) {
+                            currentCardDisplayed.setAttr('image',imageObj);
+                        }
+                    };
+                    imageObj.src = '/img/cards/' + file + '.png';
+                });
+                group.add(card);
+            });
+        }
+
+        for (let i = 0; i < rightAbilities.length; i++) {
+            const file = rightAbilities[i];
+            Konva.Image.fromURL('/img/cards/' + file + '.png', function (card) {
+                card.setAttrs({
+                    x: window.innerWidth-180,
+                    y: rightAbilitiesPos[i],
+                    width: 125,
+                    height: 180,
+                    rotation: 270,
+                    id: rightAbilities[i]
+                });
+                card.on('dblclick dbltap', function() {
+                    const currentCardDisplayed = group.findOne('#currentSTCard');
+                    var imageObj = new Image();
+                    imageObj.onload = function() {
+                        if (currentCardDisplayed !== undefined) {
+                            currentCardDisplayed.setAttr('image',imageObj);
+                        }
+                    };
+                    imageObj.src = '/img/cards/' + file + '.png';
+                });
+                group.add(card);
+            });
+        }
+
+        let finalWidth = 480;
+        let finalHeight = 692;
+        var imageObj = new Image();
+        imageObj.onload = function () {
+            var button = new Konva.Image({
+                x: window.innerWidth/2-finalWidth/2,
+                y: window.innerHeight-finalHeight,
+                width: finalWidth,
+                height: finalHeight,
+                id: 'currentSTCard',
+                image: imageObj
+            });
+
+            // add the shape to the layer
+            group.add(button);
+        };
+        imageObj.src = '/img/cards/st_card_demon.png';
+
+        let returnToGrimButton = new Image();
+        returnToGrimButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: (this._stage.width() - 162)/2,
+                y: 30,
+                image: returnToGrimButton,
+                width: 162,
+                height: 40,
+                name: 'return-to-grim-button'
+            });
+            group.add(buttonImg);
+
+            buttonImg.on('dblclick dbltap', (): void => {
+                this._nightActionsLayer.hide();
+                this._buttonsLayer.show();
+            });
+        }
+        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
+
+        this._nightActionsLayer.hide();
+        this._nightActionsLayer.add(group);
     }
 
     public hideDrawer(): void {
