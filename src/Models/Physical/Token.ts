@@ -148,10 +148,6 @@ export default class Token {
             group.y(y);
         });
 
-        group.on('dblclick dbltap', () => {
-           console.log(role.name);
-        });
-
         return group;
     }
 
