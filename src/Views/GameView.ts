@@ -148,7 +148,7 @@ export default class GameView {
         this._buttonsLayer.add(group);
     }
 
-    public renderDrawer(): void {
+    public renderDrawer(travelerTokens: Set<Token>): void {
         const finalWidth: number = 200;
         const finalHeight: number = 1000;
 
@@ -157,6 +157,15 @@ export default class GameView {
             y: 0,
             name: 'drawer',
             draggable: true
+        });
+
+        const travellerTokensGroup: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0
+        });
+
+        travelerTokens.forEach( (token: Token) => {
+           travellerTokensGroup.add(token.group);
         });
 
         const returnToGrimGroup: Konva.Group = new Konva.Group({
@@ -249,7 +258,7 @@ export default class GameView {
         }
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
 
-        group.add(bg, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
+        group.add(bg, travellerTokensGroup, characterRolesBtn, fabledRolesBtn, travelerRolesBtn);
 
         this._drawerLayer.add(group);
     }

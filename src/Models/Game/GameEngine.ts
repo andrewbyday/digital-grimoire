@@ -180,6 +180,12 @@ export default class GameEngine {
 
     public getTravelerTokens(): Set<Token> {
         let tokens: Set<Token> = new Set();
+        let spaceY: number = 0;
+
+        for (let role of this._scripSheetRoles.values()) {
+            tokens.add(new Token(role, {x: 0, y: spaceY}));
+            spaceY += 135;
+        }
 
         return tokens;
     }

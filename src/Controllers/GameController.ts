@@ -23,7 +23,7 @@ export default class GameController {
         this._view.renderButtons();
         this._view.renderNightActionCards();
         this._view.hideDrawer();
-        this._view.renderDrawer();
+        this._view.renderDrawer(this._model.getTravelerTokens());
     }
 
     public listenJoins() {
