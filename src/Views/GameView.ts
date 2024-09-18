@@ -152,6 +152,7 @@ export default class GameView {
         const finalWidth: number = 200;
         const finalHeight: number = 135 * scriptTokens.size + 30;
         const maxHeight: number = finalHeight - this._stage.height();
+        const bottom: number = this._stage.height() - 145;
 
         const group: Konva.Group = new Konva.Group({
             x: this._stage.width() - finalWidth,
@@ -170,7 +171,6 @@ export default class GameView {
             const pos = group.absolutePosition();
 
             let currY = this.clamp(pos.y, -maxHeight, 0);
-            console.log(currY);
             group.y(currY);
             group.x(this._stage.width()-finalWidth);
         });
@@ -194,19 +194,34 @@ export default class GameView {
 
         scriptTokens.forEach( (token: Token) => {
             token.disableDragging();
-            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
+
+            token.group.on('dblclick dbltap', (): void => {
+                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                this._tokenLayer.add(newToken.group);
+            });
+
             scriptTokensGroup.add(token.group);
         });
 
         travellerTokens.forEach( (token: Token) => {
             token.disableDragging();
-            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
+
+            token.group.on('dblclick dbltap', (): void => {
+                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                this._tokenLayer.add(newToken.group);
+            });
+
             travellerTokensGroup.add(token.group);
         });
 
         fabledTokens.forEach( (token: Token) => {
             token.disableDragging();
-            token.makeAddable(10, this._stage.height()-135, this._tokenLayer);
+
+            token.group.on('dblclick dbltap', (): void => {
+                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                this._tokenLayer.add(newToken.group);
+            });
+
             fabledTokensGroup.add(token.group);
         });
 
