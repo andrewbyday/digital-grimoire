@@ -138,6 +138,7 @@ export default class GameView {
 
                 nightActionCardsButton.on('dblclick dbltap', () => {
                     this._nightActionsLayer.show();
+                    this._tokenLayer.hide();
                     this._buttonsLayer.hide();
                 });
 
@@ -464,6 +465,7 @@ export default class GameView {
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
 
         this._nightActionsLayer.hide();
+        this._tokenLayer.show();
         this._nightActionsLayer.add(group);
     }
 
