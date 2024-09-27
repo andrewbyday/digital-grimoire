@@ -24,9 +24,10 @@ export default class GameController {
         this._view.renderNightActionCards();
         this._view.hideDrawer();
 
-        this._view.renderDrawer(this._model.getScriptTokens(),
-                                this._model.getTravellerTokens(),
-                                this._model.getFabledTokens()
+        this._view.renderDrawer(
+            this._model.getScriptTokens(),
+            this._model.getTravellerTokens(),                    
+            this._model.getFabledTokens()
         );
     }
 
@@ -41,7 +42,14 @@ export default class GameController {
         type PlayerInput = z.infer<typeof playerInputSchema>;
 
         this._model.session.socket.on('player-join-info', (data: PlayerInput): void => {
-            this._view.listenJoins(this._model.addPlayer(data.playerId, data.name, data.pronouns, data.role));
+            this._view.listenJoins(
+                this._model.addPlayer(
+                    data.playerId,
+                    data.name,
+                    data.pronouns,
+                    data.role
+                )
+            );
         });
     }
 }
