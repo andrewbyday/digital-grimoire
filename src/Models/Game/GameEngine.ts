@@ -211,4 +211,14 @@ export default class GameEngine {
 
         return tokens;
     }
+
+    public getScriptRoles(): Set<Role> {
+        let roles: Set<Role> = new Set();
+
+        for (let role of this._scripSheetRoles.values()) {
+            roles.add(role);
+        }
+
+        return roles;
+    }
 }
