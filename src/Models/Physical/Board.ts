@@ -49,9 +49,6 @@ export default class Board {
         this._fabledTokens = new Set<FabledToken>();
         this._players = new Set<Player>();
 
-        this._firstNightSheet = new NightSheet(this._scriptRoles);
-        this._otherNightSheet = new NightSheet(this._scriptRoles);
-
         this._shrouds = new Set<Shroud>();
 
         this._trash = new Set();
