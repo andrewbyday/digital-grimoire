@@ -29,9 +29,6 @@ export default class Board {
     private _fabledTokens: Set<FabledToken>;
     private _players: Set<Player>;
 
-    private _firstNightSheet: NightSheet;
-    private _otherNightSheet: NightSheet;
-
     private readonly _shrouds: Set<Shroud>;
 
     private _trash: Set<PlayerToken|FabledToken|Shroud>;
@@ -72,20 +69,6 @@ export default class Board {
 
     public get shrouds(): Set<Shroud> {
         return this._shrouds;
-    }
-
-    public get otherNightSheet(): NightSheet {
-        return this._otherNightSheet;
-    }
-    public set otherNightSheet(value: NightSheet) {
-        this._otherNightSheet = value;
-    }
-
-    public get firstNightSheet(): NightSheet {
-        return this._firstNightSheet;
-    }
-    public set firstNightSheet(value: NightSheet) {
-        this._firstNightSheet = value;
     }
 
     public get players(): Set<Player> {
