@@ -4,6 +4,7 @@ import {Stage} from "konva/lib/Stage";
 import {Socket} from "socket.io-client";
 import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
 import Token from "../Models/Physical/Token.ts";
+import NightSheet from "../Models/Physical/NightSheet.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -12,6 +13,7 @@ export default class GameView {
     private readonly _drawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
     private readonly _nightActionsLayer: Konva.Layer;
+    private readonly _sheetsLayer: Konva.Layer;
 
     constructor(stage: Stage, socket: Socket) {
         this._stage = stage;
@@ -21,11 +23,13 @@ export default class GameView {
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
+        this._sheetsLayer = new Konva.Layer();
 
         this._stage.add(this._tokenLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._nightActionsLayer);
+        this._stage.add(this._sheetsLayer);
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -95,6 +99,10 @@ export default class GameView {
                     name: 'first-night-button'
                 });
 
+                firstNightButton.on('dblclick dbltap', () => {
+                   this.showFirstNight();
+                });
+
                 const otherNightButton: Konva.Image = new Konva.Image({
                     x: width-64.25,
                     y: height-257,
@@ -102,6 +110,10 @@ export default class GameView {
                     width: 64.25,
                     height: 257,
                     name: 'other-night-button'
+                });
+
+                otherNightButton.on('dblclick dbltap', () => {
+                    this.showOtherNight();
                 });
 
                 const additionalTokensButton: Konva.Image = new Konva.Image({
@@ -469,12 +481,37 @@ export default class GameView {
         this._nightActionsLayer.add(group);
     }
 
+    public renderNightSheet(roles: Set<Role>) {
+        const firstNightSheet: NightSheet = new NightSheet(roles, 'first');
+        const otherNightSheet: NightSheet = new NightSheet(roles, 'other');
+        this._sheetsLayer.add(
+            firstNightSheet.renderSheet(),
+            otherNightSheet.renderSheet()
+        );
+    }
+
     public hideDrawer(): void {
         this._drawerLayer.hide();
     }
 
     public showDrawer(): void {
         this._drawerLayer.show();
+    }
+
+    public showFirstNight(): void {
+        this._sheetsLayer.findOne('#first_nightsheet')?.show();
+    }
+
+    public hideFirstNight(): void {
+        this._sheetsLayer.findOne('#first_nightsheet')?.hide();
+    }
+
+    public showOtherNight(): void {
+        this._sheetsLayer.findOne('#other_nightsheet')?.show();
+    }
+
+    public hideOtherNight(): void {
+        this._sheetsLayer.findOne('#other_nightsheet')?.hide();
     }
 
     public listenJoins(token: TokenPlayer): void {

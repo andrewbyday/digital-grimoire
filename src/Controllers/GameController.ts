@@ -29,6 +29,8 @@ export default class GameController {
             this._model.getTravellerTokens(),                    
             this._model.getFabledTokens()
         );
+
+        this._view.renderNightSheet(this._model.getScriptTokens());
     }
 
     public listenJoins() {
