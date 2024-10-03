@@ -166,7 +166,7 @@ export default class GameView {
         const finalWidth: number = 200;
         const finalHeight: number = 135 * scriptTokens.size + 30;
         const maxHeight: number = finalHeight - this._stage.height();
-        const bottom: number = this._stage.height() - 145;
+        const bottom: number = this._stage.height() - 400;
 
         const group: Konva.Group = new Konva.Group({
             x: this._stage.width() - finalWidth,
