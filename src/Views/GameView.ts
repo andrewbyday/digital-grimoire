@@ -5,7 +5,7 @@ import {Socket} from "socket.io-client";
 import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
 import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
-import Role from "../Models/Game/Role.ts";
+import {Role} from "../Models/Game/Role.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
