@@ -9,4 +9,5 @@ export interface Role {
     official_icon_bg: string;
     firstNightOrder?: Array<NightOrder>;
     otherNightOrder?: Array<NightOrder>;
+    reminders?: Array<string>;
 }

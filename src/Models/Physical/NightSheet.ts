@@ -86,7 +86,7 @@ export default class NightSheet {
             });
 
             let location = 20;
-            for (let i: number = 2; i <= values.length; i++) {
+            for (let i: number = 2; i < values.length; i++) {
                 let ratio: number = values[i].naturalWidth / values[i].naturalHeight;
                 const role_bg = new Konva.Image({
                     x: window.innerWidth - width + 20,

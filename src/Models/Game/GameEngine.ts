@@ -63,7 +63,8 @@ export default class GameEngine {
                 official_icon: role.icons.official.png_textured,
                 official_icon_bg: role.edition.official_token_bg,
                 firstNightOrder: role.night_order.first,
-                otherNightOrder: role.night_order.other
+                otherNightOrder: role.night_order.other,
+                reminders: role.reminders
             };
             apiRolesMap.set(role.script_id, currentRole);
         });

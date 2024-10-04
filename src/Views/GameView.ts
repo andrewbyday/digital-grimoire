@@ -3,6 +3,7 @@ import Konva from "konva";
 import {Stage} from "konva/lib/Stage";
 import {Socket} from "socket.io-client";
 import TokenPlayer from "../Models/Physical/TokenPlayer.ts";
+import TokenReminder from "../Models/Physical/TokenReminder.ts";
 import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
@@ -239,6 +240,11 @@ export default class GameView {
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
                 this._tokenLayer.add(newToken.group);
+
+                for (let i: number = 0; i < token.role.reminders?.length; i++) {
+                    const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom});
+                    this._tokenLayer.add(newToken.group);
+                }
             });
 
             scriptTokensGroup.add(token.group);
@@ -544,6 +550,11 @@ export default class GameView {
 
     public listenJoins(token: TokenPlayer): void {
         this._tokenLayer.add(token.group);
+
+        for (let i: number = 0; i < token.role.reminders?.length; i++) {
+            const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
+            this._tokenLayer.add(newToken.group);
+        }
     }
 
     protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
