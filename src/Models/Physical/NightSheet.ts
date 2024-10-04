@@ -97,7 +97,7 @@ export default class NightSheet {
                 });
                 group.add(role_bg);
 
-                location += width/ratio + 5;
+                location += width/ratio;
             }
         });
 
