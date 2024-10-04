@@ -85,19 +85,19 @@ export default class NightSheet {
                 group.hide();
             });
 
-            for (let i: number = 2; i < values.length; i++) {
+            let location = 20;
+            for (let i: number = 2; i <= values.length; i++) {
                 let ratio: number = values[i].naturalWidth / values[i].naturalHeight;
-                console.log('image',values[i]);
-                console.log('ratio',ratio);
-                console.log('height', width/ratio);
                 const role_bg = new Konva.Image({
                     x: window.innerWidth - width + 20,
-                    y: i*(width/ratio),
+                    y: location,
                     image: values[i],
                     width: width,
                     height: width/ratio
                 });
                 group.add(role_bg);
+
+                location += width/ratio + 5;
             }
         });
 
