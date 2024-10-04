@@ -40,6 +40,33 @@ export default class GameView {
             height: board.height,
         });
 
+        const bg_layer: Konva.Layer = new Konva.Layer();
+        stage.add(bg_layer);
+
+        const bg_group: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: board.width,
+            height: board.height,
+            name: 'background-group',
+            draggable: false
+        });
+        bg_layer.add(bg_group);
+
+        let bg = new Image();
+        bg.onload = function() {
+            const img = new Konva.Image({
+                x: board.width,
+                y: board.height,
+                image: bg,
+                width: board.width,
+                height: board.height,
+                name: 'background'
+            });
+            bg_group.add(img);
+        }
+        bg.src = './img/felt_background.png';
+
         return new GameView(stage, socket);
     }
 
