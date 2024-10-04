@@ -5,48 +5,78 @@
     "author": "TPI"
   },
   {
-    "id": "tealady"
+    "id":"grandmother"
   },
   {
-    "id": "pacifist"
+    "id":"sailor"
   },
   {
-    "id": "fool"
+    "id":"chambermaid"
   },
   {
-    "id": "goon"
+    "id":"innkeeper"
   },
   {
-    "id": "lunatic"
+    "id":"gambler"
   },
   {
-    "id": "tinker"
+    "id":"exorcist"
   },
   {
-    "id": "moonchild"
+    "id":"gossip"
   },
   {
-    "id": "godfather"
+    "id":"courtier"
   },
   {
-    "id": "devilsadvocate"
+    "id":"professor"
   },
   {
-    "id": "assassin"
+    "id":"minstrel"
   },
   {
-    "id": "mastermind"
+    "id":"tealady"
   },
   {
-    "id": "zombuul"
+    "id":"fool"
   },
   {
-    "id": "pukka"
+    "id":"pacifist"
   },
   {
-    "id": "shabaloth"
+    "id":"goon"
   },
   {
-    "id": "po"
+    "id":"lunatic"
+  },
+  {
+    "id":"tinker"
+  },
+  {
+    "id":"moonchild"
+  },
+  {
+    "id":"godfather"
+  },
+  {
+    "id":"devilsadvocate"
+  },
+  {
+    "id":"assassin"
+  },
+  {
+    "id":"mastermind"
+  },
+  {
+    "id":"pukka"
+  },
+  {
+    "id":"shabaloth"
+  },
+  {
+    "id":"po"
+  },
+  {
+    "id":"zombuul"
   }
 ]
