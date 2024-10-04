@@ -56,8 +56,8 @@ export default class GameView {
         let bg = new Image();
         bg.onload = function() {
             const img = new Konva.Image({
-                x: board.width,
-                y: board.height,
+                x: 0,
+                y: 0,
                 image: bg,
                 width: board.width,
                 height: board.height,
@@ -65,7 +65,7 @@ export default class GameView {
             });
             bg_group.add(img);
         }
-        bg.src = './img/felt_background.png';
+        bg.src = '/img/felt_background.png';
 
         return new GameView(stage, socket);
     }
