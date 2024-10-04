@@ -127,7 +127,7 @@ export default class TokenReminder {
             const path: SvgCircleTextPath = new SvgCircleTextPath(this._width,15,30,this._role.name);
             console.log(path.path);
             if (this._role.reminders[this._reminder] !== undefined) {
-                const text: Konva.TextPath = new Konva.Tex Path({
+                const text: Konva.TextPath = new Konva.TextPath({
                     x: 0,
                     y: 0,
                     fill: 'black',
@@ -139,7 +139,7 @@ export default class TokenReminder {
                     data: path.path
                 });
             } else {
-                const text: Konva.TextPath = new Konva.Tex Path({
+                const text: Konva.TextPath = new Konva.TextPath({
                     x: 0,
                     y: 0,
                     fill: 'black',
