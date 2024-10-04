@@ -241,9 +241,11 @@ export default class GameView {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
                 this._tokenLayer.add(newToken.group);
 
-                for (let i: number = 0; i < token.role.reminders?.length; i++) {
-                    const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom});
-                    this._tokenLayer.add(newToken.group);
+                if (token.role.reminders !== undefined) {
+                    for (let i: number = 0; i < token.role.reminders.length; i++) {
+                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom});
+                        this._tokenLayer.add(newToken.group);
+                    }
                 }
             });
 
@@ -551,9 +553,11 @@ export default class GameView {
     public listenJoins(token: TokenPlayer): void {
         this._tokenLayer.add(token.group);
 
-        for (let i: number = 0; i < token.role.reminders?.length; i++) {
-            const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
-            this._tokenLayer.add(newToken.group);
+        if (token.role.reminders !== undefined) {
+            for (let i: number = 0; i < token.role.reminders.length; i++) {
+                const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
+                this._tokenLayer.add(newToken.group);
+            }
         }
     }
 

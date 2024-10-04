@@ -1,5 +1,4 @@
 import {Role} from "../Game/Role.ts";
-import Player from "../Game/Player.ts";
 import Konva from "konva";
 import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
 
@@ -93,6 +92,9 @@ export default class TokenReminder {
         roleImage.src = role.official_icon;
 
         Promise.all([this.loadImage(bgImage), this.loadImage(roleImage)]).then((values) => {
+            if( this._role.reminders[this._reminder] !== undefined ) {
+
+            }
             const circle: Konva.Circle = new Konva.Circle({
                 x: this._width/2,
                 y: this._height/2,
@@ -124,17 +126,32 @@ export default class TokenReminder {
 
             const path: SvgCircleTextPath = new SvgCircleTextPath(this._width,15,30,this._role.name);
             console.log(path.path);
-            const text: Konva.TextPath = new Konva.TextPath({
-                x: 0,
-                y: 0,
-                fill: 'black',
-                fontSize: 17,
-                fontStyle: 'bold',
-                fontFamily: 'Dumbledore',
-                text: this._role.reminders[this._reminder],
-                align: 'center',
-                data: path.path
-            });
+            if (this._role.reminders[this._reminder] !== undefined) {
+                const text: Konva.TextPath = new Konva.Tex Path({
+                    x: 0,
+                    y: 0,
+                    fill: 'black',
+                    fontSize: 17,
+                    fontStyle: 'bold',
+                    fontFamily: 'Dumbledore',
+                    text: this._role.reminders[this._reminder],
+                    align: 'center',
+                    data: path.path
+                });
+            } else {
+                const text: Konva.TextPath = new Konva.Tex Path({
+                    x: 0,
+                    y: 0,
+                    fill: 'black',
+                    fontSize: 17,
+                    fontStyle: 'bold',
+                    fontFamily: 'Dumbledore',
+                    text: 'undefined',
+                    align: 'center',
+                    data: path.path
+                });
+            }
+
             group.add(text);
         });
 
