@@ -27,20 +27,10 @@ export default class NightSheet {
             width: window.innerWidth,
             height: window.innerHeight,
             id: this._type + '_nightsheet',
+            visible: false
         });
-        group.hide();
 
         let image = new Image();
-        image.onload = function() {
-            const bg = new Konva.Image({
-                x: window.innerWidth-width,
-                y: window.innerHeight-height,
-                image: image,
-                width: width,
-                height: height
-            });
-            group.add(bg);
-        }
         if (this._type === 'first') {
             image.src = '/img/sheets/night_order_first_background.webp';
         } else {
@@ -48,23 +38,76 @@ export default class NightSheet {
         }
 
         let returnToGrimButton = new Image();
-        returnToGrimButton.onload = (): void => {
-            const buttonImg = new Konva.Image({
+        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
+
+        let images: Array<Promise<HTMLImageElement>> = new Array<Promise<HTMLImageElement>>();
+        images.push(this.loadImage(image));
+        images.push(this.loadImage(returnToGrimButton));
+
+        for (let role of this._roles) {
+            if (this._type === 'first' && role.firstNightOrder !== undefined) {
+                if (role.firstNightOrder.length > 0) {
+                    let image = new Image();
+                    image.src = role.firstNightOrder[0].svg;
+                    images.push(this.loadImage(image));
+                }
+            }
+
+            if (this._type === 'other' && role.otherNightOrder !== undefined) {
+                console.log(role);
+                if (role.otherNightOrder.length > 0) {
+                    let image = new Image();
+                    image.src = role.otherNightOrder[0].svg;
+                    images.push(this.loadImage(image));
+                }
+            }
+        }
+
+        Promise.all(images).then((values): void => {
+            const bg = new Konva.Image({
+                x: window.innerWidth-width,
+                y: window.innerHeight-height,
+                image: values[0],
+                width: width,
+                height: height
+            });
+            const returnToGrimButton = new Konva.Image({
                 x: window.innerWidth - 162 - width - 20,
                 y: height - 40,
-                image: returnToGrimButton,
+                image: values[1],
                 width: 162,
                 height: 40,
                 name: 'return-to-grim-button'
             });
-            group.add(buttonImg);
+            group.add(bg, returnToGrimButton);
 
-            buttonImg.on('dblclick dbltap', (): void => {
+            returnToGrimButton.on('dblclick dbltap', (): void => {
                 group.hide();
             });
-        }
-        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
+
+            for (let i: number = 2; i < values.length; i++) {
+                let ratio: number = values[i].naturalWidth / values[i].naturalHeight;
+                console.log('image',values[i]);
+                console.log('ratio',ratio);
+                console.log('height', width/ratio);
+                const role_bg = new Konva.Image({
+                    x: window.innerWidth - width + 20,
+                    y: i*(width/ratio) + 50,
+                    image: values[i],
+                    width: width,
+                    height: width/ratio
+                });
+                group.add(role_bg);
+            }
+        });
 
         return group;
+    }
+
+    protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
+        return new Promise((resolve, reject) => {
+            image.onload = () => { resolve(image); }
+            image.onerror = (error) => { reject(error); }
+        });
     }
 }
