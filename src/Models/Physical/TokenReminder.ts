@@ -92,9 +92,6 @@ export default class TokenReminder {
         roleImage.src = role.official_icon;
 
         Promise.all([this.loadImage(bgImage), this.loadImage(roleImage)]).then((values) => {
-            if( this._role.reminders[this._reminder] !== undefined ) {
-
-            }
             const circle: Konva.Circle = new Konva.Circle({
                 x: this._width/2,
                 y: this._height/2,
@@ -125,32 +122,23 @@ export default class TokenReminder {
             group.add(role);
 
             const path: SvgCircleTextPath = new SvgCircleTextPath(this._width,15,30,this._role.name);
-            console.log(path.path);
-            if (this._role.reminders[this._reminder] !== undefined) {
-                const text: Konva.TextPath = new Konva.TextPath({
-                    x: 0,
-                    y: 0,
-                    fill: 'black',
-                    fontSize: 17,
-                    fontStyle: 'bold',
-                    fontFamily: 'Dumbledore',
-                    text: this._role.reminders[this._reminder],
-                    align: 'center',
-                    data: path.path
-                });
-            } else {
-                const text: Konva.TextPath = new Konva.TextPath({
-                    x: 0,
-                    y: 0,
-                    fill: 'black',
-                    fontSize: 17,
-                    fontStyle: 'bold',
-                    fontFamily: 'Dumbledore',
-                    text: 'undefined',
-                    align: 'center',
-                    data: path.path
-                });
+            let info: string = 'undefined';
+
+            if (this._role.reminders !== undefined) {
+                info = this._role.reminders[this._reminder];
             }
+
+            const text: Konva.TextPath = new Konva.TextPath({
+                x: 0,
+                y: 0,
+                fill: 'black',
+                fontSize: 17,
+                fontStyle: 'bold',
+                fontFamily: 'Dumbledore',
+                text: info,
+                align: 'center',
+                data: path.path
+            });
 
             group.add(text);
         });
