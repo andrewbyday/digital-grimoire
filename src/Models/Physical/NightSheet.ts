@@ -73,7 +73,7 @@ export default class NightSheet {
             });
             const returnToGrimButton = new Konva.Image({
                 x: window.innerWidth - 162 - width - 20,
-                y: height - 40,
+                y: height - 80,
                 image: values[1],
                 width: 162,
                 height: 40,
