@@ -87,7 +87,8 @@ export default class TokenReminder {
         });
 
         let bgImage: HTMLImageElement = new Image();
-        bgImage.src = role.official_icon_bg;
+        //bgImage.src = role.official_icon_bg;
+        bgImage.src = '/img/reminder_background.webp';
         let roleImage: HTMLImageElement = new Image();
         roleImage.src = role.official_icon;
 
@@ -131,7 +132,7 @@ export default class TokenReminder {
             const text: Konva.TextPath = new Konva.TextPath({
                 x: 0,
                 y: 0,
-                fill: 'black',
+                fill: 'white',
                 fontSize: 17,
                 fontStyle: 'bold',
                 fontFamily: 'Dumbledore',
