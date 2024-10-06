@@ -1,6 +1,10 @@
 @font-face {
   font-family: 'Dumbledore';
+<<<<<<< HEAD
   src: local('Dumbledore 1'), url('./assets/fonts/Dumbledore/dum1.ttf') format('truetype');
+=======
+  src: local('Dumbledore'), url('/fonts/dum1.ttf') format('truetype');
+>>>>>>> 9f1063ffa5c41be1e2c273da9f7c6dccb6a8b1e1
 }
 
 html,
