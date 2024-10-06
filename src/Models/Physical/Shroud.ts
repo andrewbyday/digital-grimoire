@@ -1,3 +1,5 @@
+import Konva from "konva";
+
 export default class Shroud {
     private _height: number;
     private _width: number;
@@ -52,5 +54,36 @@ export default class Shroud {
      */
     public set position(value: { x: number, y: number }) {
         this._position = value;
+    }
+
+    public render(): Konva.Group {
+        const width: number = this._width;
+        const height: number = this._height;
+
+        const group: Konva.Group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: this._width,
+            height: this._height,
+            draggable: true
+        });
+
+        let image = new Image();
+        image.onload = function(): void {
+            const scale: number = image.naturalWidth / image.naturalHeight;
+
+            const k_img: Konva.Image = new Konva.Image({
+                x: 0,
+                y: 0,
+                image: image,
+                width: width,
+                height: height/scale
+            });
+
+            group.add(k_img);
+        }
+        image.src = '/img/shroud/death_shroud.png';
+
+        return group;
     }
 }

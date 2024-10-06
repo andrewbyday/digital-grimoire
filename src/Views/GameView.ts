@@ -7,6 +7,7 @@ import TokenReminder from "../Models/Physical/TokenReminder.ts";
 import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
+import Shroud from "../Models/Physical/Shroud.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -247,6 +248,9 @@ export default class GameView {
                         this._tokenLayer.add(newToken.group);
                     }
                 }
+
+                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                this._tokenLayer.add(shroud.render());
             });
 
             scriptTokensGroup.add(token.group);
@@ -258,6 +262,9 @@ export default class GameView {
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
                 this._tokenLayer.add(newToken.group);
+
+                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                this._tokenLayer.add(shroud.render());
             });
 
             travellerTokensGroup.add(token.group);
@@ -559,6 +566,9 @@ export default class GameView {
                 this._tokenLayer.add(newToken.group);
             }
         }
+
+        const shroud = new Shroud(50, 50, {x: 10, y: 10});
+        this._tokenLayer.add(shroud.render());
     }
 
     protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
