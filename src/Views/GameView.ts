@@ -13,6 +13,7 @@ export default class GameView {
     private readonly _stage: Stage;
     private readonly _socket: Socket;
     private readonly _tokenLayer: Konva.Layer;
+    private readonly _shroudLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
     private readonly _nightActionsLayer: Konva.Layer;
@@ -23,12 +24,15 @@ export default class GameView {
         this._socket = socket;
 
         this._tokenLayer = new Konva.Layer();
+        this._shroudLayer = new Konva.Layer();
+
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
         this._sheetsLayer = new Konva.Layer();
 
         this._stage.add(this._tokenLayer);
+        this._stage.add(this._shroudLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._nightActionsLayer);
@@ -250,7 +254,7 @@ export default class GameView {
                 }
 
                 const shroud = new Shroud(50, 50, {x: 10, y: 10});
-                this._tokenLayer.add(shroud.render());
+                this._shroudLayer.add(shroud.render());
             });
 
             scriptTokensGroup.add(token.group);
@@ -264,7 +268,7 @@ export default class GameView {
                 this._tokenLayer.add(newToken.group);
 
                 const shroud = new Shroud(50, 50, {x: 10, y: 10});
-                this._tokenLayer.add(shroud.render());
+                this._shroudLayer.add(shroud.render());
             });
 
             travellerTokensGroup.add(token.group);
@@ -568,7 +572,7 @@ export default class GameView {
         }
 
         const shroud = new Shroud(50, 50, {x: 10, y: 10});
-        this._tokenLayer.add(shroud.render());
+        this._shroudLayer.add(shroud.render());
     }
 
     protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
