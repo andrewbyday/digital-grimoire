@@ -244,6 +244,9 @@ export default class GameView {
 
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                newToken.group.on('dragend', (): void => {
+                    console.log(newToken.)
+                });
                 this._tokenLayer.add(newToken.group);
 
                 if (token.role.reminders !== undefined) {

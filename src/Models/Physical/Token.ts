@@ -136,7 +136,7 @@ export default class Token {
             group.add(text);
         });
 
-        group.on('dragmove', () => {
+        group.on('dragmove', (): void => {
             const pos = group.absolutePosition();
 
             let x = this.clamp(pos.x,0,window.innerWidth-this._width);
@@ -146,6 +146,10 @@ export default class Token {
         });
 
         return group;
+    }
+
+    public intersects(group: Konva.Group): boolean {
+        return true;
     }
 
     /**
