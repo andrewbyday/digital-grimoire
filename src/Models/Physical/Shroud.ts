@@ -61,8 +61,8 @@ export default class Shroud {
         const height: number = this._height;
 
         const group: Konva.Group = new Konva.Group({
-            x: 0,
-            y: 0,
+            x: this._position.x,
+            y: this._position.y,
             width: this._width,
             height: this._height,
             draggable: true

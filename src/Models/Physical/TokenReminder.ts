@@ -134,7 +134,6 @@ export default class TokenReminder {
                 y: 0,
                 fill: 'white',
                 fontSize: 17,
-                fontStyle: 'bold',
                 fontFamily: 'Dumbledore',
                 text: info,
                 align: 'center',

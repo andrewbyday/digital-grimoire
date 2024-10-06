@@ -253,7 +253,7 @@ export default class GameView {
                     }
                 }
 
-                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
                 this._shroudLayer.add(shroud.render());
             });
 
@@ -267,7 +267,7 @@ export default class GameView {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
                 this._tokenLayer.add(newToken.group);
 
-                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
                 this._shroudLayer.add(shroud.render());
             });
 
@@ -571,7 +571,7 @@ export default class GameView {
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: 10});
+        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 10});
         this._shroudLayer.add(shroud.render());
     }
 
