@@ -54,7 +54,6 @@ export default class NightSheet {
             }
 
             if (this._type === 'other' && role.otherNightOrder !== undefined) {
-                console.log(role);
                 if (role.otherNightOrder.length > 0) {
                     let image = new Image();
                     image.src = role.otherNightOrder[0].svg;

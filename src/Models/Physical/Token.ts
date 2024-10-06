@@ -121,7 +121,6 @@ export default class Token {
             group.add(role);
 
             const path: SvgCircleTextPath = new SvgCircleTextPath(this._width,35,50,this._role.name);
-            console.log(path.path);
             const text: Konva.TextPath = new Konva.TextPath({
                 x: 0,
                 y: 0,

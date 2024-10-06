@@ -23,9 +23,10 @@ export default class GameView {
         this._stage = stage;
         this._socket = socket;
 
+        Konva.showWarnings = false;
+
         this._tokenLayer = new Konva.Layer();
         this._shroudLayer = new Konva.Layer();
-
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
