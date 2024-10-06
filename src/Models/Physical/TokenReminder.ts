@@ -155,6 +155,21 @@ export default class TokenReminder {
         return group;
     }
 
+    public destroy(): void {
+        this._group.destroy();
+    }
+
+    public intersects(other: Konva.Image): boolean {
+        const curr: Konva.Group = this._group;
+
+        return !(
+            other.x() > curr.x() + other.width() ||
+            other.x() + other.width() < curr.x() ||
+            other.y() > curr.y() + curr.height() ||
+            other.y() + other.height() < curr.y()
+        );
+    }
+
     /**
      * Loads images
      * @param image
