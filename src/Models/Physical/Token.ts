@@ -148,7 +148,7 @@ export default class Token {
         return group;
     }
 
-    public intersects(group: Konva.Group): boolean {
+    public intersects(other: Konva.Group): boolean {
         return true;
     }
 
