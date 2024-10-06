@@ -88,7 +88,7 @@ export default class TokenReminder {
 
         let bgImage: HTMLImageElement = new Image();
         //bgImage.src = role.official_icon_bg;
-        bgImage.src = '/img/reminder_background.png';
+        bgImage.src = '/img/reminder_background.jpg';
         let roleImage: HTMLImageElement = new Image();
         roleImage.src = role.official_icon;
 
