@@ -188,6 +188,7 @@ export default class GameView {
                     this._nightActionsLayer.show();
                     this._tokenLayer.hide();
                     this._buttonsLayer.hide();
+                    this._shroudLayer.hide();
                 });
 
                 group.add(firstNightButton, otherNightButton, additionalTokensButton, nightActionCardsButton, putAwayButton);
@@ -561,6 +562,8 @@ export default class GameView {
             buttonImg.on('dblclick dbltap', (): void => {
                 this._nightActionsLayer.hide();
                 this._buttonsLayer.show();
+                this._tokenLayer.show();
+                this._shroudLayer.show();
             });
         }
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
