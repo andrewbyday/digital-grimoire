@@ -160,13 +160,14 @@ export default class TokenReminder {
     }
 
     public intersects(other: Konva.Image): boolean {
-        const curr: Konva.Group = this._group;
+        const currRect = this._group.getClientRect();
+        const otherRect = other.getClientRect();
 
         return !(
-            other.x() > curr.x() + other.width() ||
-            other.x() + other.width() < curr.x() ||
-            other.y() > curr.y() + curr.height() ||
-            other.y() + other.height() < curr.y()
+            otherRect.x > currRect.x + currRect.width ||
+            otherRect.x + otherRect.width < currRect.x ||
+            otherRect.y > currRect.y + currRect.height ||
+            otherRect.y + otherRect.height < currRect.y
         );
     }
 

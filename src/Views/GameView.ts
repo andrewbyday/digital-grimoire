@@ -258,7 +258,7 @@ export default class GameView {
 
                 if (token.role.reminders !== undefined) {
                     for (let i: number = 0; i < token.role.reminders.length; i++) {
-                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom});
+                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom+200});
                         newToken.group.on('dragend', (): void => {
                             const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                             if (putaway !== undefined) {
@@ -272,6 +272,14 @@ export default class GameView {
                 }
 
                 const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+                shroud.render().on('dragend', (): void => {
+                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                    if (putaway !== undefined) {
+                        if (shroud.intersects(putaway)) {
+                            shroud.destroy();
+                        }
+                    }
+                });
                 this._shroudLayer.add(shroud.render());
             });
 

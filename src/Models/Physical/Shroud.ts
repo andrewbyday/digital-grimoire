@@ -4,11 +4,20 @@ export default class Shroud {
     private _height: number;
     private _width: number;
     private _position: { x: number, y: number };
+    private readonly _group: Konva.Group;
 
     constructor(height: number, width: number, position: { x: number; y: number }) {
         this._height = height;
         this._width = width;
         this._position = position;
+
+        this._group = new Konva.Group({
+            x: this._position.x,
+            y: this._position.y,
+            width: this._width,
+            height: this._height,
+            draggable: true
+        });
     }
 
     /**
@@ -60,13 +69,7 @@ export default class Shroud {
         const width: number = this._width;
         const height: number = this._height;
 
-        const group: Konva.Group = new Konva.Group({
-            x: this._position.x,
-            y: this._position.y,
-            width: this._width,
-            height: this._height,
-            draggable: true
-        });
+        const group: Konva.Group = this._group;
 
         let image = new Image();
         image.onload = function(): void {
@@ -85,5 +88,21 @@ export default class Shroud {
         image.src = '/img/shroud/death_shroud.png';
 
         return group;
+    }
+
+    public intersects(other: Konva.Image): boolean {
+        const currRect = this._group.getClientRect();
+        const otherRect = other.getClientRect();
+
+        return !(
+            otherRect.x > currRect.x + currRect.width ||
+            otherRect.x + otherRect.width < currRect.x ||
+            otherRect.y > currRect.y + currRect.height ||
+            otherRect.y + otherRect.height < currRect.y
+        );
+    }
+
+    public destroy(): void {
+        this._group.destroy();
     }
 }
