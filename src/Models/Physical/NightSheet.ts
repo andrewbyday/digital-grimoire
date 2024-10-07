@@ -22,8 +22,8 @@ export default class NightSheet {
         let width: number = 569;
         let height: number = 776;
         const group: Konva.Group = new Konva.Group({
-            x: 0,
-            y: 0,
+            x: window.innerWidth-width,
+            y: window.innerHeight-height,
             width: window.innerWidth,
             height: window.innerHeight,
             id: this._type + '_nightsheet',
@@ -54,7 +54,6 @@ export default class NightSheet {
             }
 
             if (this._type === 'other' && role.otherNightOrder !== undefined) {
-                console.log(role);
                 if (role.otherNightOrder.length > 0) {
                     let image = new Image();
                     image.src = role.otherNightOrder[0].svg;
@@ -65,15 +64,15 @@ export default class NightSheet {
 
         Promise.all(images).then((values): void => {
             const bg = new Konva.Image({
-                x: window.innerWidth-width,
-                y: window.innerHeight-height,
+                x: 0,
+                y: 0,
                 image: values[0],
                 width: width,
                 height: height
             });
             const returnToGrimButton = new Konva.Image({
-                x: window.innerWidth - 162 - width - 20,
-                y: height - 80,
+                x: -180,
+                y: height-60,
                 image: values[1],
                 width: 162,
                 height: 40,
@@ -89,7 +88,7 @@ export default class NightSheet {
             for (let i: number = 2; i < values.length; i++) {
                 let ratio: number = values[i].naturalWidth / values[i].naturalHeight;
                 const role_bg = new Konva.Image({
-                    x: window.innerWidth - width + 20,
+                    x: 20,
                     y: location,
                     image: values[i],
                     width: width,

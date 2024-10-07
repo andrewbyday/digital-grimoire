@@ -23,9 +23,10 @@ export default class GameView {
         this._stage = stage;
         this._socket = socket;
 
+        Konva.showWarnings = false;
+
         this._tokenLayer = new Konva.Layer();
         this._shroudLayer = new Konva.Layer();
-
         this._drawerLayer = new Konva.Layer();
         this._buttonsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
@@ -174,7 +175,8 @@ export default class GameView {
                     image: values[4],
                     width: 175,
                     height: 175,
-                    name: 'put-away-button'
+                    name: 'put-away-button',
+                    id: 'put-away-button'
                 });
 
                 additionalTokensButton.on('dblclick dbltap', () => {
@@ -186,6 +188,7 @@ export default class GameView {
                     this._nightActionsLayer.show();
                     this._tokenLayer.hide();
                     this._buttonsLayer.hide();
+                    this._shroudLayer.hide();
                 });
 
                 group.add(firstNightButton, otherNightButton, additionalTokensButton, nightActionCardsButton, putAwayButton);
@@ -244,16 +247,40 @@ export default class GameView {
 
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                newToken.group.on('dragend', (): void => {
+                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                    if (putaway !== undefined) {
+                        if (newToken.intersects(putaway)) {
+                            newToken.destroy();
+                        }
+                    }
+                });
                 this._tokenLayer.add(newToken.group);
 
                 if (token.role.reminders !== undefined) {
                     for (let i: number = 0; i < token.role.reminders.length; i++) {
-                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom});
+                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom+200});
+                        newToken.group.on('dragend', (): void => {
+                            const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                            if (putaway !== undefined) {
+                                if (newToken.intersects(putaway)) {
+                                    newToken.destroy();
+                                }
+                            }
+                        });
                         this._tokenLayer.add(newToken.group);
                     }
                 }
 
-                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+                shroud.render().on('dragend', (): void => {
+                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                    if (putaway !== undefined) {
+                        if (shroud.intersects(putaway)) {
+                            shroud.destroy();
+                        }
+                    }
+                });
                 this._shroudLayer.add(shroud.render());
             });
 
@@ -265,9 +292,17 @@ export default class GameView {
 
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                newToken.group.on('dragend', (): void => {
+                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                    if (putaway !== undefined) {
+                        if (newToken.intersects(putaway)) {
+                            newToken.destroy();
+                        }
+                    }
+                });
                 this._tokenLayer.add(newToken.group);
 
-                const shroud = new Shroud(50, 50, {x: 10, y: 10});
+                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
                 this._shroudLayer.add(shroud.render());
             });
 
@@ -279,6 +314,14 @@ export default class GameView {
 
             token.group.on('dblclick dbltap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                newToken.group.on('dragend', (): void => {
+                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+                    if (putaway !== undefined) {
+                        if (newToken.intersects(putaway)) {
+                            newToken.destroy();
+                        }
+                    }
+                });
                 this._tokenLayer.add(newToken.group);
             });
 
@@ -519,6 +562,8 @@ export default class GameView {
             buttonImg.on('dblclick dbltap', (): void => {
                 this._nightActionsLayer.hide();
                 this._buttonsLayer.show();
+                this._tokenLayer.show();
+                this._shroudLayer.show();
             });
         }
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
@@ -571,7 +616,7 @@ export default class GameView {
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: 10});
+        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 10});
         this._shroudLayer.add(shroud.render());
     }
 

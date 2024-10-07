@@ -19,7 +19,7 @@ export default class GameController {
         return this._view;
     }
 
-    public renderScene() {
+    public renderScene(): void {
         this._view.renderButtons();
         this._view.renderNightActionCards();
         this._view.hideDrawer();
@@ -35,7 +35,7 @@ export default class GameController {
         );
     }
 
-    public listenJoins() {
+    public listenJoins(): void {
         const playerInputSchema = z.object({
             playerId: z.string(),
             name: z.string(),
