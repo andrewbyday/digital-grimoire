@@ -700,7 +700,7 @@ export default class GameView {
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 10});
+        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 50 - 10});
         this._shroudLayer.add(shroud.render());
     }
 
