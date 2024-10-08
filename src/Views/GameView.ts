@@ -666,11 +666,30 @@ export default class GameView {
     }
 
     public listenJoins(token: TokenPlayer): void {
+        const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+        if (putaway !== undefined) {
+            if (token.intersects(putaway)) {
+                token.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
+                token.group.x(this._stage.width() - token.width - 10);
+                token.group.y(10 + ((token.height+10)*this._tokensPutAway));
+                token.group.draggable(false);
+                this._tokensPutAway++;
+            }
+        }
         this._tokenLayer.add(token.group);
 
         if (token.role.reminders !== undefined) {
             for (let i: number = 0; i < token.role.reminders.length; i++) {
                 const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
+                if (putaway !== undefined) {
+                    if (token.intersects(putaway)) {
+                        newToken.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
+                        newToken.group.x(this._stage.width() - token.width - 10);
+                        newToken.group.y(10 + ((token.height+10)*this._tokensPutAway));
+                        newToken.group.draggable(false);
+                        this._tokensPutAway++;
+                    }
+                }
                 this._tokenReminderLayer.add(newToken.group);
             }
         }
