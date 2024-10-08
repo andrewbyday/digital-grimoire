@@ -688,11 +688,7 @@ export default class GameView {
                 newToken.group.on('dragend', (): void => {
                     if (putaway !== undefined) {
                         if (token.intersects(putaway)) {
-                            newToken.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
-                            newToken.group.x(this._stage.width() - token.width - 10);
-                            newToken.group.y(10 + ((token.height+10)*this._tokensPutAway));
-                            newToken.group.draggable(false);
-                            this._tokensPutAway++;
+                            newToken.destroy();
                         }
                     }
                 });
@@ -700,7 +696,28 @@ export default class GameView {
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 50 - 10});
+        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+        shroud.render().on('dragend', (): void => {
+            const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+            if (putaway !== undefined) {
+                if (shroud.intersects(putaway)) {
+                    shroud.destroy();
+                }
+            }
+
+            this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
+                if (group === shroud.group) {
+                    return;
+                }
+
+                if (shroud.intersects(group)) {
+                    shroud.group.draggable(false);
+                    shroud.group.moveTo(group);
+                    shroud.group.x(75/2);
+                    shroud.group.y(-10);
+                }
+            });
+        });
         this._shroudLayer.add(shroud.render());
     }
 
