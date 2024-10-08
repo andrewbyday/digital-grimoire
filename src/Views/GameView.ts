@@ -8,6 +8,7 @@ import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
+import Drawer from "../Models/Physical/Drawer.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -15,6 +16,7 @@ export default class GameView {
     private readonly _tokenLayer: Konva.Layer;
     private readonly _shroudLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
+    private readonly _putAwayDrawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
     private readonly _nightActionsLayer: Konva.Layer;
     private readonly _sheetsLayer: Konva.Layer;
@@ -28,6 +30,7 @@ export default class GameView {
         this._buttonsLayer = new Konva.Layer();
         this._tokenLayer = new Konva.Layer();
         this._shroudLayer = new Konva.Layer();
+        this._putAwayDrawerLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
         this._sheetsLayer = new Konva.Layer();
@@ -35,6 +38,7 @@ export default class GameView {
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._tokenLayer);
         this._stage.add(this._shroudLayer);
+        this._stage.add(this._putAwayDrawerLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._nightActionsLayer);
         this._stage.add(this._sheetsLayer);
@@ -179,6 +183,20 @@ export default class GameView {
                     id: 'put-away-button'
                 });
 
+                putAwayButton.on('dblclick dbltap', () => {
+                    let group = this._putAwayDrawerLayer.findOne('#put-away-drawer');
+                    if (group !== undefined) {
+                        group.show();
+                    }
+                });
+
+                this._putAwayDrawerLayer.on('dblclick dbltap', (e) => {
+                    let group = this._putAwayDrawerLayer.findOne('#put-away-drawer');
+                    if (e.target.name() === 'return-to-grim-button' && group !== undefined) {
+                        group.hide();
+                    }
+                });
+
                 additionalTokensButton.on('dblclick dbltap', () => {
                     this._buttonsLayer.hide();
                     this._drawerLayer.show();
@@ -251,7 +269,10 @@ export default class GameView {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
                         if (newToken.intersects(putaway)) {
-                            newToken.destroy();
+                            newToken.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
+                            newToken.group.x(this._stage.width() - newToken.width - 10);
+                            newToken.group.y(10);
+                            newToken.group.draggable(false);
                         }
                     }
                 });
@@ -435,6 +456,22 @@ export default class GameView {
 
         this._drawerLayer.add(group);
         this._drawerLayer.add(picker);
+    }
+
+    public renderPutAwayDrawer(): void {
+        const drawer: Drawer = new Drawer();
+
+        this._putAwayDrawerLayer.on('dblclick dbltap', (e): void => {
+            const target = e.target.parent;
+            if (target?.name() === 'token') {
+                target.moveTo(this._tokenLayer);
+                target.x(10);
+                target.y(10);
+                target.draggable(true);
+            }
+        });
+
+        this._putAwayDrawerLayer.add(drawer.render());
     }
 
     public renderNightActionCards(): void {

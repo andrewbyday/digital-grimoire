@@ -1,25 +1,48 @@
-import Token, {FabledToken} from "./Token.ts";
+import Konva from "konva";
 
 export default class Drawer {
-    private readonly _scriptTokens: Set<Token>;
-    private readonly _travelerTokens: Set<Token>;
-    private readonly _fabledTokens: Set<FabledToken>;
+    private readonly _group: Konva.Group;
 
     constructor() {
-        this._scriptTokens = new Set<Token>;
-        this._travelerTokens = new Set<Token>();
-        this._fabledTokens = new Set<FabledToken>();
+        this._group = new Konva.Group({
+            x: 0,
+            y: 0,
+            width: 150,
+            height: window.innerHeight,
+            id: 'put-away-drawer',
+            visible: false
+        });
+
+        const bg: Konva.Rect = new Konva.Rect({
+            x: window.innerWidth-150,
+            y: 0,
+            fill: 'black',
+            width: 150,
+            height: window.innerHeight,
+        });
+
+        this._group.add(bg);
     }
 
-    public get scriptTokens(): Set<Token> {
-        return this._scriptTokens;
+    public get group(): Konva.Group {
+        return this._group;
     }
 
-    public get travelerTokens(): Set<Token> {
-        return this._travelerTokens;
-    }
+    public render(): Konva.Group {
+        let returnToGrimButton = new Image();
+        returnToGrimButton.onload = (): void => {
+            const buttonImg = new Konva.Image({
+                x: window.innerWidth - 390,
+                y: window.innerHeight - 80,
+                image: returnToGrimButton,
+                width: 162,
+                height: 40,
+                name: 'return-to-grim-button'
+            });
+            this._group.add(buttonImg);
+        }
+        returnToGrimButton.src = '/img/buttons/return_to_grim.png';
 
-    public get fabledTokens(): Set<FabledToken> {
-        return this._fabledTokens;
+        return this._group;
     }
 }
