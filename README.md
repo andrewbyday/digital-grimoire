@@ -36,4 +36,4 @@ A digital version of the Blood on the Clocktower grimoire for tablets and mobile
 * [Blood on the Clocktower](https://bloodontheclocktower.com/) is a trademark of Steven Medway and [The Pandemonium Institute](https://www.thepandemoniuminstitute.com/)
 * [Konva](https://konvajs.org/) for the drawing library.
 * [Vite](https://v2.vitejs.dev/) for the frontend tooling.
-* @Hey.Andrew for roles, images, and other assets.
+* @Hey.Andrew for the idea, API usage for roles, images, and other assets.
