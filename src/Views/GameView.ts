@@ -697,7 +697,7 @@ export default class GameView {
         }
 
         const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
-        shroud.render().on('dragend', (): void => {
+        shroud.group.on('dragend', (): void => {
             const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
             if (putaway !== undefined) {
                 if (shroud.intersects(putaway)) {
