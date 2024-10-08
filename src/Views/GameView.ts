@@ -25,17 +25,17 @@ export default class GameView {
 
         Konva.showWarnings = false;
 
+        this._buttonsLayer = new Konva.Layer();
         this._tokenLayer = new Konva.Layer();
         this._shroudLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
-        this._buttonsLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
         this._sheetsLayer = new Konva.Layer();
 
+        this._stage.add(this._buttonsLayer);
         this._stage.add(this._tokenLayer);
         this._stage.add(this._shroudLayer);
         this._stage.add(this._drawerLayer);
-        this._stage.add(this._buttonsLayer);
         this._stage.add(this._nightActionsLayer);
         this._stage.add(this._sheetsLayer);
     }
