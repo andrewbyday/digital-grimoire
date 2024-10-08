@@ -30,6 +30,8 @@ export default class GameController {
             this._model.getFabledTokens()
         );
 
+        this._view.renderPutAwayDrawer();
+
         this._view.renderNightSheet(
             this._model.getScriptRoles()
         );

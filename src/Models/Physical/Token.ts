@@ -82,6 +82,7 @@ export default class Token {
             x: position.x,
             y: position.y,
             id: role.script_id,
+            name: 'token',
             draggable: true
         });
 
