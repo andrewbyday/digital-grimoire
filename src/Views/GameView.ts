@@ -687,7 +687,7 @@ export default class GameView {
                 const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
                 newToken.group.on('dragend', (): void => {
                     if (putaway !== undefined) {
-                        if (token.intersects(putaway)) {
+                        if (newToken.intersects(putaway)) {
                             newToken.destroy();
                         }
                     }
