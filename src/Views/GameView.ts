@@ -14,6 +14,7 @@ export default class GameView {
     private readonly _stage: Stage;
     private readonly _socket: Socket;
     private readonly _tokenLayer: Konva.Layer;
+    private readonly _tokenReminderLayer: Konva.Layer;
     private readonly _shroudLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _putAwayDrawerLayer: Konva.Layer;
@@ -29,6 +30,7 @@ export default class GameView {
 
         this._buttonsLayer = new Konva.Layer();
         this._tokenLayer = new Konva.Layer();
+        this._tokenReminderLayer = new Konva.Layer();
         this._shroudLayer = new Konva.Layer();
         this._putAwayDrawerLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
@@ -37,6 +39,7 @@ export default class GameView {
 
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._tokenLayer);
+        this._stage.add(this._tokenReminderLayer);
         this._stage.add(this._shroudLayer);
         this._stage.add(this._putAwayDrawerLayer);
         this._stage.add(this._drawerLayer);
@@ -289,7 +292,7 @@ export default class GameView {
                                 }
                             }
                         });
-                        this._tokenLayer.add(newToken.group);
+                        this._tokenReminderLayer.add(newToken.group);
                     }
                 }
 
@@ -301,6 +304,19 @@ export default class GameView {
                             shroud.destroy();
                         }
                     }
+
+                    this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
+                       if (group === shroud.group) {
+                           return;
+                       }
+
+                       if (shroud.intersects(group)) {
+                           shroud.group.draggable(false);
+                           shroud.group.moveTo(group);
+                           shroud.group.x(75/2);
+                           shroud.group.y(-10);
+                       }
+                    });
                 });
                 this._shroudLayer.add(shroud.render());
             });
@@ -649,7 +665,7 @@ export default class GameView {
         if (token.role.reminders !== undefined) {
             for (let i: number = 0; i < token.role.reminders.length; i++) {
                 const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
-                this._tokenLayer.add(newToken.group);
+                this._tokenReminderLayer.add(newToken.group);
             }
         }
 

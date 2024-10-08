@@ -57,6 +57,10 @@ export default class Shroud {
         return this._position;
     }
 
+    public get group(): Konva.Group {
+        return this._group;
+    }
+
     /**
      * Set the position of the shroud
      * @param {x: number, y: number} value x/y pixel coordinate on the Board
@@ -90,7 +94,7 @@ export default class Shroud {
         return group;
     }
 
-    public intersects(other: Konva.Image): boolean {
+    public intersects(other: Konva.Image | Konva.Group | Konva.Shape): boolean {
         const currRect = this._group.getClientRect();
         const otherRect = other.getClientRect();
 
