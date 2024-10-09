@@ -74,12 +74,34 @@ export default class GameView {
         let bg = new Image();
         bg.onload = function() {
             const scale: number = bg.naturalWidth / bg.naturalHeight;
+
+            const aspectRatio: number = stage.width() / stage.height();
+            const imageRatio: number = bg.naturalWidth / bg.naturalHeight;
+
+            console.log(aspectRatio, imageRatio);
+
+            let finalWidth: number = 0;
+            let finalHeight: number = 0;
+
+            if (aspectRatio >= imageRatio) {
+                finalWidth = bg.naturalWidth;
+                finalHeight = bg.naturalWidth / aspectRatio;
+            } else {
+                finalWidth = bg.naturalHeight * aspectRatio;
+                finalHeight = bg.naturalHeight;
+            }
+
+            if (finalWidth < stage.width()) {
+                finalWidth = stage.width();
+                finalHeight = stage.width() / aspectRatio;
+            }
+
             const img = new Konva.Image({
                 x: 0,
                 y: 0,
                 image: bg,
-                width: board.height*scale,
-                height: board.height,
+                width: finalWidth,
+                height: finalHeight,
                 name: 'background'
             });
             bg_group.add(img);
