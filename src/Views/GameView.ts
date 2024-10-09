@@ -609,7 +609,7 @@ export default class GameView {
         returnToGrimButton.onload = (): void => {
             const buttonImg = new Konva.Image({
                 x: (this._stage.width() - 162)/2,
-                y: 10,
+                y: 25,
                 image: returnToGrimButton,
                 width: 162,
                 height: 40,
