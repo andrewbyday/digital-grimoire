@@ -31,7 +31,13 @@ A digital version of the Blood on the Clocktower grimoire for tablets and mobile
 1. `npm run build` to build the app, then
 2. `npm run preview` to preview the app
 
-## Acknowledgements
-This project/site is not affiliated with The Pandemonium Institute. All roles, characters and artwork are the property of Steven Medway and The Pandemonium Institute.
+## Acknowledgements and Copyrights
 
-Blood on the Clocktower is a trademark of Steven Medway and The Pandemonium Institute.
+* @Hey.Andrew for the idea; API usage for roles, images, and other assets.
+* [Blood on the Clocktower](https://bloodontheclocktower.com/) is a trademark of Steven Medway and [The Pandemonium Institute](https://www.thepandemoniuminstitute.com/)
+* [Konva](https://konvajs.org/) for the drawing library.
+* [Vite](https://v2.vitejs.dev/) for the frontend tooling.
+* [Zod](https://github.com/colinhacks/zod) for the schema validation.
+* [Socket.IO](https://socket.io/) for the server-client communication.
+* [Bootstrap](https://getbootstrap.com/) for the components.
+* [TypeScript](https://www.typescriptlang.org/) as the language this is written in.

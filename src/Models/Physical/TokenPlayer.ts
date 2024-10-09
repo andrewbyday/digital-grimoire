@@ -20,6 +20,14 @@ export default class TokenPlayer {
         this._height = height;
     }
 
+    public get width(): number {
+        return this._width;
+    }
+
+    public get height(): number {
+        return this._height;
+    }
+
     /**
      * Returns role
      */
@@ -67,6 +75,7 @@ export default class TokenPlayer {
     /**
      * Creates the group for Konva.Layer
      * @param role
+     * @param player
      * @param position
      * @private
      */
@@ -75,6 +84,7 @@ export default class TokenPlayer {
             x: position.x,
             y: position.y,
             id: role.script_id,
+            name: 'token',
             draggable: true
         });
 
@@ -170,6 +180,22 @@ export default class TokenPlayer {
         });
 
         return group;
+    }
+
+    public destroy(): void {
+        this._group.destroy();
+    }
+
+    public intersects(other: Konva.Image): boolean {
+        const currRect = this._group.getClientRect();
+        const otherRect = other.getClientRect();
+
+        return !(
+            otherRect.x > currRect.x + currRect.width ||
+            otherRect.x + otherRect.width < currRect.x ||
+            otherRect.y > currRect.y + currRect.height ||
+            otherRect.y + otherRect.height < currRect.y
+        );
     }
 
     /**

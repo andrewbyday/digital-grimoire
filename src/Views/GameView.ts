@@ -22,6 +22,8 @@ export default class GameView {
     private readonly _nightActionsLayer: Konva.Layer;
     private readonly _sheetsLayer: Konva.Layer;
 
+    private _tokensPutAway: number;
+
     constructor(stage: Stage, socket: Socket) {
         this._stage = stage;
         this._socket = socket;
@@ -45,6 +47,8 @@ export default class GameView {
         this._stage.add(this._drawerLayer);
         this._stage.add(this._nightActionsLayer);
         this._stage.add(this._sheetsLayer);
+
+        this._tokensPutAway = 0;
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -69,19 +73,48 @@ export default class GameView {
 
         let bg = new Image();
         bg.onload = function() {
+            const aspectRatio: number = stage.width() / stage.height();
+            const imageRatio: number = bg.naturalWidth / bg.naturalHeight;
+
+            console.log(aspectRatio, imageRatio);
+
+            let finalWidth: number = 0;
+            let finalHeight: number = 0;
+
+            if (aspectRatio >= imageRatio) {
+                finalWidth = bg.naturalWidth;
+                finalHeight = bg.naturalWidth / aspectRatio;
+            } else {
+                finalWidth = bg.naturalHeight * aspectRatio;
+                finalHeight = bg.naturalHeight;
+            }
+
+            if (finalWidth < stage.width()) {
+                finalWidth = stage.width();
+                finalHeight = stage.width() / aspectRatio;
+            }
+
             const img = new Konva.Image({
                 x: 0,
                 y: 0,
                 image: bg,
-                width: board.width,
-                height: board.height,
+                width: finalWidth,
+                height: finalHeight,
                 name: 'background'
             });
             bg_group.add(img);
         }
-        bg.src = '/img/felt_background.png';
+        bg.src = '/img/felt_background.webp';
 
         return new GameView(stage, socket);
+    }
+
+    public get tokensPutAway(): number {
+        return this._tokensPutAway;
+    }
+
+    public set tokensPutAway(val: number) {
+        this._tokensPutAway = val;
     }
 
     public get stage(): Stage {
@@ -208,6 +241,7 @@ export default class GameView {
                 nightActionCardsButton.on('dblclick dbltap', () => {
                     this._nightActionsLayer.show();
                     this._tokenLayer.hide();
+                    this._tokenReminderLayer.hide();
                     this._buttonsLayer.hide();
                     this._shroudLayer.hide();
                 });
@@ -274,8 +308,9 @@ export default class GameView {
                         if (newToken.intersects(putaway)) {
                             newToken.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
                             newToken.group.x(this._stage.width() - newToken.width - 10);
-                            newToken.group.y(10);
+                            newToken.group.y(10 + ((newToken.height+10)*this._tokensPutAway));
                             newToken.group.draggable(false);
+                            this._tokensPutAway++;
                         }
                     }
                 });
@@ -484,6 +519,7 @@ export default class GameView {
                 target.x(10);
                 target.y(10);
                 target.draggable(true);
+                this._tokensPutAway--;
             }
         });
 
@@ -491,7 +527,9 @@ export default class GameView {
     }
 
     public renderNightActionCards(): void {
-        const tokenSize: number = 125;
+        const size: number = 125;
+        const bottom: number = this._stage.height();
+
         const group = new Konva.Group({
             x: 0,
             y: 0,
@@ -508,14 +546,6 @@ export default class GameView {
             "st_card_vote"
         ];
 
-        const leftAbilitiesPos = [
-            50,
-            135+50,
-            300+50,
-            460+50,
-            600+50
-        ];
-
         const rightAbilities = [
             "st_card_you",
             "st_card_player",
@@ -524,20 +554,12 @@ export default class GameView {
             "st_card_choice"
         ];
 
-        const rightAbilitiesPos = [
-            50+tokenSize,
-            135+50+tokenSize,
-            300+50+tokenSize,
-            460+50+tokenSize,
-            600+50+tokenSize
-        ]
-
-        for (let i = 0; i < leftAbilities.length; i++) {
+        for (let i: number = 0; i < leftAbilities.length; i++) {
             const file = leftAbilities[i];
             Konva.Image.fromURL('/img/cards/' + file + '.png', function (card) {
                 card.setAttrs({
                     x: 180,
-                    y: leftAbilitiesPos[i],
+                    y: bottom - size - ((size+10)*i) - 10,
                     width: 125,
                     height: 180,
                     rotation: 90,
@@ -557,12 +579,13 @@ export default class GameView {
             });
         }
 
-        for (let i = 0; i < rightAbilities.length; i++) {
+        for (let i: number = 0; i < rightAbilities.length; i++) {
             const file = rightAbilities[i];
+            const stage: Konva.Stage = this._stage;
             Konva.Image.fromURL('/img/cards/' + file + '.png', function (card) {
                 card.setAttrs({
-                    x: window.innerWidth-180,
-                    y: rightAbilitiesPos[i],
+                    x: stage.width()-180,
+                    y: bottom - ((size+10)*i) - 10,
                     width: 125,
                     height: 180,
                     rotation: 270,
@@ -582,10 +605,11 @@ export default class GameView {
             });
         }
 
-        let finalWidth = 480;
-        let finalHeight = 692;
         var imageObj = new Image();
         imageObj.onload = function () {
+            let finalWidth = 480;
+            let finalHeight = finalWidth / (imageObj.naturalWidth / imageObj.naturalHeight);
+
             var button = new Konva.Image({
                 x: window.innerWidth/2-finalWidth/2,
                 y: window.innerHeight-finalHeight,
@@ -600,11 +624,13 @@ export default class GameView {
         };
         imageObj.src = '/img/cards/st_card_demon.png';
 
+
+
         let returnToGrimButton = new Image();
         returnToGrimButton.onload = (): void => {
             const buttonImg = new Konva.Image({
                 x: (this._stage.width() - 162)/2,
-                y: 30,
+                y: 25,
                 image: returnToGrimButton,
                 width: 162,
                 height: 40,
@@ -616,6 +642,7 @@ export default class GameView {
                 this._nightActionsLayer.hide();
                 this._buttonsLayer.show();
                 this._tokenLayer.show();
+                this._tokenReminderLayer.show();
                 this._shroudLayer.show();
             });
         }
@@ -660,16 +687,58 @@ export default class GameView {
     }
 
     public listenJoins(token: TokenPlayer): void {
+        const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+
+        token.group.on('dragend', (): void => {
+            if (putaway !== undefined) {
+                if (token.intersects(putaway)) {
+                    token.group.moveTo(this._putAwayDrawerLayer.findOne('#put-away-drawer'));
+                    token.group.x(this._stage.width() - token.width - 10);
+                    token.group.y(10 + ((token.height+10)*this._tokensPutAway));
+                    token.group.draggable(false);
+                    this._tokensPutAway++;
+                }
+            }
+        });
+
         this._tokenLayer.add(token.group);
 
         if (token.role.reminders !== undefined) {
             for (let i: number = 0; i < token.role.reminders.length; i++) {
                 const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
+                newToken.group.on('dragend', (): void => {
+                    if (putaway !== undefined) {
+                        if (newToken.intersects(putaway)) {
+                            newToken.destroy();
+                        }
+                    }
+                });
                 this._tokenReminderLayer.add(newToken.group);
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 10});
+        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+        shroud.group.on('dragend', (): void => {
+            const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
+            if (putaway !== undefined) {
+                if (shroud.intersects(putaway)) {
+                    shroud.destroy();
+                }
+            }
+
+            this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
+                if (group === shroud.group) {
+                    return;
+                }
+
+                if (shroud.intersects(group)) {
+                    shroud.group.draggable(false);
+                    shroud.group.moveTo(group);
+                    shroud.group.x(75/2);
+                    shroud.group.y(-10);
+                }
+            });
+        });
         this._shroudLayer.add(shroud.render());
     }
 

@@ -127,7 +127,6 @@ export default class Token {
                 y: 0,
                 fill: 'black',
                 fontSize: 17,
-                fontStyle: 'bold',
                 fontFamily: 'Dumbledore',
                 text: this._role.name.toUpperCase(),
                 align: 'center',
