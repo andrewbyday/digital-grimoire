@@ -83,7 +83,7 @@ export default class GameView {
             });
             bg_group.add(img);
         }
-        bg.src = '/img/felt_background.png';
+        bg.src = '/img/felt_background.webp';
 
         return new GameView(stage, socket);
     }
