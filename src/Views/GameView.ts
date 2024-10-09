@@ -73,8 +73,6 @@ export default class GameView {
 
         let bg = new Image();
         bg.onload = function() {
-            const scale: number = bg.naturalWidth / bg.naturalHeight;
-
             const aspectRatio: number = stage.width() / stage.height();
             const imageRatio: number = bg.naturalWidth / bg.naturalHeight;
 
