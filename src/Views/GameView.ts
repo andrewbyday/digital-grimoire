@@ -73,11 +73,12 @@ export default class GameView {
 
         let bg = new Image();
         bg.onload = function() {
+            const scale: number = bg.naturalWidth / bg.naturalHeight;
             const img = new Konva.Image({
                 x: 0,
                 y: 0,
                 image: bg,
-                width: board.width,
+                width: board.height*scale,
                 height: board.height,
                 name: 'background'
             });
