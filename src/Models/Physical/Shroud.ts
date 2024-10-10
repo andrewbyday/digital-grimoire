@@ -4,11 +4,13 @@ export default class Shroud {
     private _height: number;
     private _width: number;
     private _position: { x: number, y: number };
+    private _connected: boolean;
     private readonly _group: Konva.Group;
 
     constructor(height: number, width: number, position: { x: number; y: number }) {
         this._height = height;
         this._width = width;
+        this._connected = false;
         this._position = position;
 
         this._group = new Konva.Group({
@@ -18,6 +20,14 @@ export default class Shroud {
             height: this._height,
             draggable: true
         });
+    }
+
+    public get connected(): boolean {
+        return this._connected;
+    }
+
+    public set connected(value: boolean) {
+        this._connected = value;
     }
 
     /**
