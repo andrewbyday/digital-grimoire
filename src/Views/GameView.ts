@@ -337,7 +337,7 @@ export default class GameView {
                     if (shroud.connected) {
                         shroud.group.moveTo(this._shroudLayer);
                         shroud.group.x(10);
-                        shroud.group.y(this._stage.height() - 50);
+                        shroud.group.y(this._stage.height() - 100);
                         shroud.connected = false;
                     }
                 });
@@ -729,7 +729,17 @@ export default class GameView {
             }
         }
 
-        const shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+        const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+
+        shroud.group.on('dblclick dbltap', (): void => {
+            if (shroud.connected) {
+                shroud.group.moveTo(this._shroudLayer);
+                shroud.group.x(10);
+                shroud.group.y(this._stage.height() - 100);
+                shroud.connected = false;
+            }
+        });
+
         shroud.group.on('dragend', (): void => {
             const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
             if (putaway !== undefined) {
@@ -744,10 +754,12 @@ export default class GameView {
                 }
 
                 if (shroud.intersects(group)) {
-                    shroud.group.draggable(false);
                     shroud.group.moveTo(group);
+                    shroud.group.moveToTop();
+                    shroud.group.draggable(true);
                     shroud.group.x(75/2);
                     shroud.group.y(-10);
+                    shroud.connected = true;
                 }
             });
         });
