@@ -342,7 +342,7 @@ export default class GameView {
                     }
                 });
 
-                shroud.group.on('dragend', (e): void => {
+                shroud.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
                         if (shroud.intersects(putaway)) {
