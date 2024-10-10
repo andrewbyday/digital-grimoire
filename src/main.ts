@@ -67,7 +67,7 @@ if (hostButton && sessionCode && baseThreeSelect && scriptUrl) {
         const app: main = new main();
 
         const status: boolean = customScriptButton.checked;
-        const sessionCodeValue: string = sessionCode.value ? sessionCode.value : "42";
+        const sessionCodeValue: string = sessionCode.value ? sessionCode.value : "";
         const baseThreeSelectValue: string = baseThreeSelect.value ? baseThreeSelect.value : "./scripts/trouble_brewing.json";
         const customScriptValue: string = scriptUrl.value ? scriptUrl.value : "./scripts/trouble_brewing.json";
 
