@@ -332,12 +332,19 @@ export default class GameView {
                 }
 
                 const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
-                shroud.render().on('dragend', (): void => {
+                shroud.render().on('dragend', (e): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
                         if (shroud.intersects(putaway)) {
                             shroud.destroy();
                         }
+                    }
+
+                    if (shroud.connected) {
+                        shroud.group.moveTo(this._shroudLayer);
+                        shroud.group.x(e.evt.x);
+                        shroud.group.y(e.evt.y);
+                        shroud.connected = false;
                     }
 
                     this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
@@ -346,10 +353,10 @@ export default class GameView {
                        }
 
                        if (shroud.intersects(group)) {
-                           shroud.group.draggable(false);
                            shroud.group.moveTo(group);
                            shroud.group.x(75/2);
                            shroud.group.y(-10);
+                           shroud.connected = true;
                        }
                     });
                 });
