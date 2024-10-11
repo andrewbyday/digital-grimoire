@@ -301,7 +301,7 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('dblclick dbltap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -318,7 +318,7 @@ export default class GameView {
 
                 if (token.role.reminders !== undefined) {
                     for (let i: number = 0; i < token.role.reminders.length; i++) {
-                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: bottom+200});
+                        const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 50, y: bottom+200});
                         newToken.group.on('dragend', (): void => {
                             const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                             if (putaway !== undefined) {
@@ -331,13 +331,13 @@ export default class GameView {
                     }
                 }
 
-                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
 
                 shroud.group.on('dblclick dbltap', (): void => {
                     if (shroud.connected) {
                         shroud.group.moveTo(this._shroudLayer);
                         shroud.group.draggable(true);
-                        shroud.group.x(10);
+                        shroud.group.x(25);
                         shroud.group.y(this._stage.height() - 100);
                         shroud.connected = false;
                     }
@@ -375,7 +375,7 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('dblclick dbltap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -386,7 +386,7 @@ export default class GameView {
                 });
                 this._tokenLayer.add(newToken.group);
 
-                const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
                 this._shroudLayer.add(shroud.render());
             });
 
@@ -397,7 +397,7 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('dblclick dbltap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 10, y: bottom});
+                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -528,8 +528,8 @@ export default class GameView {
             const target = e.target.parent;
             if (target?.name() === 'token') {
                 target.moveTo(this._tokenLayer);
-                target.x(10);
-                target.y(10);
+                target.x(25);
+                target.y(25);
                 target.draggable(true);
                 this._tokensPutAway--;
             }
@@ -715,7 +715,7 @@ export default class GameView {
 
         if (token.role.reminders !== undefined) {
             for (let i: number = 0; i < token.role.reminders.length; i++) {
-                const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 10, y: 10});
+                const newToken: TokenReminder = new TokenReminder(token.role, i, {x: 50, y: 50});
                 newToken.group.on('dragend', (): void => {
                     if (putaway !== undefined) {
                         if (newToken.intersects(putaway)) {
@@ -727,13 +727,13 @@ export default class GameView {
             }
         }
 
-        const shroud: Shroud = new Shroud(50, 50, {x: 10, y: this._stage.height() - 100});
+        const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
 
         shroud.group.on('dblclick dbltap', (): void => {
             if (shroud.connected) {
                 shroud.group.moveTo(this._shroudLayer);
                 shroud.group.draggable(true);
-                shroud.group.x(10);
+                shroud.group.x(25);
                 shroud.group.y(this._stage.height() - 100);
                 shroud.connected = false;
             }

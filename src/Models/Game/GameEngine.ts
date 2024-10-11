@@ -172,7 +172,7 @@ export default class GameEngine {
             }
         }
 
-        return new TokenPlayer(role, player, {x: 10, y: 10});
+        return new TokenPlayer(role, player, {x: 50, y: 50});
     }
 
     public getScriptTokens(): Set<Token> {
