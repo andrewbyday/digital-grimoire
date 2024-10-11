@@ -1,13 +1,31 @@
 import {Role} from "../Game/Role.ts";
 import Konva from "konva";
+import {NightOrder} from "../Game/NightOrder.ts";
 
 export default class NightSheet {
     private readonly _roles: Set<Role>;
     private readonly _type: string;
+    private readonly _items: NightOrder[];
 
     constructor(roles: Set<Role>, type: string) {
         this._roles = roles;
         this._type = type;
+        this._items = [];
+
+        roles.forEach((role: Role) => {
+            if (type === 'first') {
+                role.firstNightOrder?.forEach( (order: NightOrder) => {
+                   this._items.push(order);
+                });
+            } else {
+                role.otherNightOrder?.forEach( (order: NightOrder) => {
+                    this._items.push(order);
+                });
+            }
+        });
+
+        this._items.sort((a,b) => a.index - b.index);
+        console.log(this._items);
     }
 
     public get roles(): Set<Role> {
@@ -44,23 +62,29 @@ export default class NightSheet {
         images.push(this.loadImage(image));
         images.push(this.loadImage(returnToGrimButton));
 
-        for (let role of this._roles) {
-            if (this._type === 'first' && role.firstNightOrder !== undefined) {
-                if (role.firstNightOrder.length > 0) {
-                    let image = new Image();
-                    image.src = role.firstNightOrder[0].svg;
-                    images.push(this.loadImage(image));
-                }
-            }
+        this._items.forEach( (order: NightOrder) => {
+           let image = new Image();
+           image.src = order.svg;
+           images.push(this.loadImage(image));
+        });
 
-            if (this._type === 'other' && role.otherNightOrder !== undefined) {
-                if (role.otherNightOrder.length > 0) {
-                    let image = new Image();
-                    image.src = role.otherNightOrder[0].svg;
-                    images.push(this.loadImage(image));
-                }
-            }
-        }
+        // for (let role of this._roles) {
+        //     if (this._type === 'first' && role.firstNightOrder !== undefined) {
+        //         if (role.firstNightOrder.length > 0) {
+        //             let image = new Image();
+        //             image.src = role.firstNightOrder[0].svg;
+        //             images.push(this.loadImage(image));
+        //         }
+        //     }
+        //
+        //     if (this._type === 'other' && role.otherNightOrder !== undefined) {
+        //         if (role.otherNightOrder.length > 0) {
+        //             let image = new Image();
+        //             image.src = role.otherNightOrder[0].svg;
+        //             images.push(this.loadImage(image));
+        //         }
+        //     }
+        // }
 
         Promise.all(images).then((values): void => {
             const bg = new Konva.Image({
