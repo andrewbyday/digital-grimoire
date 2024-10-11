@@ -1,12 +1,12 @@
 [
     {
         "name": "Acrobat",
-        "text": "Each night*, if either good living neighbor \r\nis drunk or poisoned, \r\nyou die.",
-        "type": "outsider",
+        "text": "Each night*, choose a player: \r\nif they are drunk or poisoned, \r\nyou die.",
+        "type": "townsfolk",
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 70,
+        "sao_index": 32,
         "formatted_script_img": null,
         "script_id": "acrobat",
         "jinxes": [],
@@ -17,10 +17,10 @@
             "first": [],
             "other": [
                 {
-                    "index": 41,
-                    "text": "If either good living neighbor is drunk or poisoned, place the **DEAD** reminder. (*)",
+                    "index": 45,
+                    "text": "The Acrobat chooses a player. If the chosen player is drunk or poisoned, place the **DEAD** reminder. (*)",
                     "group": "death_confusion",
-                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/8b8712168237435987467862f2475c00.svg"
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/12a0b48422c14bbb8caf9d7a9879fe04.svg"
                 }
             ]
         },
@@ -76,7 +76,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 3,
+                    "index": 5,
                     "text": "Show the **YOU ARE** info token then the character token of a not-in-play Minion. Put the Alchemist to sleep.\r\nMark the Alchemist with the **IS THE ALCHEMIST** token. (*) Swap the Alchemist token with this Minion token.\r\nTurn the Minion token upside-down. (This shows they are still good.)",
                     "group": "minion_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/9657a0763fa64f1cbd818c586cc1101e.svg"
@@ -176,7 +176,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 35,
+                    "index": 38,
                     "text": "The Al-Hadikhia points at three players:\r\n    Mark these players with the **1**, **2**, & **3** reminders, in the chosen order. Put the Al-Hadikhia to sleep. \r\n    Wake the player marked **1** & say \"The A-l Hadikhia has chosen\" then the name of the player.\r\n    Ask \"Do you choose to live?\" They nod or shake their head. Put them to sleep. Repeat for players marked **2** & **3**.\r\n    Remove a shroud (if any) for players that choose live, & add a shroud for players that choose die.\r\n    If all three are alive (none have a shroud), add a shroud to all three.",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/202018bcc9354efbbac74cb61b9fa86c.svg"
@@ -225,7 +225,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 39,
+        "sao_index": 40,
         "formatted_script_img": null,
         "script_id": "alsaahir",
         "jinxes": [],
@@ -276,7 +276,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 41,
+        "sao_index": 42,
         "formatted_script_img": null,
         "script_id": "amnesiac",
         "jinxes": [],
@@ -288,7 +288,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 8,
+                    "index": 12,
                     "text": "This ability should occur at the appropriate time in the night order. Abilities are usually ordered: \r\n    Poisoners, Protectors, Killers, Information",
                     "group": "post_dusk",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/b25cb8d7de8544218aa82c0be6074778.svg"
@@ -447,7 +447,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 46,
+        "sao_index": 47,
         "formatted_script_img": null,
         "script_id": "artist",
         "jinxes": [],
@@ -512,7 +512,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 39,
+                    "index": 44,
                     "text": "The Assassin might choose a player. (*)(*)",
                     "group": "minions_post_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1546388fe89a4a2582936a1fe382486c.svg"
@@ -561,7 +561,7 @@
         "setup": true,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 64,
+        "sao_index": 65,
         "formatted_script_img": null,
         "script_id": "atheist",
         "jinxes": [],
@@ -607,12 +607,12 @@
     },
     {
         "name": "Balloonist",
-        "text": "Each night, you learn 1 player \r\nof each character type, \r\nuntil there are no more types to learn. [+1 Outsider]",
+        "text": "Each night, you learn a player \r\nof a different character type than last night. [+0 or +1 Outsider]",
         "type": "townsfolk",
         "setup": true,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 21,
+        "sao_index": 16,
         "formatted_script_img": null,
         "script_id": "balloonist",
         "jinxes": [],
@@ -622,18 +622,18 @@
         "night_order": {
             "first": [
                 {
-                    "index": 43,
-                    "text": "Point to a player (alive or dead). (*)",
+                    "index": 48,
+                    "text": "Point to a player (alive or dead).\r\nPlace the SEEN token next to the shown player. (*)",
                     "group": "info",
-                    "svg": ""
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0f9f597cfa024c59b37966b2bedf9c1b.svg"
                 }
             ],
             "other": [
                 {
-                    "index": 56,
-                    "text": "Point to a player (alive or dead) that has a different role type as the player from the previous night. (*)",
+                    "index": 61,
+                    "text": "Point to a player (alive or dead) with a different role type from the player with the SEEN token.\r\nPlace the SEEN token next to the shown player. (*)",
                     "group": "info",
-                    "svg": ""
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/776e2aa8923f4b42b6abf7aa6c1791d4.svg"
                 }
             ]
         },
@@ -679,14 +679,21 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 66,
+        "sao_index": 67,
         "formatted_script_img": null,
         "script_id": "banshee",
         "jinxes": [],
         "reminders": [],
         "night_order": {
             "first": [],
-            "other": []
+            "other": [
+                {
+                    "index": 57,
+                    "text": "If the demon killed the Banshee tonight, place the **HAS ABILITY** token. (*)\r\n    Publicly announce that the Banshee died.",
+                    "group": "death_info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3fd0fde9f0064ec28eeed41bdbf67bc6.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -741,7 +748,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 44,
+                    "index": 49,
                     "text": "If the Barber died today or tonight, show the Demon the **THIS CHARACTER SELECTED YOU** & Barber tokens.\r\nIf the Demon chose 2 players, wake one at a time. Show the **YOU ARE** token & their new character token.",
                     "group": "death_confusion",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0aa9ae424e7d431081b3bcaa0e683afd.svg"
@@ -1002,7 +1009,14 @@
             "Demon Ability"
         ],
         "night_order": {
-            "first": [],
+            "first": [
+                {
+                    "index": 31,
+                    "text": "(TBD)",
+                    "group": "minions_pre_demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ae3346c5882f4f60b11c21999363821c.svg"
+                }
+            ],
             "other": []
         },
         "edition": {
@@ -1149,7 +1163,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 155,
+        "sao_index": 156,
         "formatted_script_img": null,
         "script_id": "bootlegger",
         "jinxes": [],
@@ -1210,7 +1224,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 47,
+                    "index": 54,
                     "text": "Wake any player with a Townsfolk character:\r\n    Show them the **YOU ARE** token, & a thumbs down. Put them back to sleep. \r\n    Turn their token upside-down. (This shows they are evil.)\r\nWake the Bounty Hunter, point to an evil player. Place the **SEEN** token beside the shown player. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/50d828775b104ef38f96d7634ba49adf.svg"
@@ -1218,7 +1232,7 @@
             ],
             "other": [
                 {
-                    "index": 60,
+                    "index": 68,
                     "text": "If the player with the **SEEN** token died today or tonight, point to an evil player. \r\nMove the **SEEN** token to the shown player. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/f565a5e6b62443ebb351c1f7ab172ef5.svg"
@@ -1420,7 +1434,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 69,
+        "sao_index": 70,
         "formatted_script_img": null,
         "script_id": "butler",
         "jinxes": [
@@ -1449,7 +1463,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 51,
+                    "index": 58,
                     "text": "The Butler chooses a player. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ad6fa56542ca4e5da0d0a64154426ce3.svg"
@@ -1457,7 +1471,7 @@
             ],
             "other": [
                 {
-                    "index": 68,
+                    "index": 76,
                     "text": "The Butler chooses a player. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ad6fa56542ca4e5da0d0a64154426ce3.svg"
@@ -1506,7 +1520,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 67,
+        "sao_index": 68,
         "formatted_script_img": null,
         "script_id": "cannibal",
         "jinxes": [],
@@ -1519,9 +1533,9 @@
             "other": [
                 {
                     "index": 3,
-                    "text": "The Cannibal has the ability of the most recently executed player. They immediately learn any 'you start knowing' information.",
+                    "text": "The Cannibal has the ability of the most recently executed player. \r\nThey immediately learn any 'you start knowing' information.",
                     "group": "post_dusk",
-                    "svg": ""
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/a697f7d5fb8946659c6f5c4e7b4d5594.svg"
                 }
             ]
         },
@@ -1596,7 +1610,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 24,
+                    "index": 28,
                     "text": "The Cerenovus chooses a player & a character. (*) Put the Cerenovus to sleep. Wake the target.\r\nShow the **THIS CHARACTER SELECTED YOU** token, the Cerenovus token, then the madness-character token.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/016515ecf01348338ce5e7165c063b4e.svg"
@@ -1653,7 +1667,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 20,
+        "sao_index": 21,
         "formatted_script_img": null,
         "script_id": "chambermaid",
         "jinxes": [
@@ -1680,7 +1694,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 53,
+                    "index": 60,
                     "text": "The Chambermaid chooses 2 living players. Give a finger signal.",
                     "group": "pre_dawn",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/542eb87945df4fceb6462213be1583a3.svg"
@@ -1688,7 +1702,7 @@
             ],
             "other": [
                 {
-                    "index": 69,
+                    "index": 77,
                     "text": "The Chambermaid chooses 2 living players. Give a finger signal.",
                     "group": "pre_dawn",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/542eb87945df4fceb6462213be1583a3.svg"
@@ -1745,7 +1759,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 34,
+                    "index": 40,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/25b2b3e54bd44f139f11afe98ba7e9fb.svg"
@@ -1795,7 +1809,7 @@
         "setup": true,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 62,
+        "sao_index": 63,
         "formatted_script_img": null,
         "script_id": "choirboy",
         "jinxes": [],
@@ -1804,7 +1818,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 50,
+                    "index": 56,
                     "text": "If the Demon killed the King, wake the Choirboy. Point to the Demon player.",
                     "group": "death_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/245857fcb8244999827df7033cef1f7f.svg"
@@ -1861,7 +1875,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 36,
+                    "index": 42,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/41a0429724da403e9484acb87b06f1d9.svg"
@@ -1911,7 +1925,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 47,
+        "sao_index": 48,
         "formatted_script_img": null,
         "script_id": "courtier",
         "jinxes": [],
@@ -1924,7 +1938,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 13,
+                    "index": 17,
                     "text": "The Courtier might choose a character. (*)(*)",
                     "group": "droison",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/f368d8171a4d4b648896ca5dbb6aa2eb.svg"
@@ -1989,7 +2003,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 46,
+                    "index": 53,
                     "text": "The Cult Leader becomes the alignment of one of their living neighbors. If their alignment changed: \r\n    Wake the Cult Leader, show them the **YOU ARE** token, &either a thumbs down (if evil) or thumbs up (if good). \r\n    Put the Cult Leader back to sleep.\r\n    Turn the Cult Leader token upside-down. (This shows their alignment.)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ee8ef003c91f497a8593c50e8e710e79.svg"
@@ -1997,7 +2011,7 @@
             ],
             "other": [
                 {
-                    "index": 59,
+                    "index": 67,
                     "text": "The Cult Leader becomes the alignment of one of their living neighbors. If their alignment changed: \r\n    Wake the Cult Leader, show them the **YOU ARE** token, &either a thumbs down (if evil) or thumbs up (if good). \r\n    Put the Cult Leader back to sleep.\r\n    Turn the Cult Leader token upside-down. (This shows their alignment.)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ee8ef003c91f497a8593c50e8e710e79.svg"
@@ -2056,7 +2070,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 52,
+                    "index": 59,
                     "text": "Wake each Minion. Show the Damsel token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/c858c4eb95a6471a8d7c8f38482f6605.svg"
@@ -2167,7 +2181,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 20,
+                    "index": 24,
                     "text": "The Devil's Advocate chooses a living player. (*)",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/96fbf2162c4a478dbe98b943b0c17b05.svg"
@@ -2334,7 +2348,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 44,
+                    "index": 51,
                     "text": "The Dreamer points to a player. Show 1 good & 1 evil character token, 1 of which is their character.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/cb744343831948cfa9da30cd2ac4a647.svg"
@@ -2342,7 +2356,7 @@
             ],
             "other": [
                 {
-                    "index": 57,
+                    "index": 65,
                     "text": "The Dreamer points to a player. Show 1 good & 1 evil character token, 1 of which is their character.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/cb744343831948cfa9da30cd2ac4a647.svg"
@@ -2503,7 +2517,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 40,
+                    "index": 46,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/e4faa2555e544e20bd0c8b2d37dc7f8c.svg"
@@ -2511,7 +2525,7 @@
             ],
             "other": [
                 {
-                    "index": 52,
+                    "index": 59,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/e4faa2555e544e20bd0c8b2d37dc7f8c.svg"
@@ -2560,7 +2574,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 42,
+        "sao_index": 43,
         "formatted_script_img": null,
         "script_id": "engineer",
         "jinxes": [],
@@ -2570,7 +2584,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 16,
+                    "index": 20,
                     "text": "If the Engineer points to a Demon or Minions on their character sheet:\r\n    Swap all appropriate character tokens with new character tokens.\r\n    Wake each evil player that changed character, show the **YOU ARE** info token, then their new character token. Put them to sleep. \r\n    Mark the Engineer with the **NO ABILITY** reminder token. (*)",
                     "group": "protection",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/72647eec973545708ee040aa5b84575a.svg"
@@ -2637,7 +2651,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 18,
+                    "index": 22,
                     "text": "Wake both twins. Allow eye contact.\r\nShow the good twin's character token to the Evil Twin &vice versa.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0c4ff82faabe4809a5e88232b143c488.svg"
@@ -2687,7 +2701,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 32,
+        "sao_index": 33,
         "formatted_script_img": null,
         "script_id": "exorcist",
         "jinxes": [],
@@ -2698,7 +2712,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 23,
+                    "index": 24,
                     "text": "The Exorcist chooses a player. (*) Put the Exorcist to sleep. If the Exorcist chose the Demon:\r\n    Wake the Demon. Show the **THIS CHARACTER SELECTED** YOU & Exorcist tokens. Point to the Exorcist.",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/4b6ccb5a3d924170b331e199f9eeef40.svg"
@@ -2778,7 +2792,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 30,
+                    "index": 32,
                     "text": "The Fang Gu chooses a player. (*) If they chose an Outsider (once only):\r\n    Replace the Outsider token with the spare Fang Gu token. Put the Fang Gu to sleep. Wake the target. \r\n    Show the **YOU ARE** and Fang Gu tokens & give a thumbs-down. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3b7352d11dfa4301bc5ea8bd20f75b24.svg"
@@ -2827,7 +2841,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 59,
+        "sao_index": 60,
         "formatted_script_img": null,
         "script_id": "farmer",
         "jinxes": [],
@@ -2836,7 +2850,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 48,
+                    "index": 54,
                     "text": "If the Farmer died tonight: \r\n    Wake an alive good player.\r\n    Show them the **YOU ARE** info token and a Farmer character token, then put them to sleep. \r\n    Replace their previous character token with a Farmer character token.",
                     "group": "death_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/322d34b6953f4361b869dbb5388121f8.svg"
@@ -2895,7 +2909,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 25,
+                    "index": 29,
                     "text": "The Fearmonger picks a player:\r\n    Mark the chosen player with the **FEAR** reminder. (*) Declare that \"The Fearmonger has chosen a player.\"",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/925e119a657b4b52beae4338bd9b5e13.svg"
@@ -3105,7 +3119,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 38,
+        "sao_index": 39,
         "formatted_script_img": null,
         "script_id": "fisherman",
         "jinxes": [],
@@ -3212,7 +3226,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 58,
+        "sao_index": 59,
         "formatted_script_img": null,
         "script_id": "fool",
         "jinxes": [],
@@ -3275,7 +3289,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 45,
+                    "index": 52,
                     "text": "The Fortune Teller chooses 2 players. Nod fi either is the Demon (or the **RED HERRING**).",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/c172861785d045b78302f76eaa9cff67.svg"
@@ -3283,7 +3297,7 @@
             ],
             "other": [
                 {
-                    "index": 58,
+                    "index": 66,
                     "text": "The Fortune Teller chooses 2 players. Nod fi either is the Demon (or the **RED HERRING**).",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/c172861785d045b78302f76eaa9cff67.svg"
@@ -3332,7 +3346,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 35,
+        "sao_index": 36,
         "formatted_script_img": null,
         "script_id": "gambler",
         "jinxes": [],
@@ -3494,7 +3508,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 16,
+        "sao_index": 17,
         "formatted_script_img": null,
         "script_id": "general",
         "jinxes": [],
@@ -3502,7 +3516,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 42,
+                    "index": 49,
                     "text": "If you believe that the good team is winning, give a thumbs up.\r\nIf you believe that the evil team is winning, give a thumbs down.\r\nIf you don't know which team is winning, give a thumbs to the side.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/d13f0cc9c32a427da0c09e865e9880be.svg"
@@ -3510,7 +3524,7 @@
             ],
             "other": [
                 {
-                    "index": 54,
+                    "index": 62,
                     "text": "If you believe that the good team is winning, give a thumbs up.\r\nIf you believe that the evil team is winning, give a thumbs down.\r\nIf you don't know which team is winning, give a thumbs to the side.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/d13f0cc9c32a427da0c09e865e9880be.svg"
@@ -3642,7 +3656,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 19,
+                    "index": 23,
                     "text": "Show the character tokens of al in-play Outsiders.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/282a8ccfd7d8441eaf64696b623899e4.svg"
@@ -3650,7 +3664,7 @@
             ],
             "other": [
                 {
-                    "index": 38,
+                    "index": 43,
                     "text": "If an Outsider died today, the Godfather chooses a player. (*)",
                     "group": "minions_post_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/031022d82f904a928f6c993affff3632.svg"
@@ -3803,7 +3817,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 37,
+        "sao_index": 38,
         "formatted_script_img": null,
         "script_id": "gossip",
         "jinxes": [],
@@ -3867,7 +3881,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 37,
+                    "index": 43,
                     "text": "Point to the grandchild player & show their character token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/f3f6b08d55ee4669ba9d8f340295748a.svg"
@@ -3875,7 +3889,7 @@
             ],
             "other": [
                 {
-                    "index": 51,
+                    "index": 58,
                     "text": "If the grandchild was killed by the Demon, the Grandmother dies too. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/645a31ffbf374777807cf0f02e3df49a.svg"
@@ -4037,7 +4051,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 21,
+                    "index": 25,
                     "text": "The Harpy chooses a player (*) & then another player. (*) Put the Harpy to sleep. Wake the first target.\r\nShow the **THIS CHARACTER SELECTED YOU** token, the Harpy token, then point to the second target.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/447b53844a2e40538e78f70dc66dfd0a.svg"
@@ -4101,7 +4115,14 @@
         "reminders": [],
         "night_order": {
             "first": [],
-            "other": []
+            "other": [
+                {
+                    "index": 51,
+                    "text": "TBD",
+                    "group": "death_confusion",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1d4f1b13b9504fb9b453c362a23c8abb.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -4255,7 +4276,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 41,
+                    "index": 47,
                     "text": "Point to the player whom you most think the High Priestess should speak with tomorrow.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3ca586c4676e4dc9ad7390c780c3ba93.svg"
@@ -4263,7 +4284,7 @@
             ],
             "other": [
                 {
-                    "index": 53,
+                    "index": 60,
                     "text": "Point to the player whom you most think the High Priestess should speak with tomorrow.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3ca586c4676e4dc9ad7390c780c3ba93.svg"
@@ -4312,7 +4333,7 @@
         "setup": true,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 53,
+        "sao_index": 54,
         "formatted_script_img": null,
         "script_id": "huntsman",
         "jinxes": [],
@@ -4322,7 +4343,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 50,
+                    "index": 57,
                     "text": "If the Huntsman points to a player:\r\n    Put them to sleep. Mark them with the **NO ABILITY** token. (*)\r\n    If they chose the Damsel, wake the Damsel, show the **NO ABILITY** info token, then a not-in-play Townsfolk token. \r\n    Put the Damsel to sleep. Replace the Damsel character token with their new Townsfolk character token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1d16e263167546bcaa78ff88d33f929d.svg"
@@ -4330,7 +4351,7 @@
             ],
             "other": [
                 {
-                    "index": 67,
+                    "index": 75,
                     "text": "If the Huntsman points to a player:\r\n    Put them to sleep. Mark them with the **NO ABILITY** token. (*)\r\n    If they chose the Damsel, wake the Damsel, show the **NO ABILITY** info token, then a not-in-play Townsfolk token. \r\n    Put the Damsel to sleep. Replace the Damsel character token with their new Townsfolk character token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1d16e263167546bcaa78ff88d33f929d.svg"
@@ -4390,7 +4411,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 33,
+                    "index": 35,
                     "text": "The Imp chooses a player. (*) If the Imp chose themselves: \r\n    Replace 1 alive Minion token with a spare Imp token. \r\n    Put the old Imp to sleep. Wake the new Imp.\r\n    Show the **YOU ARE** token, then show the Imp token.",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0eeef28681cb4deb933539232e77b5a4.svg"
@@ -4439,7 +4460,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 33,
+        "sao_index": 34,
         "formatted_script_img": null,
         "script_id": "innkeeper",
         "jinxes": [],
@@ -4512,7 +4533,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 33,
+                    "index": 39,
                     "text": "Show the Minion character token. Point to both the **MINION** and **WRONG** players.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/93eab79648d04624ae45d3c6a71fa22e.svg"
@@ -4613,7 +4634,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 52,
+        "sao_index": 53,
         "formatted_script_img": null,
         "script_id": "juggler",
         "jinxes": [],
@@ -4628,7 +4649,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 66,
+                    "index": 74,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1b41080fe6c2473db685e6b5cc7f38b0.svg"
@@ -4685,8 +4706,22 @@
             "Dead"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": 2,
+                    "text": "(TBD)",
+                    "group": "setup",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/387df953e16a4873b585e966e510af05.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": 27,
+                    "text": "(TBD)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/76ad2a4e6e7f4d718d0fa07edc056409.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -4730,7 +4765,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 19,
+        "sao_index": 20,
         "formatted_script_img": null,
         "script_id": "king",
         "jinxes": [],
@@ -4738,7 +4773,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 4,
+                    "index": 8,
                     "text": "Wake the Demon. Show them the **THIS PLAYER IS** info token, then the King token, then point at the King player.",
                     "group": "demon_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/6684ec2e53a44c4ea709fa195b9e1108.svg"
@@ -4746,7 +4781,7 @@
             ],
             "other": [
                 {
-                    "index": 55,
+                    "index": 64,
                     "text": "If the number of dead players is equal to or exceeds the number of alive players:\r\n    Wake the King. Show one alive character token. Put the King to sleep.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/f2f92c048da84806afbd363caaeb12f6.svg"
@@ -4857,7 +4892,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 30,
+                    "index": 36,
                     "text": "Point to the two players marked **KNOW**. (*)(*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0f839c5181e54825a583513ad3affab6.svg"
@@ -4957,7 +4992,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 7,
+                    "index": 11,
                     "text": "During the Demon Info step, let all Legion players make eye contact.",
                     "group": "demon_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1de92ca53cda40dbb85d8597295727c2.svg"
@@ -4965,7 +5000,7 @@
             ],
             "other": [
                 {
-                    "index": 37,
+                    "index": 41,
                     "text": "You may decide a player that dies. (Once per living Legion) (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/673600ea51fd4c5ca7860caebf17f1fa.svg"
@@ -5153,8 +5188,22 @@
             "Day 5"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": 34,
+                    "text": "Mark the Leviathan with either the **DAY 1** reminder. (*)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/7295810af91947779ce706914bc63ca9.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": 42,
+                    "text": "Mark the Leviathan with either the **DAY 2**, **DAY 3**, **DAY 4**, or **DAY 5** reminder. (*)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/74615b0a98b84699bfd2d3520ef4c597.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -5209,7 +5258,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 32,
+                    "index": 38,
                     "text": "Show the Outsider character token. Point to both the **OUTSIDER** and **WRONG** players.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/e94ed0ae4ad547f7baf9ad348396c906.svg"
@@ -5325,7 +5374,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 2,
+                    "index": 3,
                     "text": "Instead of the normal Minion Info and Demon Info steps, do the following:\r\n    Wake all Minions. Show the **THESE ARE YOUR MINIONS** token. The minions pick a player:\r\n        Put the minions back to sleep. Wake the chosen player. Point to the player, & show them the **IS THE DEMON** token. \r\n        Put the chosen player back to sleep. Place the **IS THE DEMON** token beside them. (*)",
                     "group": "setup",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/cf8fbdbc8c1d4e188bb4165b1c47660f.svg"
@@ -5333,7 +5382,7 @@
             ],
             "other": [
                 {
-                    "index": 28,
+                    "index": 30,
                     "text": "The minions pick a player. Put them back to sleep, and then:\r\n    Wake the chosen player. Point to the player, & show them the **IS THE DEMON** token. \r\n    Put the chosen player back to sleep. Place the **IS THE DEMON** token beside them. (*)\r\nPlace the **DEAD** token beside any living player. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ecb55735f04e4ac5add3d03a39e9628e.svg"
@@ -5430,7 +5479,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 28,
+                    "index": 33,
                     "text": "The Lleech picks a player. Mark them with the **POISONED** token. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/2a1d5ca9afa642ba90c361a1b8dacdf9.svg"
@@ -5438,7 +5487,7 @@
             ],
             "other": [
                 {
-                    "index": 29,
+                    "index": 31,
                     "text": "The Lleech chooses a player. Mark them with the **DEAD** token. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/bda7ac7c4779404398b505c2a43e2426.svg"
@@ -5487,7 +5536,7 @@
         "setup": true,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 129,
+        "sao_index": 130,
         "formatted_script_img": null,
         "script_id": "lordoftyphon",
         "jinxes": [],
@@ -5495,8 +5544,22 @@
             "Dead"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": 4,
+                    "text": "(TBD)",
+                    "group": "setup",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/38aa80825f4e447b9f8f4f947c5e53f7.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": 40,
+                    "text": "(TBD)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/963adf48e9484bfb95aa9231d5cb266b.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -5574,7 +5637,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 5,
+                    "index": 9,
                     "text": "If there are 7 or more players, wake the Lunatic:\r\n    Show the **THESE ARE YOUR MINIONS** token. Point to any players.\r\n    Show the **THESE CHARACTERS ARE NOT IN PLAY** token. Show 3 good character tokens. \r\n    Put the Lunatic to sleep. Wake the Demon.\r\n    Show the **YOU ARE** info token and the Demon token.\r\n    Show the **THIS PLAYER IS** info token and the Lunatic token, then point to the Lunatic.",
                     "group": "demon_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/5dd6cf3ac1f54b6aab94521195874e91.svg"
@@ -5582,7 +5645,7 @@
             ],
             "other": [
                 {
-                    "index": 25,
+                    "index": 26,
                     "text": "Do whatever needs to be done to simulate the Demon acting. \r\nPut the Lunatic to sleep. Wake the Demon.\r\nShow the Lunatic token &point to them, then their target(s).",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/5da3a531559c45c186b736ad5194ecdc.svg"
@@ -5631,7 +5694,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 36,
+        "sao_index": 37,
         "formatted_script_img": null,
         "script_id": "lycanthrope",
         "jinxes": [
@@ -5661,7 +5724,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 24,
+                    "index": 25,
                     "text": "The Lycanthrope points to a player. If the chosen player is good:\r\n    Mark them with the **DEAD** reminder. (*) Any other player that would die tonight remains alive.",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/60c34d3b783a438f8d286f47dfa27a04.svg"
@@ -5710,7 +5773,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 61,
+        "sao_index": 62,
         "formatted_script_img": null,
         "script_id": "magician",
         "jinxes": [],
@@ -5887,7 +5950,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 6,
+                    "index": 10,
                     "text": "Wake the Demon. Point to the player marked **IS THE MARIONETTE** & show the Marionette character token. \r\nPut the Demon to sleep.",
                     "group": "demon_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/b5ee17136624484e830baa3094ee27a7.svg"
@@ -6002,7 +6065,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 54,
+                    "index": 61,
                     "text": "Give a finger signal.",
                     "group": "pre_dawn",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/48874170284c432d95efa474ddfc8c77.svg"
@@ -6010,7 +6073,7 @@
             ],
             "other": [
                 {
-                    "index": 70,
+                    "index": 78,
                     "text": "Give a finger signal.",
                     "group": "pre_dawn",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/48874170284c432d95efa474ddfc8c77.svg"
@@ -6110,7 +6173,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 65,
+        "sao_index": 66,
         "formatted_script_img": null,
         "script_id": "mayor",
         "jinxes": [],
@@ -6172,7 +6235,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 26,
+                    "index": 30,
                     "text": "Show a single word on a piece of paper, phone, or other device.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0e557a9301fd4e4bbd416ed63c72949d.svg"
@@ -6229,7 +6292,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 55,
+        "sao_index": 56,
         "formatted_script_img": null,
         "script_id": "minstrel",
         "jinxes": [],
@@ -6282,7 +6345,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 34,
+        "sao_index": 35,
         "formatted_script_img": null,
         "script_id": "monk",
         "jinxes": [],
@@ -6353,7 +6416,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 45,
+                    "index": 50,
                     "text": "If the Moonchild is due to kill a good player, they die. (*)",
                     "group": "death_confusion",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/f208a88e0a6e4d009ce01ec8f041fea2.svg"
@@ -6453,7 +6516,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 43,
+        "sao_index": 44,
         "formatted_script_img": null,
         "script_id": "nightwatchman",
         "jinxes": [],
@@ -6463,7 +6526,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 48,
+                    "index": 55,
                     "text": "If the Nightwatchman points at a player:\r\n    Put the Nightwatchman to sleep.\r\n    Wake the chosen player, show them the **THIS CHARACTER SELECTED YOU** info token & the Nightwatchman token. \r\n    Point to the Nightwatchman player. Put the chosen player back to sleep.\r\n    Mark the Nightwatchman with the **NO ABILITY** reminder token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/754a1c32c55c46ffa5f5c26e21dc75dd.svg"
@@ -6471,7 +6534,7 @@
             ],
             "other": [
                 {
-                    "index": 64,
+                    "index": 72,
                     "text": "If the Nightwatchman points at a player:\r\n    Put the Nightwatchman to sleep.\r\n    Wake the chosen player, show them the **THIS CHARACTER SELECTED YOU** info token & the Nightwatchman token. \r\n    Point to the Nightwatchman player. Put the chosen player back to sleep.\r\n    Mark the Nightwatchman with the **NO ABILITY** reminder token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/754a1c32c55c46ffa5f5c26e21dc75dd.svg"
@@ -6532,7 +6595,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 35,
+                    "index": 41,
                     "text": "Point to al three players marked **KNOW**.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/4767a7dec509411ab1fbee796108dd37.svg"
@@ -6595,7 +6658,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 32,
+                    "index": 34,
                     "text": "The No Dashii chooses a player. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/0859beb962624be298ba1ba47bbb1bff.svg"
@@ -6644,7 +6707,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 68,
+        "sao_index": 69,
         "formatted_script_img": null,
         "script_id": "ogre",
         "jinxes": [],
@@ -6654,10 +6717,10 @@
         "night_order": {
             "first": [
                 {
-                    "index": 55,
+                    "index": 62,
                     "text": "The Ogre points to a player:\r\n    If the player is evil, flip the Ogre's token upside down.",
                     "group": "pre_dawn",
-                    "svg": ""
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/27b45d506f714eb182c7d8f652df7965.svg"
                 }
             ],
             "other": []
@@ -6713,7 +6776,14 @@
         ],
         "night_order": {
             "first": [],
-            "other": []
+            "other": [
+                {
+                    "index": 36,
+                    "text": "The Ojo points to a role. If a player has that role, they die. (*)\r\nIf the role is out of play, the Storyteller chooses any number of players that die. (*)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/d630f1418e4c41eb801d2133c10e387e.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -6766,7 +6836,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 62,
+                    "index": 70,
                     "text": "Give a finger signal.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1a55953c744d4eba9da9b292a957647b.svg"
@@ -6868,7 +6938,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 57,
+        "sao_index": 58,
         "formatted_script_img": null,
         "script_id": "pacifist",
         "jinxes": [],
@@ -6919,7 +6989,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 45,
+        "sao_index": 46,
         "formatted_script_img": null,
         "script_id": "philosopher",
         "jinxes": [],
@@ -6930,7 +7000,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 12,
+                    "index": 16,
                     "text": "The Philosopher might choose a character. If necessary, swap their character token. (*)",
                     "group": "droison",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/e662051a7d4344e184fb20b45344323f.svg"
@@ -7111,7 +7181,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 39,
+                    "index": 45,
                     "text": "Show the Townsfolk character token marked **MAD**.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1f4bd09460164136b7ac5cfff12e81ec.svg"
@@ -7119,7 +7189,7 @@
             ],
             "other": [
                 {
-                    "index": 46,
+                    "index": 52,
                     "text": "If the Townsfolk marked **MAD** died, & the Pixie player has been sufficiently mad that they were this character:\r\n     Replace the **MAD** reminder with the **HAS ABILITY** reminder. (*)",
                     "group": "death_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/9ec6c9e2caad4352ade7e3c5c02cec44.svg"
@@ -7235,7 +7305,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 34,
+                    "index": 37,
                     "text": "The Po may choose a player OR chooses 3 players fi they chose no-one last night. (*) or (*)(*)(*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/95278277371244d6a9b8a091ed1621ef.svg"
@@ -7294,7 +7364,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 14,
+                    "index": 18,
                     "text": "The Poisoner chooses a player. (*)",
                     "group": "droison",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/8a86ddcbda1747c7ae1aff714fd15c95.svg"
@@ -7402,7 +7472,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": true,
-        "sao_index": 63,
+        "sao_index": 64,
         "formatted_script_img": null,
         "script_id": "poppygrower",
         "jinxes": [],
@@ -7412,7 +7482,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 9,
+                    "index": 13,
                     "text": "Wake the Demon.\r\nShow the **THESE CHARACTERS ARE NOT IN PLAY** token. Show 3 not-in-play good character tokens. Put the Demon to sleep. Do not do the Minion Info and Demon Info steps.",
                     "group": "post_dusk",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/58199e4b127e4d4aa074fe94d004d68d.svg"
@@ -7469,7 +7539,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 17,
+        "sao_index": 18,
         "formatted_script_img": null,
         "script_id": "preacher",
         "jinxes": [],
@@ -7482,7 +7552,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 15,
+                    "index": 19,
                     "text": "The Preacher chooses a player. If they choose a Minion:\r\n    Put a **PREACHED** reminder token next to that Minion. Wake the chosen Minion.\r\n    Show them the **THIS CHARACTER SELECTED YOU** card & the Preacher token. Put the Minion back to sleep",
                     "group": "protection",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/dc3261700ee64008a05011d46942cc2f.svg"
@@ -7539,7 +7609,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 51,
+        "sao_index": 52,
         "formatted_script_img": null,
         "script_id": "professor",
         "jinxes": [],
@@ -7551,7 +7621,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 40,
+                    "index": 46,
                     "text": "The Professor might choose a dead player. (*)(*)",
                     "group": "death_confusion",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/27bda2366f8c45e89d5e025224441184.svg"
@@ -7662,7 +7732,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 27,
+                    "index": 32,
                     "text": "The Pukka chooses a player. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/9da740ffdfaa4f83a5641facccf4a448.svg"
@@ -7670,7 +7740,7 @@
             ],
             "other": [
                 {
-                    "index": 27,
+                    "index": 29,
                     "text": "The Pukka chooses a player. (*) The previously poisoned player dies then becomes healthy. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/45bcbc9e04a9498183668a2e1579132f.svg"
@@ -7773,7 +7843,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 48,
+        "sao_index": 49,
         "formatted_script_img": null,
         "script_id": "ravenkeeper",
         "jinxes": [],
@@ -7782,7 +7852,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 47,
+                    "index": 53,
                     "text": "If the Ravenkeeper died tonight, the Ravenkeeper chooses a player. Show that player's character token.",
                     "group": "death_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1afbb5958d714b5588482d338a4e8ff9.svg"
@@ -8119,24 +8189,6 @@
             },
             {
                 "with_role": {
-                    "name": "Cannibal",
-                    "icons": {
-                        "official": {
-                            "svg_two_tone": "",
-                            "png_flat": "",
-                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/1790e4f3560a462d82a99b889e5abb01.png"
-                        },
-                        "playtest": {
-                            "svg_two_tone": "",
-                            "png_flat": "",
-                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/old/img/UZyTFxeBP3hh1EtYSRes.png"
-                        }
-                    }
-                },
-                "text": "Players that die by nomination register as being executed to the Cannibal."
-            },
-            {
-                "with_role": {
                     "name": "Innkeeper",
                     "icons": {
                         "official": {
@@ -8152,6 +8204,24 @@
                     }
                 },
                 "text": "If a Riot player nominates an Innkeeper-protected-player, the Innkeeper-protected-player does not die."
+            },
+            {
+                "with_role": {
+                    "name": "Cannibal",
+                    "icons": {
+                        "official": {
+                            "svg_two_tone": "",
+                            "png_flat": "",
+                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/1790e4f3560a462d82a99b889e5abb01.png"
+                        },
+                        "playtest": {
+                            "svg_two_tone": "",
+                            "png_flat": "",
+                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/old/img/UZyTFxeBP3hh1EtYSRes.png"
+                        }
+                    }
+                },
+                "text": "Players that die by nomination register as being executed to the Cannibal."
             },
             {
                 "with_role": {
@@ -8188,24 +8258,6 @@
                     }
                 },
                 "text": "If the Snitch is in play, each Riot player gets an extra 3 bluffs."
-            },
-            {
-                "with_role": {
-                    "name": "Pacifist",
-                    "icons": {
-                        "official": {
-                            "svg_two_tone": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/svg/55ad9984a2de4cc4b59ed93f47d4069d.svg",
-                            "png_flat": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/08bb63b90bb2423e8a1f6081378eecac.png",
-                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/da9804e92a9d4fd297a7b97072c76de0.png"
-                        },
-                        "playtest": {
-                            "svg_two_tone": "",
-                            "png_flat": "",
-                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/old/img/cb7844d7121b45f7a54dfdc584028198.png"
-                        }
-                    }
-                },
-                "text": "Players that die by nomination register as being executed to the Pacifist."
             },
             {
                 "with_role": {
@@ -8260,6 +8312,24 @@
                     }
                 },
                 "text": "If the 3rd day begins with just three players alive, the players may choose (as a group) not to nominate at all. If so (and a Mayor is alive) then the Mayor's team wins."
+            },
+            {
+                "with_role": {
+                    "name": "Pacifist",
+                    "icons": {
+                        "official": {
+                            "svg_two_tone": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/svg/55ad9984a2de4cc4b59ed93f47d4069d.svg",
+                            "png_flat": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/08bb63b90bb2423e8a1f6081378eecac.png",
+                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/new/img/da9804e92a9d4fd297a7b97072c76de0.png"
+                        },
+                        "playtest": {
+                            "svg_two_tone": "",
+                            "png_flat": "",
+                            "png_textured": "https://s3.us-east-1.amazonaws.com/botc-roles/icons/old/img/cb7844d7121b45f7a54dfdc584028198.png"
+                        }
+                    }
+                },
+                "text": "Players that die by nomination register as being executed to the Pacifist."
             },
             {
                 "with_role": {
@@ -8471,7 +8541,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 60,
+        "sao_index": 61,
         "formatted_script_img": null,
         "script_id": "sage",
         "jinxes": [],
@@ -8480,7 +8550,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 49,
+                    "index": 55,
                     "text": "If the Demon killed the Sage, wake the Sage and point to 2 players, 1 of which is the Demon.",
                     "group": "death_info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/ba7de8c26e094fc7afd8706af7c1dc31.svg"
@@ -8539,7 +8609,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 10,
+                    "index": 14,
                     "text": "The Sailor chooses a living player. (*)",
                     "group": "droison",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/d9d5c1a033a3499ba662809851931227.svg"
@@ -8647,7 +8717,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 40,
+        "sao_index": 41,
         "formatted_script_img": null,
         "script_id": "savant",
         "jinxes": [],
@@ -8809,7 +8879,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 44,
+        "sao_index": 45,
         "formatted_script_img": null,
         "script_id": "seamstress",
         "jinxes": [],
@@ -8819,7 +8889,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 49,
+                    "index": 56,
                     "text": "The Seamstress might choose 2 players. Nod or shake your head. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3c7b314e68e9424386dc354870ce6d05.svg"
@@ -8827,7 +8897,7 @@
             ],
             "other": [
                 {
-                    "index": 65,
+                    "index": 73,
                     "text": "The Seamstress might choose 2 players. Nod or shake your head. (*)",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3c7b314e68e9424386dc354870ce6d05.svg"
@@ -8990,7 +9060,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 38,
+                    "index": 44,
                     "text": "Point your finger horizontally in the direction of the closest evil player.\r\nIf the two closest evil players are equidistant, point your finger horizontally in either direction.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/d87f6a181ddc470499fc6d04b34a0237.svg"
@@ -9040,7 +9110,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 50,
+        "sao_index": 51,
         "formatted_script_img": null,
         "script_id": "slayer",
         "jinxes": [],
@@ -9103,7 +9173,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 11,
+                    "index": 15,
                     "text": "The Snake Charmer chooses a player. If they chose the Demon:\r\n    Show the **YOU ARE** & Demon tokens. Give a thumbs down. Swap the Snake Charmer & Demon tokens. \r\n    Put the old Snake Charmer to sleep. Wake the old Demon.\r\n    Show the **YOU ARE** and Snake Charmer tokens & give a thumbs up. (*)",
                     "group": "droison",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/dd009d7666da43ac9734761d6009fe57.svg"
@@ -9166,7 +9236,14 @@
         "jinxes": [],
         "reminders": [],
         "night_order": {
-            "first": [],
+            "first": [
+                {
+                    "index": 6,
+                    "text": "Repeat the following process for each Minion:\r\n     Show the THESE CHARACTERS ARE NOT IN PLAY token. Show 3 not-in-play good character tokens.",
+                    "group": "minion_info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/21eb4515170a430394bfd54eb9827412.svg"
+                }
+            ],
             "other": []
         },
         "edition": {
@@ -9211,7 +9288,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 54,
+        "sao_index": 55,
         "formatted_script_img": null,
         "script_id": "soldier",
         "jinxes": [],
@@ -9262,7 +9339,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 156,
+        "sao_index": 155,
         "formatted_script_img": null,
         "script_id": "spiritofivory",
         "jinxes": [],
@@ -9412,7 +9489,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 22,
+                    "index": 26,
                     "text": "Show the Grimoire to the Spy for as long as they need.",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/8cc7fc8d696940b2878cc188e861d7c9.svg"
@@ -9479,7 +9556,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 29,
+                    "index": 35,
                     "text": "Point to the player marked **KNOW**.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/622bbfb5a21c4ce899323bb0faf35a6b.svg"
@@ -9590,8 +9667,22 @@
             "Night 3"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": 7,
+                    "text": "(TBD)",
+                    "group": "minion_info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/689deaf4b53f458ca2197604c6346074.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": 23,
+                    "text": "(TBD)",
+                    "group": "minions_pre_demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/6f3519d3ece14426834a1b8435d40cb1.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -9646,7 +9737,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 43,
+                    "index": 48,
                     "text": "If the Sweetheart died, a player became drunk immediately. fI you haven't done this yet, do so now. (*)",
                     "group": "death_confusion",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/a41fc1df839641548b90da65e7ae75d8.svg"
@@ -9695,7 +9786,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 56,
+        "sao_index": 57,
         "formatted_script_img": null,
         "script_id": "tealady",
         "jinxes": [],
@@ -9811,7 +9902,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 42,
+                    "index": 47,
                     "text": "The Tinker might die. (*)",
                     "group": "death_confusion",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/3bd4ab2a7b2e4da2bf6ba7a572546fc7.svg"
@@ -9872,7 +9963,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 61,
+                    "index": 69,
                     "text": "Either nod or shake your head.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/4ffb5d44d18b4a768f4e4c9ca4a61362.svg"
@@ -9983,7 +10074,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 63,
+                    "index": 71,
                     "text": "If a player was executed today, show their character token.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/e8e986533f494f48974f71fc105c9c68.svg"
@@ -10049,7 +10140,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 31,
+                    "index": 33,
                     "text": "The Vigormortis chooses a player. (*) If that player is a Minion, poison a neighboring Townsfolk. (*)(*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/96dd47231dde4286882723be37de79ac.svg"
@@ -10098,7 +10189,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 18,
+        "sao_index": 19,
         "formatted_script_img": null,
         "script_id": "villageidiot",
         "jinxes": [],
@@ -10106,8 +10197,22 @@
             "Drunk"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": 50,
+                    "text": "(TBD)",
+                    "group": "info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/88814ed18a8042cfbd9b2d2451cd3abe.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": 63,
+                    "text": "(TBD)",
+                    "group": "info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/88814ed18a8042cfbd9b2d2451cd3abe.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -10151,7 +10256,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 49,
+        "sao_index": 50,
         "formatted_script_img": null,
         "script_id": "virgin",
         "jinxes": [],
@@ -10212,7 +10317,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 56,
+                    "index": 63,
                     "text": "Declare that the Vizier is in play, and which player it is.",
                     "group": "post_dawn",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/b239c5f96b5e46e58efa5e09e02aab7a.svg"
@@ -10262,7 +10367,7 @@
         "setup": false,
         "is_public": true,
         "is_kickstarter": false,
-        "sao_index": 130,
+        "sao_index": 129,
         "formatted_script_img": null,
         "script_id": "vortox",
         "jinxes": [],
@@ -10273,7 +10378,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 36,
+                    "index": 39,
                     "text": "The Vortox chooses a player. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/bc134f4a712c4f35a87a4fe093ed8c78.svg"
@@ -10384,7 +10489,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 31,
+                    "index": 37,
                     "text": "Show the Townsfolk character token. Point to both the **TOWNSFOLK** and **WRONG** players.",
                     "group": "info",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1d7eaced8d424f2b9e631aa15e64e2b2.svg"
@@ -10518,7 +10623,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 17,
+                    "index": 21,
                     "text": "Show the Grimoire for as long as the Widow needs.\r\nThe Widow picks a player. Mark that player with a **POISONED** reminder. (*) Put the Widow to sleep.\r\nWake any good player. Show them the Widow token. Put them to sleep. Mark them with the **KNOWS** reminder. (*)",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/76d8dc7dcde54678b82e2e8cc8c09c2c.svg"
@@ -10578,7 +10683,7 @@
         "night_order": {
             "first": [
                 {
-                    "index": 23,
+                    "index": 27,
                     "text": "The Witch chooses a player. (*)",
                     "group": "minions_pre_demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/1c35cf1686a34c9fa8c17cb5567cd037.svg"
@@ -10645,8 +10750,22 @@
             "Dead"
         ],
         "night_order": {
-            "first": [],
-            "other": []
+            "first": [
+                {
+                    "index": null,
+                    "text": "Write a phrase down so that the Yaggababble can read it.\r\nShow the Yaggababble the phrase.",
+                    "group": "demon_info",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/958bb93dcc6f46fe9d9caca4d0f80c16.svg"
+                }
+            ],
+            "other": [
+                {
+                    "index": null,
+                    "text": "For each time the Yaggababble publicly said their phrase:\r\n    You may place a **DEAD** token next to a living player. (*)",
+                    "group": "demon",
+                    "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/5b54b9cee3c544299418affae79a03c2.svg"
+                }
+            ]
         },
         "edition": {
             "name": "Expirimental",
@@ -10752,7 +10871,7 @@
             "first": [],
             "other": [
                 {
-                    "index": 26,
+                    "index": 28,
                     "text": "If no one died today, the Zombuul chooses a player. (*)",
                     "group": "demon",
                     "svg": "https://s3.us-east-1.amazonaws.com/botc-roles/script/night_order/svg/38e7ddd8d7734294ac5425982ac5caa5.svg"

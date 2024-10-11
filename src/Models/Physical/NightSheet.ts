@@ -37,11 +37,9 @@ export default class NightSheet {
     }
 
     public renderSheet(): Konva.Group {
-        let width: number = 569;
-        let height: number = 776;
         const group: Konva.Group = new Konva.Group({
-            x: window.innerWidth-width,
-            y: window.innerHeight-height,
+            x: 0,
+            y: 0,
             width: window.innerWidth,
             height: window.innerHeight,
             id: this._type + '_nightsheet',
@@ -63,40 +61,26 @@ export default class NightSheet {
         images.push(this.loadImage(returnToGrimButton));
 
         this._items.forEach( (order: NightOrder) => {
-           let image = new Image();
-           image.src = order.svg;
-           images.push(this.loadImage(image));
+           if (order.svg !== undefined || order.svg !== '') {
+               let image = new Image();
+               image.src = order.svg;
+               images.push(this.loadImage(image));
+           }
         });
 
-        // for (let role of this._roles) {
-        //     if (this._type === 'first' && role.firstNightOrder !== undefined) {
-        //         if (role.firstNightOrder.length > 0) {
-        //             let image = new Image();
-        //             image.src = role.firstNightOrder[0].svg;
-        //             images.push(this.loadImage(image));
-        //         }
-        //     }
-        //
-        //     if (this._type === 'other' && role.otherNightOrder !== undefined) {
-        //         if (role.otherNightOrder.length > 0) {
-        //             let image = new Image();
-        //             image.src = role.otherNightOrder[0].svg;
-        //             images.push(this.loadImage(image));
-        //         }
-        //     }
-        // }
-
         Promise.all(images).then((values): void => {
+            const ratio = values[0].naturalWidth / values[0].naturalHeight;
+            group.x(window.innerWidth - window.innerHeight*ratio);
             const bg = new Konva.Image({
                 x: 0,
                 y: 0,
                 image: values[0],
-                width: width,
-                height: height
+                width: window.innerHeight * ratio,
+                height: window.innerHeight
             });
             const returnToGrimButton = new Konva.Image({
                 x: -180,
-                y: height-60,
+                y: window.innerHeight-60,
                 image: values[1],
                 width: 162,
                 height: 40,
@@ -108,20 +92,40 @@ export default class NightSheet {
                 group.hide();
             });
 
-            let location = 20;
+            const group_text: Konva.Group = new Konva.Group({
+                x: 0,
+                y: 0,
+                width: window.innerWidth,
+                height: window.innerHeight,
+                id: this._type + '_nightsheet-text',
+                visible: true,
+                draggable: true
+            });
+
+            let location = 10;
             for (let i: number = 2; i < values.length; i++) {
                 let ratio: number = values[i].naturalWidth / values[i].naturalHeight;
                 const role_bg = new Konva.Image({
                     x: 20,
                     y: location,
                     image: values[i],
-                    width: width,
-                    height: width/ratio
+                    width: bg.width(),
+                    height: bg.width()/ratio
                 });
-                group.add(role_bg);
+                group_text.add(role_bg);
 
-                location += width/ratio;
+                location += bg.width()/ratio;
             }
+
+            group_text.on('dragmove', () => {
+                const pos = group_text.position();
+
+                let currY = this.clamp(pos.y, -window.innerHeight, window.innerHeight);
+                group_text.y(currY);
+                group_text.x(0);
+            });
+
+            group.add(group_text);
         });
 
         return group;
@@ -132,5 +136,9 @@ export default class NightSheet {
             image.onload = () => { resolve(image); }
             image.onerror = (error) => { reject(error); }
         });
+    }
+
+    protected clamp(value: number, min: number, max: number): number {
+        return Math.min(Math.max(value, min), max);
     }
 }
