@@ -342,6 +342,12 @@ export default class GameView {
                     }
                 });
 
+                shroud.group.on('dragmove', (e) => {
+                   console.log('e', e);
+                   console.log('shroud', shroud);
+                   console.log('layer', this._shroudLayer);
+                });
+
                 shroud.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
