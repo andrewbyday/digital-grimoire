@@ -14,18 +14,17 @@ export default class NightSheet {
 
         roles.forEach((role: Role) => {
             if (type === 'first') {
-                role.firstNightOrder?.forEach( (order: NightOrder) => {
+                role.firstNightOrder?.forEach( (order: NightOrder): void => {
                    this._items.push(order);
                 });
             } else {
-                role.otherNightOrder?.forEach( (order: NightOrder) => {
+                role.otherNightOrder?.forEach( (order: NightOrder): void => {
                     this._items.push(order);
                 });
             }
         });
 
-        this._items.sort((a,b) => a.index - b.index);
-        console.log(this._items);
+        this._items.sort((a: NightOrder,b: NightOrder) => a.index - b.index);
     }
 
     public get roles(): Set<Role> {

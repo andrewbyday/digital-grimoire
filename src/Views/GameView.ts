@@ -78,8 +78,8 @@ export default class GameView {
 
             console.log(aspectRatio, imageRatio);
 
-            let finalWidth: number = 0;
-            let finalHeight: number = 0;
+            let finalWidth: number;
+            let finalHeight: number;
 
             if (aspectRatio >= imageRatio) {
                 finalWidth = bg.naturalWidth;
@@ -636,13 +636,11 @@ export default class GameView {
         };
         imageObj.src = '/img/cards/st_card_demon.png';
 
-
-
         let returnToGrimButton = new Image();
         returnToGrimButton.onload = (): void => {
             const buttonImg = new Konva.Image({
                 x: (this._stage.width() - 162)/2,
-                y: 25,
+                y: 30,
                 image: returnToGrimButton,
                 width: 162,
                 height: 40,
