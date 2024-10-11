@@ -342,12 +342,6 @@ export default class GameView {
                     }
                 });
 
-                shroud.group.on('dragmove', (e) => {
-                   console.log('e', e);
-                   console.log('shroud', shroud);
-                   console.log('layer', this._shroudLayer);
-                });
-
                 shroud.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -362,9 +356,8 @@ export default class GameView {
                        }
 
                        if (shroud.intersects(group)) {
-                           shroud.group.moveTo(group);
-                           shroud.group.moveToTop();
                            shroud.group.draggable(false);
+                           shroud.group.moveTo(group);
                            shroud.group.x(75/2);
                            shroud.group.y(-10);
                            shroud.connected = true;
@@ -758,9 +751,8 @@ export default class GameView {
                 }
 
                 if (shroud.intersects(group)) {
-                    shroud.group.moveTo(group);
-                    shroud.group.moveToTop();
                     shroud.group.draggable(false);
+                    shroud.group.moveTo(group);
                     shroud.group.x(75/2);
                     shroud.group.y(-10);
                     shroud.connected = true;
