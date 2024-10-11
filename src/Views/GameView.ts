@@ -336,6 +336,7 @@ export default class GameView {
                 shroud.group.on('dblclick dbltap', (): void => {
                     if (shroud.connected) {
                         shroud.group.moveTo(this._shroudLayer);
+                        shroud.group.draggable(true);
                         shroud.group.x(10);
                         shroud.group.y(this._stage.height() - 100);
                         shroud.connected = false;
@@ -731,6 +732,7 @@ export default class GameView {
         shroud.group.on('dblclick dbltap', (): void => {
             if (shroud.connected) {
                 shroud.group.moveTo(this._shroudLayer);
+                shroud.group.draggable(true);
                 shroud.group.x(10);
                 shroud.group.y(this._stage.height() - 100);
                 shroud.connected = false;
