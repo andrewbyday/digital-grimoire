@@ -339,6 +339,11 @@ export default class GameView {
                         shroud.group.x(10);
                         shroud.group.y(this._stage.height() - 100);
                         shroud.connected = false;
+                    } else {
+                        shroud.group.moveTo(this._shroudLayer);
+                        shroud.group.x(10);
+                        shroud.group.y(this._stage.height() - 100);
+                        shroud.group.draggable(true);
                     }
                 });
 
