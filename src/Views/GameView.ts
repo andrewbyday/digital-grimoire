@@ -364,7 +364,7 @@ export default class GameView {
                        if (shroud.intersects(group)) {
                            shroud.group.moveTo(group);
                            shroud.group.moveToTop();
-                           shroud.group.draggable(true);
+                           shroud.group.draggable(false);
                            shroud.group.x(75/2);
                            shroud.group.y(-10);
                            shroud.connected = true;
@@ -760,7 +760,7 @@ export default class GameView {
                 if (shroud.intersects(group)) {
                     shroud.group.moveTo(group);
                     shroud.group.moveToTop();
-                    shroud.group.draggable(true);
+                    shroud.group.draggable(false);
                     shroud.group.x(75/2);
                     shroud.group.y(-10);
                     shroud.connected = true;
