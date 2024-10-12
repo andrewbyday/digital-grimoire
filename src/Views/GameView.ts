@@ -14,7 +14,6 @@ export default class GameView {
     private readonly _socket: Socket;
     private readonly _tokenLayer: Konva.Layer;
     private readonly _tokenReminderLayer: Konva.Layer;
-    private readonly _shroudLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _putAwayDrawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
@@ -32,7 +31,6 @@ export default class GameView {
         this._buttonsLayer = new Konva.Layer();
         this._tokenLayer = new Konva.Layer();
         this._tokenReminderLayer = new Konva.Layer();
-        this._shroudLayer = new Konva.Layer();
         this._putAwayDrawerLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
@@ -41,7 +39,6 @@ export default class GameView {
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._tokenLayer);
         this._stage.add(this._tokenReminderLayer);
-        this._stage.add(this._shroudLayer);
         this._stage.add(this._putAwayDrawerLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._nightActionsLayer);
@@ -253,7 +250,6 @@ export default class GameView {
                     this._tokenLayer.hide();
                     this._tokenReminderLayer.hide();
                     this._buttonsLayer.hide();
-                    this._shroudLayer.hide();
                 });
 
                 group.add(firstNightButton, otherNightButton, additionalTokensButton, nightActionCardsButton, putAwayButton);
@@ -624,7 +620,6 @@ export default class GameView {
                 this._buttonsLayer.show();
                 this._tokenLayer.show();
                 this._tokenReminderLayer.show();
-                this._shroudLayer.show();
             });
         }
         returnToGrimButton.src = '/img/buttons/return_to_grim.png';
