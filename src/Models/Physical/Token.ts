@@ -2,7 +2,6 @@ import {Role} from "../Game/Role.ts";
 import Player from "../Game/Player.ts";
 import Konva from "konva";
 import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
-import Shroud from "./Shroud.ts";
 
 export default class Token {
     protected _role: Role;
@@ -93,8 +92,10 @@ export default class Token {
         bgImage.src = role.official_icon_bg;
         let roleImage: HTMLImageElement = new Image();
         roleImage.src = role.official_icon;
+        let shroudImage: HTMLImageElement = new Image();
+        shroudImage.src = '/img/shroud/death_shroud.png';
 
-        Promise.all([this.loadImage(bgImage), this.loadImage(roleImage)]).then((values) => {
+        Promise.all([this.loadImage(bgImage), this.loadImage(roleImage), this.loadImage(shroudImage)]).then((values) => {
             const circle: Konva.Circle = new Konva.Circle({
                 x: this._width/2,
                 y: this._height/2,
@@ -137,8 +138,19 @@ export default class Token {
             });
             group.add(text);
 
-            const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
-            group.add(shroud.render());
+            const shroud_scale: number = values[2].naturalWidth / values[2].naturalHeight;
+
+            const shroud: Konva.Image = new Konva.Image({
+                x: 75/2,
+                y: 0,
+                image: values[2],
+                width: 50,
+                height: 50/shroud_scale,
+                name: 'shroud',
+                visible: false,
+                draggable: false
+            });
+            group.add(shroud);
         });
 
         group.on('dragmove', (): void => {

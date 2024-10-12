@@ -51,6 +51,9 @@ export default class GameView {
 
         this._tokenLayer.on('dbltap dblclick', (e) => {
            const shroud = e.target.parent?.findOne('.shroud');
+
+           console.log(e.target.parent);
+
            if (shroud !== undefined) {
                if (shroud.visible()) {
                    shroud.visible(false);
