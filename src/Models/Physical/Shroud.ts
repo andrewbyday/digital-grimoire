@@ -19,7 +19,7 @@ export default class Shroud {
             width: this._width,
             height: this._height,
             name: 'shroud',
-            draggable: true
+            draggable: false
         });
     }
 
