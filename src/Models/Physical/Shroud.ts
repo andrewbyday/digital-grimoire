@@ -18,6 +18,7 @@ export default class Shroud {
             y: this._position.y,
             width: this._width,
             height: this._height,
+            name: 'shroud',
             draggable: true
         });
     }

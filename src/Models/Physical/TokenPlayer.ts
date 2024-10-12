@@ -2,6 +2,7 @@ import {Role} from "../Game/Role.ts";
 import Player from "../Game/Player.ts";
 import Konva from "konva";
 import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
+import Shroud from "./Shroud.ts";
 
 export default class TokenPlayer {
     private _role: Role;
@@ -10,6 +11,7 @@ export default class TokenPlayer {
     private readonly _group: Konva.Group;
     private readonly _width: number;
     private readonly _height: number;
+    private _dead: boolean;
 
     constructor(role: Role, player: Player, position: { x: number; y: number }, width: number = 125, height: number = 125) {
         this._role = role;
@@ -18,6 +20,15 @@ export default class TokenPlayer {
         this._player = player;
         this._width = width;
         this._height = height;
+        this._dead = false;
+    }
+
+    public get dead(): boolean {
+        return this._dead;
+    }
+
+    public set dead(value: boolean) {
+        this._dead = value;
     }
 
     public get width(): number {
@@ -174,6 +185,9 @@ export default class TokenPlayer {
             group.x(x);
             group.y(y);
         });
+
+        const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
+        group.add(shroud.render());
 
         group.on('dblclick dbltap', () => {
             console.log(role.name);

@@ -2,6 +2,7 @@ import {Role} from "../Game/Role.ts";
 import Player from "../Game/Player.ts";
 import Konva from "konva";
 import SvgCircleTextPath from "../Helper/SvgCircleTextPath.ts";
+import Shroud from "./Shroud.ts";
 
 export default class Token {
     protected _role: Role;
@@ -9,6 +10,7 @@ export default class Token {
     protected readonly _group: Konva.Group;
     protected readonly _width: number;
     protected readonly _height: number;
+    protected _dead: boolean;
 
     constructor(role: Role, position: { x: number; y: number }, width: number = 125, height: number = 125) {
         this._role = role;
@@ -16,6 +18,7 @@ export default class Token {
         this._group = this.createGroup(role,position);
         this._width = width;
         this._height = height;
+        this._dead = false;
     }
 
     public disableDragging(): void {
@@ -133,6 +136,10 @@ export default class Token {
                 data: path.path
             });
             group.add(text);
+
+            const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
+            shroud.group.visible(false);
+            group.add(shroud.render());
         });
 
         group.on('dragmove', (): void => {

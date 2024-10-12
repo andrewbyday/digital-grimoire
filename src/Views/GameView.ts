@@ -7,7 +7,6 @@ import TokenReminder from "../Models/Physical/TokenReminder.ts";
 import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
-import Shroud from "../Models/Physical/Shroud.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
 
 export default class GameView {
@@ -49,6 +48,16 @@ export default class GameView {
         this._stage.add(this._sheetsLayer);
 
         this._tokensPutAway = 0;
+
+        this._tokenLayer.on('dblclick dbltap', (e) => {
+           const target = e.target;
+           const shroud = target.parent?.findOne('.shroud');
+           if (!shroud?.isVisible()) {
+               shroud?.visible(true);
+           } else {
+               shroud?.visible(false);
+           }
+        });
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -330,42 +339,6 @@ export default class GameView {
                         this._tokenReminderLayer.add(newToken.group);
                     }
                 }
-
-                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
-
-                shroud.group.on('dblclick dbltap', (): void => {
-                    if (shroud.connected) {
-                        shroud.group.moveTo(this._shroudLayer);
-                        shroud.group.draggable(true);
-                        shroud.group.x(25);
-                        shroud.group.y(this._stage.height() - 100);
-                        shroud.connected = false;
-                    }
-                });
-
-                shroud.group.on('dragend', (): void => {
-                    const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
-                    if (putaway !== undefined) {
-                        if (shroud.intersects(putaway)) {
-                            shroud.destroy();
-                        }
-                    }
-
-                    this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
-                       if (group === shroud.group) {
-                           return;
-                       }
-
-                       if (shroud.intersects(group)) {
-                           shroud.group.draggable(false);
-                           shroud.group.moveTo(group);
-                           shroud.group.x(75/2);
-                           shroud.group.y(-10);
-                           shroud.connected = true;
-                       }
-                    });
-                });
-                this._shroudLayer.add(shroud.render());
             });
 
             scriptTokensGroup.add(token.group);
@@ -385,9 +358,6 @@ export default class GameView {
                     }
                 });
                 this._tokenLayer.add(newToken.group);
-
-                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
-                this._shroudLayer.add(shroud.render());
             });
 
             travellerTokensGroup.add(token.group);
@@ -726,42 +696,6 @@ export default class GameView {
                 this._tokenReminderLayer.add(newToken.group);
             }
         }
-
-        const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height() - 125});
-
-        shroud.group.on('dblclick dbltap', (): void => {
-            if (shroud.connected) {
-                shroud.group.moveTo(this._shroudLayer);
-                shroud.group.draggable(true);
-                shroud.group.x(25);
-                shroud.group.y(this._stage.height() - 100);
-                shroud.connected = false;
-            }
-        });
-
-        shroud.group.on('dragend', (): void => {
-            const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
-            if (putaway !== undefined) {
-                if (shroud.intersects(putaway)) {
-                    shroud.destroy();
-                }
-            }
-
-            this._tokenLayer.children.forEach((group: Konva.Group | Konva.Shape): void => {
-                if (group === shroud.group) {
-                    return;
-                }
-
-                if (shroud.intersects(group)) {
-                    shroud.group.draggable(false);
-                    shroud.group.moveTo(group);
-                    shroud.group.x(75/2);
-                    shroud.group.y(-10);
-                    shroud.connected = true;
-                }
-            });
-        });
-        this._shroudLayer.add(shroud.render());
     }
 
     protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {
