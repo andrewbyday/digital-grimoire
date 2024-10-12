@@ -174,6 +174,9 @@ export default class TokenPlayer {
             });
             nameText.x(this._width/2-nameText.getTextWidth()/2);
             group.add(nameText);
+
+            const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
+            group.add(shroud.render());
         });
 
         group.on('dragmove', () => {
@@ -184,13 +187,6 @@ export default class TokenPlayer {
 
             group.x(x);
             group.y(y);
-        });
-
-        const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
-        group.add(shroud.render());
-
-        group.on('dblclick dbltap', () => {
-            console.log(role.name);
         });
 
         return group;
