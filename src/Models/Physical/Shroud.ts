@@ -19,7 +19,8 @@ export default class Shroud {
             width: this._width,
             height: this._height,
             name: 'shroud',
-            draggable: false
+            draggable: false,
+            visible: false
         });
     }
 
@@ -102,36 +103,6 @@ export default class Shroud {
         }
         image.src = '/img/shroud/death_shroud.png';
 
-        group.on('dragmove', () => {
-            const pos = group.absolutePosition();
-
-            let x = this.clamp(pos.x,0,window.innerWidth-this._width);
-            let y = this.clamp(pos.y,0,window.innerHeight-this._width);
-
-            group.x(x);
-            group.y(y);
-        });
-
         return group;
-    }
-
-    public intersects(other: Konva.Image | Konva.Group | Konva.Shape): boolean {
-        const currRect = this._group.getClientRect();
-        const otherRect = other.getClientRect();
-
-        return !(
-            otherRect.x > currRect.x + currRect.width ||
-            otherRect.x + otherRect.width < currRect.x ||
-            otherRect.y > currRect.y + currRect.height ||
-            otherRect.y + otherRect.height < currRect.y
-        );
-    }
-
-    public destroy(): void {
-        this._group.destroy();
-    }
-
-    protected clamp(value: number, min: number, max: number): number {
-        return Math.min(Math.max(value, min), max);
     }
 }

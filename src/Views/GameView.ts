@@ -48,16 +48,6 @@ export default class GameView {
         this._stage.add(this._sheetsLayer);
 
         this._tokensPutAway = 0;
-
-        this._tokenLayer.on('dblclick dbltap', (e) => {
-           const target = e.target;
-           const shroud = target.parent?.findOne('.shroud');
-           if (!shroud?.isVisible()) {
-               shroud?.visible(true);
-           } else {
-               shroud?.visible(false);
-           }
-        });
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {

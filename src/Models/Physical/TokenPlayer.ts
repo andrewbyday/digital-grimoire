@@ -177,6 +177,14 @@ export default class TokenPlayer {
 
             const shroud: Shroud = new Shroud(50,50,{x: 75/2, y: 0});
             group.add(shroud.render());
+
+            group.on('dblclick dbltap', () => {
+                if (shroud.group.isVisible())  {
+                    shroud.group.visible(false);
+                } else {
+                    shroud.group.visible(true);
+                }
+            });
         });
 
         group.on('dragmove', () => {
