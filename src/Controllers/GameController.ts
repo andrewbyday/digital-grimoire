@@ -37,6 +37,10 @@ export default class GameController {
         );
     }
 
+    public createListeners(): void {
+        this._view.createListeners();
+    }
+
     public listenJoins(): void {
         const playerInputSchema = z.object({
             playerId: z.string(),

@@ -49,27 +49,6 @@ export default class GameView {
         this._stage.add(this._sheetsLayer);
 
         this._tokensPutAway = 0;
-
-        this._shroudLayer.on('dragend', (e) => {
-            const pos = e.target.getAbsolutePosition();
-            const token = this._tokenLayer?.getIntersection(pos);
-            const name = token?.parent?.name();
-
-            if (token !== undefined && token !== null && name === 'token') {
-                e.target.moveTo(token.parent);
-                e.target.x(75/2);
-                e.target.y(-5);
-            }
-        });
-
-        this._tokenLayer.on('dragend', (e) => {
-           if (e.target.name() === 'shroud') {
-               const pos = e.target.getAbsolutePosition();
-               e.target.moveTo(this._shroudLayer);
-               e.target.x(pos.x);
-               e.target.y(pos.y);
-           }
-        });
     }
 
     public static async init(board: Board, socket: Socket): Promise<GameView> {
@@ -715,6 +694,29 @@ export default class GameView {
                 this._tokenReminderLayer.add(newToken.group);
             }
         }
+    }
+
+    public createListeners() {
+        this._shroudLayer.on('dragend', (e) => {
+            const pos = e.target.getAbsolutePosition();
+            const token = this._tokenLayer?.getIntersection(pos);
+            const name = token?.parent?.name();
+
+            if (token !== undefined && token !== null && name === 'token') {
+                e.target.moveTo(token.parent);
+                e.target.x(75/2);
+                e.target.y(-5);
+            }
+        });
+
+        this._tokenLayer.on('dragend', (e) => {
+            if (e.target.name() === 'shroud') {
+                const pos = e.target.getAbsolutePosition();
+                e.target.moveTo(this._shroudLayer);
+                e.target.x(pos.x);
+                e.target.y(pos.y);
+            }
+        });
     }
 
     protected loadImage(image: HTMLImageElement): Promise<HTMLImageElement> {

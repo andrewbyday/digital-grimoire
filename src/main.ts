@@ -83,6 +83,7 @@ if (hostButton && sessionCode && baseThreeSelect && scriptUrl) {
         app.startGame(sessionCodeValue, chosenScript).then((game: GameController): void => {
             game.renderScene();
             game.listenJoins();
+            game.createListeners();
         });
 
         startGameModal.hide();
