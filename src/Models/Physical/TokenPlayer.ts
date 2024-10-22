@@ -95,7 +95,9 @@ export default class TokenPlayer {
             y: position.y,
             id: role.script_id,
             name: 'token',
-            draggable: true
+            draggable: true,
+            player_name: player.name,
+            player_pronouns: player.pronouns
         });
 
         let bgImage: HTMLImageElement = new Image();

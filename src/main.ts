@@ -1,4 +1,5 @@
 import './style.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './assets/fonts/Dumbledore/dum1.ttf';
 
 import GameEngine from './Models/Game/GameEngine.ts'

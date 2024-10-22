@@ -9,6 +9,7 @@ import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
+import {Modal} from "bootstrap";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -75,8 +76,6 @@ export default class GameView {
         bg.onload = function() {
             const aspectRatio: number = stage.width() / stage.height();
             const imageRatio: number = bg.naturalWidth / bg.naturalHeight;
-
-            console.log(aspectRatio, imageRatio);
 
             let finalWidth: number;
             let finalHeight: number;
@@ -715,6 +714,23 @@ export default class GameView {
                 e.target.moveTo(this._shroudLayer);
                 e.target.x(pos.x);
                 e.target.y(pos.y);
+            }
+        });
+
+        this._tokenLayer.on('dbltap dblclick', (e) => {
+            if (e.target?.parent?.name() === 'token') {
+                const element = document.getElementById('playerTokenModal') as HTMLElement;
+
+                const role = document.getElementById('roleInput') as HTMLInputElement;
+                const username = document.getElementById('usernameInput') as HTMLInputElement;
+                const pronouns = document.getElementById('userPronounsInput') as HTMLInputElement;
+
+                role.value = e.target.parent?.id();
+                username.value = e.target.parent?.getAttr('player_name');
+                pronouns.value = e.target.parent?.getAttr('player_pronouns');
+
+                const modal = new Modal(element);
+                modal.show();
             }
         });
     }
