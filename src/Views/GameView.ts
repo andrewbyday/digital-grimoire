@@ -8,12 +8,14 @@ import Token from "../Models/Physical/Token.ts";
 import NightSheet from "../Models/Physical/NightSheet.ts";
 import {Role} from "../Models/Game/Role.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
+import Shroud from "../Models/Physical/Shroud.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
     private readonly _socket: Socket;
     private readonly _tokenLayer: Konva.Layer;
     private readonly _tokenReminderLayer: Konva.Layer;
+    private readonly _shroudLayer: Konva.Layer;
     private readonly _drawerLayer: Konva.Layer;
     private readonly _putAwayDrawerLayer: Konva.Layer;
     private readonly _buttonsLayer: Konva.Layer;
@@ -31,6 +33,7 @@ export default class GameView {
         this._buttonsLayer = new Konva.Layer();
         this._tokenLayer = new Konva.Layer();
         this._tokenReminderLayer = new Konva.Layer();
+        this._shroudLayer = new Konva.Layer();
         this._putAwayDrawerLayer = new Konva.Layer();
         this._drawerLayer = new Konva.Layer();
         this._nightActionsLayer = new Konva.Layer();
@@ -39,6 +42,7 @@ export default class GameView {
         this._stage.add(this._buttonsLayer);
         this._stage.add(this._tokenLayer);
         this._stage.add(this._tokenReminderLayer);
+        this._stage.add(this._shroudLayer);
         this._stage.add(this._putAwayDrawerLayer);
         this._stage.add(this._drawerLayer);
         this._stage.add(this._nightActionsLayer);
@@ -46,14 +50,24 @@ export default class GameView {
 
         this._tokensPutAway = 0;
 
-        this._tokenLayer.on('dbltap dblclick', (e) => {
-           const shroud = e.target.parent?.findOne('.shroud');
-           if (shroud !== undefined) {
-               if (shroud.visible()) {
-                   shroud.visible(false);
-               } else {
-                   shroud.visible(true);
-               }
+        this._shroudLayer.on('dragend', (e) => {
+            const pos = e.target.getAbsolutePosition();
+            const token = this._tokenLayer?.getIntersection(pos);
+            const name = token?.parent?.name();
+
+            if (token !== undefined && token !== null && name === 'token') {
+                e.target.moveTo(token.parent);
+                e.target.x(75/2);
+                e.target.y(-5);
+            }
+        });
+
+        this._tokenLayer.on('dragend', (e) => {
+           if (e.target.name() === 'shroud') {
+               const pos = e.target.getAbsolutePosition();
+               e.target.moveTo(this._shroudLayer);
+               e.target.x(pos.x);
+               e.target.y(pos.y);
            }
         });
     }
@@ -336,6 +350,9 @@ export default class GameView {
                         this._tokenReminderLayer.add(newToken.group);
                     }
                 }
+
+                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height()-100});
+                this._shroudLayer.add(shroud.render());
             });
 
             scriptTokensGroup.add(token.group);
@@ -355,6 +372,9 @@ export default class GameView {
                     }
                 });
                 this._tokenLayer.add(newToken.group);
+
+                const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height()-100});
+                this._shroudLayer.add(shroud.render());
             });
 
             travellerTokensGroup.add(token.group);
@@ -678,6 +698,9 @@ export default class GameView {
         });
 
         this._tokenLayer.add(token.group);
+
+        const shroud: Shroud = new Shroud(50, 50, {x: 50, y: this._stage.height()-100});
+        this._shroudLayer.add(shroud.render());
 
         if (token.role.reminders !== undefined) {
             for (let i: number = 0; i < token.role.reminders.length; i++) {
