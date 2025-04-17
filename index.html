@@ -16,7 +16,7 @@
   </head>
   <body>
     <!-- Startup Modal -->
-    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="false" id="startGameModal" tabindex="-1" role="dialog" aria-labelledby="startGameModalTitle" aria-hidden="true">
+    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="false" id="startGameModal" tabindex="-1" role="dialog" aria-labelledby="startGameModalTitle">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -87,14 +87,14 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary mx-auto" id="hostButton">Host Game</button>
+            <button type="button" class="btn btn-primary mx-auto" id="hostButton" data-bs-dismiss="modal">Host Game</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Player Token Modal -->
-    <div class="modal fade" id="playerTokenModal" tabindex="-1" role="dialog" aria-labelledby="playerTokenModalTitle" aria-hidden="true">
+    <div class="modal fade" id="playerTokenModal" tabindex="-1" role="dialog" aria-labelledby="playerTokenModalTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -106,9 +106,11 @@
               <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="" aria-label="Username" id="usernameInput">
                 <input type="text" class="form-control" placeholder="" aria-label="Pronouns" id="userPronounsInput">
+                <input type="text" class="form-control" placeholder="" aria-label="UUID" id="userUUIDInput" hidden>
               </div>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Imp" aria-label="Role" id="roleInput">
+                <select class="form-select" id="userRoleSelectInput">
+                </select>
               </div>
               <div class="input-group btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">

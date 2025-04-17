@@ -38,7 +38,9 @@ export default class GameController {
     }
 
     public createListeners(): void {
-        this._view.createListeners();
+        this._view.createListeners(
+            this._model.getScriptRoles()
+        );
     }
 
     public listenJoins(): void {

@@ -86,7 +86,5 @@ if (hostButton && sessionCode && baseThreeSelect && scriptUrl) {
             game.listenJoins();
             game.createListeners();
         });
-
-        startGameModal.hide();
     })
 }

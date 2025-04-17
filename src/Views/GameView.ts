@@ -10,6 +10,7 @@ import {Role} from "../Models/Game/Role.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
 import {Modal} from "bootstrap";
+import Player from "../Models/Game/Player.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -695,7 +696,7 @@ export default class GameView {
         }
     }
 
-    public createListeners() {
+    public createListeners(roles: Set<Role>): void {
         this._shroudLayer.on('dragend', (e) => {
             const pos = e.target.getAbsolutePosition();
             const token = this._tokenLayer?.getIntersection(pos);
@@ -721,16 +722,40 @@ export default class GameView {
             if (e.target?.parent?.name() === 'token') {
                 const element = document.getElementById('playerTokenModal') as HTMLElement;
 
-                const role = document.getElementById('roleInput') as HTMLInputElement;
                 const username = document.getElementById('usernameInput') as HTMLInputElement;
                 const pronouns = document.getElementById('userPronounsInput') as HTMLInputElement;
+                const uuid = document.getElementById('userUUIDInput') as HTMLInputElement;
+                const rolesInput = document.getElementById('userRoleSelectInput') as HTMLSelectElement;
 
-                role.value = e.target.parent?.id();
                 username.value = e.target.parent?.getAttr('player_name');
                 pronouns.value = e.target.parent?.getAttr('player_pronouns');
+                uuid.value = e.target.parent?.getAttr('player_uuid');
+
+                roles.forEach( (role) => {
+                    rolesInput.add(new Option(role.name, role.script_id));
+                });
 
                 const modal = new Modal(element);
                 modal.show();
+
+                document.getElementById('savePlayerTokenInfoButton')?.addEventListener('click', (): void => {
+                    const playerRoleSelected = document.getElementById('userRoleSelectInput') as HTMLSelectElement;
+                    const selectedRoleValue = playerRoleSelected.value;
+                    const selectedRole = Array.from(roles).find((role) => role.script_id === selectedRoleValue);
+
+                    if (selectedRole) {
+                        const x: number | undefined = e.target?.parent?.x();
+                        const y: number | undefined = e.target?.parent?.y();
+                        const player = new Player(username.value, pronouns.value, false, uuid.value);
+
+                        if (x && y) {
+                            const newToken = new TokenPlayer(selectedRole, player, {x: x, y: y});
+                            this._tokenLayer.add(newToken.group);
+                        }
+
+                        e.target?.parent?.destroy();
+                    }
+                });
             }
         });
     }
