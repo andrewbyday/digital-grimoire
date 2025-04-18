@@ -42,6 +42,7 @@ export default class GameEngine {
 
         try {
             apiRolesResponse = await fetch(api_url, {
+                credentials: 'include',
                 method: "GET",
                 headers: {
                     'Authorization': "Api-Key " + api_key,
