@@ -20,6 +20,10 @@ export default class GameController {
     }
 
     public renderScene(): void {
+        this._view.renderPlayerTokenRoleOptions(
+            this._model.getScriptRoles()
+        );
+
         this._view.renderButtons();
         this._view.renderNightActionCards();
         this._view.hideDrawer();

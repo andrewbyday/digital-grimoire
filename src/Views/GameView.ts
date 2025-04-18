@@ -637,6 +637,14 @@ export default class GameView {
         );
     }
 
+    public renderPlayerTokenRoleOptions(roles: Set<Role>): void {
+        const rolesInput = document.getElementById('userRoleSelectInput') as HTMLSelectElement;
+
+        roles.forEach( (role) => {
+            rolesInput.add(new Option(role.name, role.script_id));
+        });
+    }
+
     public hideDrawer(): void {
         this._drawerLayer.hide();
     }
@@ -725,15 +733,10 @@ export default class GameView {
                 const username = document.getElementById('usernameInput') as HTMLInputElement;
                 const pronouns = document.getElementById('userPronounsInput') as HTMLInputElement;
                 const uuid = document.getElementById('userUUIDInput') as HTMLInputElement;
-                const rolesInput = document.getElementById('userRoleSelectInput') as HTMLSelectElement;
 
                 username.value = e.target.parent?.getAttr('player_name');
                 pronouns.value = e.target.parent?.getAttr('player_pronouns');
                 uuid.value = e.target.parent?.getAttr('player_uuid');
-
-                roles.forEach( (role) => {
-                    rolesInput.add(new Option(role.name, role.script_id));
-                });
 
                 const modal = new Modal(element);
                 modal.show();
