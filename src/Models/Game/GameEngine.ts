@@ -42,10 +42,14 @@ export default class GameEngine {
 
         try {
             apiRolesResponse = await fetch(api_url, {
+                mode: 'cors',
                 credentials: 'include',
                 method: "GET",
                 headers: {
+                    'access-control-allow-origin': '*',
+                    'access-control-allow-headers': '*',
                     'Authorization': "Api-Key " + api_key,
+                    'Content-Type': 'application/json',
                 }
             });
         } catch(error) {
