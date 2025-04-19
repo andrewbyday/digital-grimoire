@@ -39,16 +39,14 @@ export default class GameEngine {
         const api_url: string = import.meta.env.VITE_ROLES_API_URL;
         const api_key: string | undefined = process.env.API_KEY;
 
+        console.log(api_key);
+
         let apiRolesResponse: Response;
 
         try {
             apiRolesResponse = await fetch(api_url, {
-                mode: 'no-cors',
-                credentials: 'include',
-                method: "GET",
                 headers: {
                     'Authorization': "Api-Key " + api_key,
-                    'Content-Type': 'application/json',
                 }
             });
         } catch(error) {
