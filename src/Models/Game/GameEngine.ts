@@ -39,6 +39,7 @@ export default class GameEngine {
         const api_url: string = import.meta.env.VITE_ROLES_API_URL;
         const api_key: string | undefined = process.env.API_KEY;
 
+        console.log(api_url);
         console.log(api_key);
 
         let apiRolesResponse: Response;
