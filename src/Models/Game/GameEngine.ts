@@ -36,8 +36,8 @@ export default class GameEngine {
      * @param {string} scriptSheetRolesURL
      */
     public static async init(window: Window, session: Session, scriptSheetRolesURL: string): Promise<GameEngine> {
-        const api_url: string = process.env.API_URL || './roles.json';
-        const api_key: string | undefined = process.env.API_KEY;
+        const api_url: string = import.meta.env.API_URL || './roles.json';
+        const api_key: string | undefined = import.meta.env.API_KEY;
 
         console.log(api_url);
         console.log(api_key);

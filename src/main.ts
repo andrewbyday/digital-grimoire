@@ -13,7 +13,7 @@ class main {
     private readonly _client: Socket;
 
     constructor() {
-        this._client = io(process.env.WEBSOCKET_SERVER);
+        this._client = io(import.meta.env.WEBSOCKET_SERVER);
     }
 
     public async startGame(sessionCode:string, scriptURL:string): Promise<GameController> {
