@@ -37,7 +37,7 @@ export default class GameEngine {
      */
     public static async init(window: Window, session: Session, scriptSheetRolesURL: string): Promise<GameEngine> {
         const api_url: string = import.meta.env.VITE_API_URL || './roles.json';
-        const api_key: string | undefined = import.meta.env.VITE_API_KEY;
+        const api_key: string | undefined = import.meta.env.API_KEY;
 
         console.log(api_url);
         console.log(api_key);
@@ -46,7 +46,8 @@ export default class GameEngine {
 
         try {
             apiRolesResponse = await fetch(api_url, {
-                mode: 'no-cors',
+                mode: 'cors',
+                credentials: 'include',
                 headers: {
                     'Authorization': 'Api-Key ' + api_key,
                 }
