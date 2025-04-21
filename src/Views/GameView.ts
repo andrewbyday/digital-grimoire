@@ -748,16 +748,26 @@ export default class GameView {
 
                     if (selectedRole) {
                         let image = e.target?.parent?.children[2];
-                        let text = e.target?.parent?.children[3];
-                        if (image && text) {
+                        let roleText = e.target?.parent?.children[3];
+                        if (image && roleText) {
                             var newImage = new Image();
                             newImage.onload = function() {
                                 image.setAttr('image',newImage);
                             };
                             newImage.src = selectedRole.official_icon;
-                            text.setAttr('text', selectedRole.name);
+                            roleText.setAttr('text', selectedRole.name);
                         }
 
+                        let pronounText = e.target?.parent?.children[4];
+                        let nameText = e.target?.parent?.children[5];
+
+                        if (nameText) {
+                            nameText.setAttr('text', username.value);
+                        }
+
+                        if (pronounText) {
+                            pronounText.setAttr('text', pronouns.value);
+                        }
                     }
                 });
             }
