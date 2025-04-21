@@ -727,6 +727,7 @@ export default class GameView {
 
         this._tokenLayer.on('dbltap dblclick', (e) => {
             if (e.target?.parent?.name() === 'token') {
+                console.log(e.target.parent);
                 const element = document.getElementById('playerTokenModal') as HTMLElement;
 
                 const username = document.getElementById('usernameInput') as HTMLInputElement;
