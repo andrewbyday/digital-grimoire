@@ -10,7 +10,6 @@ import {Role} from "../Models/Game/Role.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
 import {Modal} from "bootstrap";
-import Player from "../Models/Game/Player.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -747,16 +746,17 @@ export default class GameView {
                     const selectedRole = Array.from(roles).find((role) => role.script_id === selectedRoleValue);
 
                     if (selectedRole) {
-                        const x: number | undefined = e.target?.parent?.x();
-                        const y: number | undefined = e.target?.parent?.y();
-                        const player = new Player(username.value, pronouns.value, false, uuid.value);
-
-                        if (x && y) {
-                            const newToken = new TokenPlayer(selectedRole, player, {x: x, y: y});
-                            this._tokenLayer.add(newToken.group);
+                        let image = e.target?.parent?.children[2];
+                        let text = e.target?.parent?.children[3];
+                        if (image && text) {
+                            var newImage = new Image();
+                            newImage.onload = function() {
+                                image.setAttr('image',newImage);
+                            };
+                            newImage.src = selectedRole.official_icon;
+                            text.setAttr('text', selectedRole.name);
                         }
 
-                        e.target?.parent?.destroy();
                     }
                 });
             }
