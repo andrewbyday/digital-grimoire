@@ -763,10 +763,12 @@ export default class GameView {
 
                         if (nameText) {
                             nameText.setAttr('text', username.value);
+                            e.target.parent?.setAttr('player_name', username.value);
                         }
 
                         if (pronounText) {
                             pronounText.setAttr('text', pronouns.value);
+                            e.target.parent?.setAttr('player_pronouns', pronouns.value);
                         }
                     }
                 });
