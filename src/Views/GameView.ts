@@ -173,7 +173,7 @@ export default class GameView {
                     name: 'first-night-button'
                 });
 
-                firstNightButton.on('dblclick dbltap', () => {
+                firstNightButton.on('click tap', () => {
                    this.showFirstNight();
                 });
 
@@ -186,7 +186,7 @@ export default class GameView {
                     name: 'other-night-button'
                 });
 
-                otherNightButton.on('dblclick dbltap', () => {
+                otherNightButton.on('click tap', () => {
                     this.showOtherNight();
                 });
 
@@ -218,26 +218,26 @@ export default class GameView {
                     id: 'put-away-button'
                 });
 
-                putAwayButton.on('dblclick dbltap', () => {
+                putAwayButton.on('click tap', () => {
                     let group = this._putAwayDrawerLayer.findOne('#put-away-drawer');
                     if (group !== undefined) {
                         group.show();
                     }
                 });
 
-                this._putAwayDrawerLayer.on('dblclick dbltap', (e) => {
+                this._putAwayDrawerLayer.on('click tap', (e) => {
                     let group = this._putAwayDrawerLayer.findOne('#put-away-drawer');
                     if (e.target.name() === 'return-to-grim-button' && group !== undefined) {
                         group.hide();
                     }
                 });
 
-                additionalTokensButton.on('dblclick dbltap', () => {
+                additionalTokensButton.on('click tap', () => {
                     this._buttonsLayer.hide();
                     this._drawerLayer.show();
                 });
 
-                nightActionCardsButton.on('dblclick dbltap', () => {
+                nightActionCardsButton.on('click tap', () => {
                     this._nightActionsLayer.show();
                     this._tokenLayer.hide();
                     this._tokenReminderLayer.hide();
@@ -298,7 +298,7 @@ export default class GameView {
         scriptTokens.forEach( (token: Token) => {
             token.disableDragging();
 
-            token.group.on('dblclick dbltap', (): void => {
+            token.group.on('click tap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
@@ -339,7 +339,7 @@ export default class GameView {
         travellerTokens.forEach( (token: Token) => {
             token.disableDragging();
 
-            token.group.on('dblclick dbltap', (): void => {
+            token.group.on('click tap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
@@ -361,7 +361,7 @@ export default class GameView {
         fabledTokens.forEach( (token: Token) => {
             token.disableDragging();
 
-            token.group.on('dblclick dbltap', (): void => {
+            token.group.on('click tap', (): void => {
                 const newToken: Token = new Token(token.role, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
