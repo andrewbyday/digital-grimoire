@@ -60,9 +60,9 @@ export default class NightSheet {
         images.push(this.loadImage(returnToGrimButton));
 
         this._items.forEach( (order: NightOrder) => {
-           if (order.svg !== undefined || order.svg !== '') {
+           if (order.png !== undefined || order.png !== '') {
                let image = new Image();
-               image.src = order.svg;
+               image.src = order.png;
                images.push(this.loadImage(image));
            }
         });

@@ -1,4 +1,4 @@
 export interface NightOrder {
     index: number;
-    svg: string;
+    png: string;
 }
