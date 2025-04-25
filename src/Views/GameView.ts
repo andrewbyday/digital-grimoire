@@ -301,7 +301,7 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('click tap', (): void => {
-                const newPlayer: Player = new Player('NA', 'NA', true, `${uuidv4()}`);
+                const newPlayer: Player = new Player('Name', 'Pronouns', true, `${uuidv4()}`);
 
                 const newToken: TokenPlayer = new TokenPlayer(token.role, newPlayer, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
