@@ -17,6 +17,7 @@
     "bootstrap": "^5.3.3",
     "konva": "^9.3.16",
     "socket.io-client": "^4.8.0",
+    "uuid": "^11.1.0",
     "zod": "^3.23.8"
   },
   "engines": {
