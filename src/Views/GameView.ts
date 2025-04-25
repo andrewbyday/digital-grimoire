@@ -10,6 +10,7 @@ import {Role} from "../Models/Game/Role.ts";
 import Drawer from "../Models/Physical/Drawer.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
 import {Modal} from "bootstrap";
+import Player from "../Models/Game/Player.ts";
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -299,7 +300,9 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('click tap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
+                const newPlayer: Player = new Player('NA', 'NA', true, `${Math.random()}`);
+
+                const newToken: TokenPlayer = new TokenPlayer(token.role, newPlayer, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -340,7 +343,8 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('click tap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
+                const newPlayer: Player = new Player('NA', 'NA', true, `${Math.random()}`);
+                const newToken: TokenPlayer = new TokenPlayer(token.role, newPlayer, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -362,7 +366,8 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('click tap', (): void => {
-                const newToken: Token = new Token(token.role, {x: 50, y: bottom});
+                const newPlayer: Player = new Player('NA', 'NA', true, `${Math.random()}`);
+                const newToken: TokenPlayer = new TokenPlayer(token.role, newPlayer, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
                     const putaway: Konva.Image | undefined = this._buttonsLayer.findOne('#put-away-button');
                     if (putaway !== undefined) {
@@ -741,7 +746,7 @@ export default class GameView {
                 const modal = new Modal(element);
                 modal.show();
 
-                document.getElementById('savePlayerTokenInfoButton')?.addEventListener('click', (): void => {
+                document.getElementById('savePlayerTokenInfoButton')!.onclick = (): void => {
                     const playerRoleSelected = document.getElementById('userRoleSelectInput') as HTMLSelectElement;
                     const selectedRoleValue = playerRoleSelected.value;
                     const selectedRole = Array.from(roles).find((role) => role.script_id === selectedRoleValue);
@@ -755,7 +760,7 @@ export default class GameView {
                                 image.setAttr('image',newImage);
                             };
                             newImage.src = selectedRole.official_icon;
-                            roleText.setAttr('text', selectedRole.name);
+                            roleText.setAttr('text', selectedRole.name.toUpperCase());
                         }
 
                         let pronounText = e.target?.parent?.children[4];
@@ -778,7 +783,7 @@ export default class GameView {
                             }
                         }
                     }
-                });
+                };
             }
         });
     }
