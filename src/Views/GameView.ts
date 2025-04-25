@@ -11,6 +11,7 @@ import Drawer from "../Models/Physical/Drawer.ts";
 import Shroud from "../Models/Physical/Shroud.ts";
 import {Modal} from "bootstrap";
 import Player from "../Models/Game/Player.ts";
+import { v4 as uuidv4 } from 'uuid';
 
 export default class GameView {
     private readonly _stage: Stage;
@@ -300,7 +301,7 @@ export default class GameView {
             token.disableDragging();
 
             token.group.on('click tap', (): void => {
-                const newPlayer: Player = new Player('NA', 'NA', true, `${Math.random()}`);
+                const newPlayer: Player = new Player('NA', 'NA', true, `${uuidv4()}`);
 
                 const newToken: TokenPlayer = new TokenPlayer(token.role, newPlayer, {x: 50, y: bottom});
                 newToken.group.on('dragend', (): void => {
