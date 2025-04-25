@@ -770,6 +770,13 @@ export default class GameView {
                             pronounText.setAttr('text', pronouns.value);
                             e.target.parent?.setAttr('player_pronouns', pronouns.value);
                         }
+
+                        if (selectedRole.reminders !== undefined && selectedRole.reminders.length > 0) {
+                            for (let index: number = 0; index < selectedRole.reminders?.length; index++) {
+                                const reminderToken = new TokenReminder(selectedRole, index, {x: 50, y: 50});
+                                this._tokenReminderLayer.add(reminderToken.group);
+                            }
+                        }
                     }
                 });
             }
